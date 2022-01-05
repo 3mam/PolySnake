@@ -5,7 +5,7 @@ Use for this project:
 - OpenTK 
 - OpenGL4
 
-Suport platform:
+Support platform:
 - Linux
 - Windows
 

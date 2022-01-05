@@ -3,13 +3,18 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL4;
+using PolySnake.Tools;
 
-class Window : GameWindow
+namespace PolySnake;
+
+public class Window : GameWindow
 {
+  int _program;
+  int _rotate;
+  float _rot;
+
   Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
-      : base(gameWindowSettings, nativeWindowSettings)
-  {
-  }
+      : base(gameWindowSettings, nativeWindowSettings) { }
 
   public static Window Create()
   {
@@ -24,6 +29,35 @@ class Window : GameWindow
   protected override void OnLoad()
   {
     base.OnLoad();
+    var vertex = new []{
+      -0.5f,-0.5f,
+      -0.5f, 0.5f,
+      0.5f, 0.5f,
+
+      0.5f, 0.5f,
+      0.5f, -0.5f,
+      -0.5f, -0.5f,
+    };
+
+    var buffer = GL.GenBuffer();
+    GL.BindBuffer(BufferTarget.ArrayBuffer, buffer);
+    GL.BufferData(BufferTarget.ArrayBuffer, vertex.Length * sizeof(float), vertex, BufferUsageHint.StaticDraw);
+
+    var vertexArray = GL.GenVertexArray();
+    GL.BindVertexArray(vertexArray);
+
+    GL.Enable(EnableCap.Blend);
+    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+    GL.Enable(EnableCap.DepthTest);
+    GL.DepthMask(false);
+
+    _program = Gl.CreateShader(Shader.Vertex, Shader.Fragment);
+    GL.UseProgram(_program);
+    
+    _rotate = GL.GetUniformLocation(_program, "rotate");
+    var sVertexPosition = GL.GetAttribLocation(_program, "vertex_position");
+    GL.EnableVertexAttribArray(sVertexPosition);
+    GL.VertexAttribPointer(sVertexPosition, 2, VertexAttribPointerType.Float, false, 0, 0);
   }
   protected override void OnUpdateFrame(FrameEventArgs e)
   {
@@ -48,6 +82,9 @@ class Window : GameWindow
     var delta = (float)e.Time;
     GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
     GL.ClearColor(1f, 0.5f, 0.5f, 1f);
+    GL.DrawArrays(PrimitiveType.Triangles, 0, 6);
+    GL.Uniform1(_rotate, _rot);
+    _rot+=0.01f;
     SwapBuffers();
   }
 }
