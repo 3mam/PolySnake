@@ -60,7 +60,7 @@ public class Shader
   
   public void Position(float x, float y)
   {
-    GL.Uniform2(_position, (float)Math.Round(x), (float)Math.Round(y));
+    GL.Uniform2(_position, x, y);
   }
   
   public void Camera(float x, float y)
@@ -76,10 +76,6 @@ public class Shader
   public void Active()
   {
     GL.UseProgram(_program);
-  }
-
-  public void EnableVertex()
-  {
     GL.EnableVertexAttribArray(_vertexPosition);
     GL.VertexAttribPointer(_vertexPosition, 4, VertexAttribPointerType.Float, false, 0, 0);
   }
