@@ -22,7 +22,7 @@ void main() {
 
 	vec3 vertex = vec3(vertex_position.x, vertex_position.y, index);
 	vec3 xyz = vertex * rot / vec3(ASPECT_RATIO, 1, 1);
-	gl_Position = vec4(xyz + vec3(camera, 0), 1);
+	gl_Position = vec4(xyz + vec3(position + camera, 0), 1);
 	color_index = vec2(vertex_position.z, vertex_position.w);
 }
 "; 
