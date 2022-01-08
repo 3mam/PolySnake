@@ -12,17 +12,24 @@ public static class ShaderDefault
 	out vec2 color_index;
 
 void main() {
-	mat3 rot;
 	float c = cos(rotate);
 	float s = sin(rotate);
-	rot[0].x=c;
-	rot[0].y=-s;
-	rot[1].x=s;
-	rot[1].y=c;
+	mat3 rot = mat3(
+	vec3(c, -s, 0),
+	vec3(s,  c, 0),
+	vec3(0,  0, 1));
 
+	mat3 scale = mat3(
+	vec3(0.1,   0, 0),
+	vec3(  0, 0.1, 0),
+	vec3(  0,   0, 1));
+
+	vec2 dimensions = vec2(1000, 500);
+	vec2 cam = camera / dimensions;
+	vec2 pos = position / dimensions;
 	vec3 vertex = vec3(vertex_position.x, vertex_position.y, index);
 	vec3 xyz = vertex * rot / vec3(ASPECT_RATIO, 1, 1);
-	gl_Position = vec4(xyz + vec3(position + camera, 0), 1);
+	gl_Position = vec4((xyz * scale) + vec3((pos + cam) - 1, 0), 1);
 	color_index = vec2(vertex_position.z, vertex_position.w);
 }
 "; 
