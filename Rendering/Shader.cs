@@ -12,7 +12,7 @@ public class Shader
   private int _camera;
   private int _alpha;
   private int _vertexPosition;
- 
+
   public static Shader Load(string vertex, string fragment)
   {
     var program = Program.Load(vertex, fragment);
@@ -25,11 +25,11 @@ public class Shader
     var alpha = GL.GetUniformLocation(program, "alpha");
     var palette = GL.GetUniformLocation(program, "palette");
     var vertexPosition = GL.GetAttribLocation(program, "vertex_position");
-    
+
     GL.Uniform1(palette, 0);
     GL.Uniform1(index, 0f);
     GL.Uniform1(alpha, 1f);
-    
+
     return new Shader()
     {
       _program = program,
@@ -42,27 +42,27 @@ public class Shader
       _vertexPosition = vertexPosition,
     };
   }
- 
+
   public void Palette(int val = 0)
   {
     GL.Uniform1(_switchPalette, val);
   }
-  
+
   public void Index(int val = 0)
   {
-    GL.Uniform1(_index, (float)val / 100);
+    GL.Uniform1(_index, (float) val / 100);
   }
 
   public void Alpha(float val = 1f)
   {
     GL.Uniform1(_alpha, val);
   }
-  
+
   public void Position(float x, float y)
   {
     GL.Uniform2(_position, x, y);
   }
-  
+
   public void Camera(float x, float y)
   {
     GL.Uniform2(_camera, x, y);
@@ -70,9 +70,9 @@ public class Shader
 
   public void Rotate(float angle)
   {
-    GL.Uniform1(_rotate, angle);
+    GL.Uniform1(_rotate, angle * Math.PI / 180);
   }
-  
+
   public void Active()
   {
     GL.UseProgram(_program);
