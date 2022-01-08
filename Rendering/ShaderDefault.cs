@@ -4,20 +4,25 @@ public static class ShaderDefault
    public const string Vertex = @"#version 400
 	#define PI 3.1415926535897932384626433832795
 	#define ASPECT_RATIO 1.77777777778
-	uniform float rotate;
+	uniform float angle;
 	uniform float index;
 	uniform vec2 camera;
 	uniform vec2 position;
 	in vec4 vertex_position;
 	out vec2 color_index;
 
-void main() {
-	float c = cos(rotate);
-	float s = sin(rotate);
-	mat3 rot = mat3(
+mat3 rotate(float degrees) {
+	float angle = radians(degrees);
+	float c = cos(angle);
+	float s = sin(angle);
+	return mat3(
 	vec3(c, -s, 0),
 	vec3(s,  c, 0),
 	vec3(0,  0, 1));
+}
+
+void main() {
+	mat3 rot = rotate(angle);
 
 	mat3 scale = mat3(
 	vec3(0.1,   0, 0),

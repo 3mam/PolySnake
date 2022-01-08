@@ -5,7 +5,7 @@ namespace PolySnake.Rendering;
 public class Shader
 {
   private int _program;
-  private int _rotate;
+  private int _angle;
   private int _position;
   private int _switchPalette;
   private int _index;
@@ -17,7 +17,7 @@ public class Shader
   {
     var program = Program.Load(vertex, fragment);
     GL.UseProgram(program);
-    var rotate = GL.GetUniformLocation(program, "rotate");
+    var angle = GL.GetUniformLocation(program, "angle");
     var index = GL.GetUniformLocation(program, "index");
     var camera = GL.GetUniformLocation(program, "camera");
     var position = GL.GetUniformLocation(program, "position");
@@ -33,7 +33,7 @@ public class Shader
     return new Shader()
     {
       _program = program,
-      _rotate = rotate,
+      _angle = angle,
       _position = position,
       _switchPalette = switchPalette,
       _index = index,
@@ -70,7 +70,7 @@ public class Shader
 
   public void Rotate(float angle)
   {
-    GL.Uniform1(_rotate, angle * (float)Math.PI / 180f);
+    GL.Uniform1(_angle, angle);
   }
 
   public void Active()
