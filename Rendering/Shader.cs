@@ -70,7 +70,7 @@ public class Shader
 
   public void Rotate(float angle)
   {
-    GL.Uniform1(_rotate, angle * Math.PI / 180);
+    GL.Uniform1(_rotate, angle * (float)Math.PI / 180f);
   }
 
   public void Active()
