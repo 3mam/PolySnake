@@ -5,7 +5,7 @@ public static class ShaderDefault
 	#define PI 3.1415926535897932384626433832795
 	#define ASPECT_RATIO 1.77777777778
 	uniform float angle;
-	uniform float index;
+	uniform int index;
 	uniform vec2 camera;
 	uniform vec2 position;
 	in vec4 vertex_position;
@@ -25,16 +25,23 @@ void main() {
 	mat3 rot = rotate(angle);
 
 	mat3 scale = mat3(
-	vec3(0.1,   0, 0),
-	vec3(  0, 0.1, 0),
+	vec3(0.5,   0, 0),
+	vec3(  0, 0.5, 0),
 	vec3(  0,   0, 1));
 
-	vec2 dimensions = vec2(1000, 500);
-	vec2 cam = camera / dimensions;
-	vec2 pos = position / dimensions;
-	vec3 vertex = vec3(vertex_position.x, vertex_position.y, index);
-	vec3 xyz = vertex * rot / vec3(ASPECT_RATIO, 1, 1);
-	gl_Position = vec4((xyz * scale) + vec3((pos + cam) - 1, 0), 1);
+	mat4 ortho = mat4(
+		vec4(2/1000, 0, 0, 0),
+		vec4(0, 2/500, 0, 0),
+		vec4(0, 2/-200, 0, 0),
+		vec4(1000, 500, -200,1));
+
+	vec3 dimensions = vec3(1000, 500, -1);
+	vec3 cam = vec3(camera, 0) / dimensions;
+	vec3 pos = vec3(position, index/100.0) / dimensions;
+	vec3 vertex = vec3(vertex_position.x, vertex_position.y, 1);
+	vec3 vertex_aspect = vertex * rot / vec3(ASPECT_RATIO, 1, 1);
+	gl_Position = vec4((vertex_aspect * scale) + (pos + cam - 1), 1);
+
 	color_index = vec2(vertex_position.z, vertex_position.w);
 }
 "; 

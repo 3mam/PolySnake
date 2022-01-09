@@ -50,7 +50,7 @@ public class Shader
 
   public void Index(int val = 0)
   {
-    GL.Uniform1(_index, (float) val / 100);
+    GL.Uniform1(_index, val);
   }
 
   public void Alpha(float val = 1f)
