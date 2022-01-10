@@ -1,6 +1,7 @@
 using OpenTK.Graphics.OpenGL4;
 using PolySnake.Rendering;
 using OpenTK.Mathematics;
+using PolySnake.Collision;
 
 namespace PolySnake;
 
@@ -14,6 +15,7 @@ public class Actor
   private float _alpha = 1;
   private float _angle;
   private Vector2 _size = new Vector2(1f, 1f);
+  private float _radius;
 
   public static Actor Create(Shader shader) => new()
   {
@@ -51,6 +53,14 @@ public class Actor
   {
     _size = size;
   }
+
+  public void Radius(float radius)
+  {
+    _radius = radius;
+  }
+
+  public bool Collide(Actor actor) =>
+    new CollideCircle(_position, _radius).Collide(new CollideCircle(actor._position, actor._radius));
 
   public void Show()
   {
