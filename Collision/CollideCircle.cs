@@ -1,3 +1,4 @@
+using Microsoft.VisualBasic.CompilerServices;
 using OpenTK.Mathematics;
 
 namespace PolySnake.Collision;
@@ -33,4 +34,10 @@ public readonly struct CollideCircle
     var distance = MathF.Sqrt(x * x + y * y);
     return distance < R + circle.R;
   }
+
+  public static bool operator ==(CollideCircle a, CollideCircle b) =>
+    a.Collide(b);
+
+  public static bool operator !=(CollideCircle a, CollideCircle b) =>
+    !a.Collide(b);
 }
