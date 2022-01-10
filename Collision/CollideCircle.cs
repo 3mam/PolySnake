@@ -40,4 +40,13 @@ public readonly struct CollideCircle
 
   public static bool operator !=(CollideCircle a, CollideCircle b) =>
     !a.Collide(b);
+
+  public bool Equals(CollideCircle other) =>
+    X.Equals(other.X) && Y.Equals(other.Y) && R.Equals(other.R);
+
+  public override bool Equals(object? obj) =>
+    obj is CollideCircle other && Equals(other);
+
+  public override int GetHashCode() =>
+    HashCode.Combine(X, Y, R);
 }
