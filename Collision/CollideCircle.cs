@@ -2,31 +2,31 @@ using OpenTK.Mathematics;
 
 namespace PolySnake.Collision;
 
-public readonly struct Circle
+public readonly struct CollideCircle
 {
   public readonly float X;
   public readonly float Y;
   public readonly float R;
 
-  public Circle(float x, float y, float radius)
+  public CollideCircle(float x, float y, float radius)
   {
     X = x;
     Y = y;
     R = radius;
   }
 
-  public Circle(Vector2 point, float radius)
+  public CollideCircle(Vector2 point, float radius)
   {
     point.Deconstruct(out X, out Y);
     R = radius;
   }
 
-  public Circle(Vector3 point)
+  public CollideCircle(Vector3 point)
   {
     point.Deconstruct(out X, out Y, out R);
   }
 
-  public bool Collide(Circle circle)
+  public bool Collide(CollideCircle circle)
   {
     var x = (X + R) - (circle.X + circle.R);
     var y = (Y + R) - (circle.Y + circle.R);
