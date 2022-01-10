@@ -30,7 +30,7 @@ public readonly struct Circle
   {
     var x = (X + R) - (circle.X + circle.R);
     var y = (Y + R) - (circle.Y + circle.R);
-    var distance = (float) Math.Sqrt(x * x + y * y);
+    var distance = MathF.Sqrt(x * x + y * y);
     return distance < R + circle.R;
   }
 }
