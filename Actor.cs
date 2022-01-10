@@ -17,7 +17,7 @@ public class Actor
   private Vector2 _size = new Vector2(1f, 1f);
   private float _radius;
 
-  public CollideCircle Boundary => new CollideCircle(_position, _radius);
+  private CollideCircle Boundary => new CollideCircle(_position, _radius);
 
   public static Actor Create(Shader shader) => new()
   {
