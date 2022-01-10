@@ -64,10 +64,10 @@ public class Scene
   }
   public void Resize(int width, int height)
   {
-    double fWidth = width;
-    double fHeight = height;
+    float fWidth = width;
+    float fHeight = height;
 
-    const double targetAspectRatio = 16.0 / 9.0;
+    const float targetAspectRatio = 16.0f / 9.0f;
     var viewWidth = fWidth;
     var viewHeight = fWidth / targetAspectRatio;
 
