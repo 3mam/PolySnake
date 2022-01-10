@@ -2,11 +2,11 @@ using OpenTK.Mathematics;
 
 namespace PolySnake.Collision;
 
-public struct Circle
+public readonly struct Circle
 {
-  public float X;
-  public float Y;
-  public float R;
+  public readonly float X;
+  public readonly float Y;
+  public readonly float R;
 
   public Circle(float x, float y, float radius)
   {
