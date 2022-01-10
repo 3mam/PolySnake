@@ -17,6 +17,8 @@ public class Actor
   private Vector2 _size = new Vector2(1f, 1f);
   private float _radius;
 
+  public CollideCircle Boundary => new CollideCircle(_position, _radius);
+
   public static Actor Create(Shader shader) => new()
   {
     _shader = shader,
@@ -59,8 +61,7 @@ public class Actor
     _radius = radius;
   }
 
-  public bool Collide(Actor actor) =>
-    new CollideCircle(_position, _radius).Collide(new CollideCircle(actor._position, actor._radius));
+  public bool Collide(Actor actor) => Boundary == actor.Boundary;
 
   public void Show()
   {
