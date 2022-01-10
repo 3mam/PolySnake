@@ -3,7 +3,7 @@ public static class ShaderDefault
  {
    public const string Vertex = @"#version 400
 	#define PI 3.1415926535897932384626433832795
-	#define ASPECT_RATIO 1.77777777778
+	#define ASPECT_RATIO 16.0/9.0
 	uniform float angle;
 	uniform int index;
 	uniform vec2 camera;
