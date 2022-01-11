@@ -55,7 +55,10 @@ public class Actor
   {
     _size = size;
   }
-
+  public void Scale(float size)
+  {
+    _size = new Vector2(size, size);
+  }
   public void Radius(float radius)
   {
     _radius = radius;
