@@ -29,10 +29,11 @@ public readonly struct CollideCircle
 
   public bool Collide(CollideCircle circle)
   {
-    var x = (X + R) - (circle.X + circle.R);
-    var y = (Y + R) - (circle.Y + circle.R);
-    var distance = MathF.Sqrt(x * x + y * y);
-    return distance < R + circle.R;
+    var x = X - circle.X;
+    var y = Y - circle.Y;
+    var distance = MathF.Sqrt((x * x) + (y * y));
+    var radius = R + circle.R;
+    return distance <= radius;
   }
 
   public static bool operator ==(CollideCircle a, CollideCircle b) =>
