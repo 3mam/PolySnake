@@ -1,17 +1,18 @@
-using System.Numerics;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 using PolySnake.Rendering;
+using Vector2 = System.Numerics.Vector2;
 
 namespace PolySnake;
 
 public class Scene
 {
   private readonly Shader _shader = Shader.Load(ShaderDefault.Vertex, ShaderDefault.Fragment);
-  private readonly int _texturePalette;
-  private Vector2 _camera = new();
   private float _width;
   private float _height;
   private float _scale;
+  private readonly int _texturePalette;
+  private Vector2 _camera = new();
 
   private Scene()
   {
@@ -66,7 +67,8 @@ public class Scene
     GL.TexSubImage2D(TextureTarget.Texture2D, 0, 0, palette, 32, 1, PixelFormat.Rgb, PixelType.UnsignedByte, colors);
   }
 
-  public Actor CreateActor() => Actor.Create(_shader);
+  public Actor CreateActor() =>
+    Actor.Create(_shader, new Vector3(_width, _height, _scale));
 
   public void Camera(float x, float y)
   {

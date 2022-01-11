@@ -12,16 +12,25 @@ public class Actor
   private Shader _shader = default!;
   private Vector2 _position;
   private int _index;
-  private float _alpha = 1;
+  private float _alpha = 1.0f;
   private float _angle;
-  private Vector2 _size = new Vector2(1f, 1f);
+  private float _size = 1.0f;
   private float _radius;
+  private Vector3 _dimensionScene;
 
-  private CollideCircle Boundary => new CollideCircle(_position, _radius);
+  public CollideCircle Boundary
+  {
+    get
+    {
+      var correctRadius = _radius / (1.0f / (_dimensionScene.Z * _size)) * 0.1f * _dimensionScene.X;
+      return new CollideCircle(_position, correctRadius);
+    }
+  }
 
-  public static Actor Create(Shader shader) => new()
+  public static Actor Create(Shader shader, Vector3 dimension) => new()
   {
     _shader = shader,
+    _dimensionScene = dimension,
   };
 
   public void UploadData(float[] data)
@@ -51,14 +60,11 @@ public class Actor
     _index = index;
   }
 
-  public void Scale(Vector2 size)
+  public void Scale(float size)
   {
     _size = size;
   }
-  public void Scale(float size)
-  {
-    _size = new Vector2(size, size);
-  }
+
   public void Radius(float radius)
   {
     _radius = radius;
@@ -74,7 +80,7 @@ public class Actor
     _shader.Rotate(_angle);
     _shader.Alpha(_alpha);
     _shader.Index(_index);
-    _shader.Size(_size.X, _size.Y);
+    _shader.Size(_size, _size);
     GL.DrawArrays(PrimitiveType.Triangles, 0, _bufferSize);
   }
 }
