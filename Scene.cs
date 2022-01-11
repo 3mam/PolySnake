@@ -46,6 +46,9 @@ public class Scene
   {
     var scene = new Scene();
     scene._shader.Dimensions(width, height, scale);
+    scene._width = width;
+    scene._height = height;
+    scene._scale = scale;
     return scene;
   }
 
