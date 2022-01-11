@@ -8,8 +8,10 @@ public class Scene
 {
   private readonly Shader _shader = Shader.Load(ShaderDefault.Vertex, ShaderDefault.Fragment);
   private readonly int _texturePalette;
-  
-  private Vector2 _camera = new ();
+  private Vector2 _camera = new();
+  private float _width;
+  private float _height;
+  private float _scale;
 
   private Scene()
   {
@@ -18,8 +20,8 @@ public class Scene
     GL.Enable(EnableCap.DepthTest);
     GL.DepthMask(true);
     GL.DepthFunc(DepthFunction.Lequal);
-    GL.DepthRange(-1,1);
-    
+    GL.DepthRange(-1, 1);
+
     GL.BindVertexArray(GL.GenVertexArray());
 
     var palette = new byte[32 * 32 * 3];
@@ -35,19 +37,25 @@ public class Scene
     _texturePalette = GL.GenTexture();
     GL.ActiveTexture(TextureUnit.Texture0);
     GL.BindTexture(TextureTarget.Texture2D, _texturePalette);
-    GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)TextureMinFilter.Nearest);
-    GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, 32, 32, 0, PixelFormat.Rgb, PixelType.UnsignedByte, palette);
+    GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int) TextureMinFilter.Nearest);
+    GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, 32, 32, 0, PixelFormat.Rgb,
+      PixelType.UnsignedByte, palette);
   }
-  
-  public static Scene Init() => new Scene();
-  
+
+  public static Scene Create(float width, float height, float scale)
+  {
+    var scene = new Scene();
+    scene._shader.Dimensions(width, height, scale);
+    return scene;
+  }
+
   public void Clear()
   {
     GL.ClearColor(1f, 0.5f, 0.5f, 1f);
     GL.ClearDepth(1);
     GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
   }
-  
+
   public void UploadPalette(byte[] colors, int palette)
   {
     GL.ActiveTexture(TextureUnit.Texture0);
@@ -56,12 +64,14 @@ public class Scene
   }
 
   public Actor CreateActor() => Actor.Create(_shader);
+
   public void Camera(float x, float y)
   {
     _shader.Camera(x, y);
     _camera.X = x;
     _camera.Y = y;
   }
+
   public void Resize(int width, int height)
   {
     float fWidth = width;

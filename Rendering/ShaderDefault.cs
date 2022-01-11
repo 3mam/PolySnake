@@ -1,7 +1,8 @@
 namespace PolySnake.Rendering;
+
 public static class ShaderDefault
- {
-   public const string Vertex = @"#version 400
+{
+  public const string Vertex = @"#version 400
 	#define PI 3.1415926535897932384626433832795
 	#define ASPECT_RATIO 16.0/9.0
 	uniform float angle;
@@ -9,6 +10,7 @@ public static class ShaderDefault
 	uniform vec2 camera;
 	uniform vec2 position;
 	uniform vec2 size;
+	uniform vec3 dimensions;
 	in vec4 vertex_position;
 	out vec2 color_index;
 
@@ -31,20 +33,20 @@ mat3 scaling(vec2 size) {
 
 void main() {
 	mat3 rot = rotation(angle);
-	mat3 scale = scaling(vec2(0.5, 0.5)) * scaling(size);
+	mat3 scale = scaling(vec2(dimensions.z, dimensions.z)) * scaling(size);
 
-	vec3 dimensions = vec3(1000, 500, -1);
-	vec3 cam = vec3(camera, 0) / dimensions;
-	vec3 pos = vec3(position, index/100.0) / dimensions;
+	vec3 resolution = vec3(dimensions.xy, -1);
+	vec3 cam = vec3(camera, 0) / resolution;
+	vec3 pos = vec3(position, index/100.0) / resolution;
 	vec3 vertex = vec3(vertex_position.x, vertex_position.y, 1);
 	vec3 vertex_aspect = vertex * rot / vec3(ASPECT_RATIO, 1, 1);
 	gl_Position = vec4(vertex_aspect * scale + pos + cam - 1, 1);
 
 	color_index = vec2(vertex_position.z, vertex_position.w);
 }
-"; 
+";
 
-   public const string Fragment = @"#version 400
+  public const string Fragment = @"#version 400
 precision mediump float;
 uniform sampler2D palette;
 uniform int switch_palette;

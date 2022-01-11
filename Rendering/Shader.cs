@@ -13,6 +13,7 @@ public class Shader
   private int _alpha;
   private int _vertexPosition;
   private int _size;
+  private int _dimensions;
 
   public static Shader Load(string vertex, string fragment)
   {
@@ -27,6 +28,7 @@ public class Shader
     var palette = GL.GetUniformLocation(program, "palette");
     var size = GL.GetUniformLocation(program, "size");
     var vertexPosition = GL.GetAttribLocation(program, "vertex_position");
+    var dimensions = GL.GetUniformLocation(program, "dimensions");
 
     GL.Uniform1(palette, 0);
     GL.Uniform1(index, 0f);
@@ -43,6 +45,7 @@ public class Shader
       _alpha = alpha,
       _vertexPosition = vertexPosition,
       _size = size,
+      _dimensions = dimensions,
     };
   }
 
@@ -79,6 +82,11 @@ public class Shader
   public void Size(float x, float y)
   {
     GL.Uniform2(_size, x, y);
+  }
+
+  public void Dimensions(float width, float height, float scale)
+  {
+    GL.Uniform3(_dimensions, width, height, scale);
   }
 
   public void Active()
