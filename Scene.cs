@@ -26,15 +26,6 @@ public class Scene
     GL.BindVertexArray(GL.GenVertexArray());
 
     var palette = new byte[32 * 32 * 3];
-    palette[0] = 255;
-    palette[1] = 0;
-    palette[2] = 244;
-    palette[3] = 255;
-    palette[4] = 0;
-    palette[5] = 0;
-    palette[6] = 255;
-    palette[7] = 255;
-    palette[8] = 0;
     _texturePalette = GL.GenTexture();
     GL.ActiveTexture(TextureUnit.Texture0);
     GL.BindTexture(TextureTarget.Texture2D, _texturePalette);
