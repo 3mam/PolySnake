@@ -76,25 +76,4 @@ public class Scene
     _camera.X = x;
     _camera.Y = y;
   }
-
-  public void Resize(int width, int height)
-  {
-    float fWidth = width;
-    float fHeight = height;
-
-    const float targetAspectRatio = 16.0f / 9.0f;
-    var viewWidth = fWidth;
-    var viewHeight = fWidth / targetAspectRatio;
-
-    if (viewHeight > fHeight)
-    {
-      viewWidth = fHeight * targetAspectRatio;
-      viewHeight = fHeight;
-    }
-
-    var viewX = (fWidth / 2) - (viewWidth / 2);
-    var viewY = (fHeight / 2) - (viewHeight / 2);
-
-    GL.Viewport((int) viewX, (int) viewY, (int) viewWidth, (int) viewHeight);
-  }
 }
