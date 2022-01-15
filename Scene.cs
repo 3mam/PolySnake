@@ -8,8 +8,8 @@ namespace PolySnake;
 public class Scene
 {
   private readonly Shader _shader = Shader.Load(ShaderDefault.Vertex, ShaderDefault.Fragment);
-  private float _width;
-  private float _height;
+  public float Width;
+  public float Height;
   private float _scale;
   private readonly int _texturePalette;
   private Vector2 _camera = new();
@@ -38,8 +38,8 @@ public class Scene
   {
     var scene = new Scene();
     scene._shader.Dimensions(width, height, scale);
-    scene._width = width;
-    scene._height = height;
+    scene.Width = width;
+    scene.Height = height;
     scene._scale = scale;
     return scene;
   }
@@ -59,7 +59,7 @@ public class Scene
   }
 
   public Actor CreateActor() =>
-    Actor.Create(_shader, new Vector3(_width, _height, _scale));
+    Actor.Create(_shader, new Vector3(Width, Height, _scale));
 
   public void Camera(float x, float y)
   {
