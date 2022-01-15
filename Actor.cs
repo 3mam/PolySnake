@@ -72,7 +72,7 @@ public class Actor
 
   public bool Collide(Actor actor) => Boundary == actor.Boundary;
 
-  public void Show()
+  public void Draw()
   {
     GL.BindBuffer(BufferTarget.ArrayBuffer, _buffer);
     _shader.Active();
