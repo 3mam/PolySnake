@@ -3,6 +3,7 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL4;
+using PolySnake.Collision;
 using PolySnake.Rendering;
 
 namespace PolySnake;
@@ -10,7 +11,8 @@ namespace PolySnake;
 public class Window : GameWindow
 {
   private Scene _scene = default!;
-  Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
+  private Game _game = default!;
+  private Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
     : base(gameWindowSettings, nativeWindowSettings)
   {
   }
@@ -19,7 +21,7 @@ public class Window : GameWindow
   {
     var nativeWindowSettings = new NativeWindowSettings()
     {
-      Size = new Vector2i(320, 180),
+      Size = new Vector2i(640, 360),
       Title = "PolySnake",
       Flags = ContextFlags.ForwardCompatible, // This is needed to run on macos
     };
@@ -29,30 +31,35 @@ public class Window : GameWindow
   protected override void OnLoad()
   {
     base.OnLoad();
-    _scene = Scene.Init();
+    _scene = Scene.Create(1000, 500, 1f);
+    var colors = new byte[32 * 3];
+    colors[0] = 255;
+    _scene.UploadPalette(colors,0);
+    _game = Game.Create(_scene);
   }
 
   protected override void OnUpdateFrame(FrameEventArgs e)
   {
-    // Check if the Escape button is currently being pressed.
-    if (KeyboardState.IsKeyDown(Keys.Escape))
-    {
-      // If it is, close the window.
-      Close();
-    }
-
     base.OnUpdateFrame(e);
+    if (KeyboardState.IsKeyDown(Keys.Escape))
+      Close();
+    var direction = 0f;
+    if (KeyboardState.IsKeyDown(Keys.A))
+      direction = 2f;
+    if (KeyboardState.IsKeyDown(Keys.D))
+      direction = -2f;
+    _game.Move((float)e.Time, direction);
   }
 
   protected override void OnResize(ResizeEventArgs e)
   {
     base.OnResize(e);
-    double fWidth = e.Width;
-    double fHeight = e.Height;
+    float fWidth = e.Width;
+    float fHeight = e.Height;
 
-    const double targetAspectRatio = 16.0 / 9.0;
-    double viewWidth = fWidth;
-    double viewHeight = fWidth / targetAspectRatio;
+    const float targetAspectRatio = 16.0f / 9.0f;
+    var viewWidth = fWidth;
+    var viewHeight = fWidth / targetAspectRatio;
 
     if (viewHeight > fHeight)
     {
@@ -60,8 +67,8 @@ public class Window : GameWindow
       viewHeight = fHeight;
     }
 
-    double viewX = (fWidth / 2) - (viewWidth / 2);
-    double viewY = (fHeight / 2) - (viewHeight / 2);
+    var viewX = (fWidth / 2) - (viewWidth / 2);
+    var viewY = (fHeight / 2) - (viewHeight / 2);
 
     GL.Viewport((int) viewX, (int) viewY, (int) viewWidth, (int) viewHeight);
   }
@@ -69,9 +76,8 @@ public class Window : GameWindow
   protected override void OnRenderFrame(FrameEventArgs e)
   {
     base.OnRenderFrame(e);
-    //var delta = (float)e.Time;
     _scene.Clear();
-    _scene.Show();
+    _game.Draw();
     SwapBuffers();
   }
 }
