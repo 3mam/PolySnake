@@ -39,4 +39,15 @@ public static class Snake
     0.6f, 0.3f, 0f, 1f,
     0.6f, -0.3f, 0f, 1f,
   };
+
+  public static float[] Tail = new[]
+  {
+    0f, 0.6f, 0f, 1f,
+    0f, -0.6f, 0f, 1f,
+    -0.6f, 0.3f, 0f, 1f,
+
+    0f, 0.6f, 0f, 1f,
+    0.6f, 0.3f, 0f, 1f,
+    0f, -0.6f, 0f, 1f,
+  };
 }
