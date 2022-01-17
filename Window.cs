@@ -48,6 +48,8 @@ public class Window : GameWindow
       direction = 2f;
     if (KeyboardState.IsKeyDown(Keys.D))
       direction = -2f;
+    if (KeyboardState.IsKeyDown(Keys.R))
+      _game.Reset();
     _game.Move((float)e.Time, direction);
   }
 
