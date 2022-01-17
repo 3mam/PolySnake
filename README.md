@@ -7,6 +7,12 @@ Use for this project:
 
 Support platform:
 - Linux
-- Windows
+- Windows 10
+- MacOS 10.10
 
 Graphics will be based on 2D polygons.
+
+Keyboard:
+- A turn left
+- D turn right
+- R reset snake
