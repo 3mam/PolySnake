@@ -1,4 +1,4 @@
-# Polygonal Snake.
+# Polygonal Snake
 
 Project goal is write from scratch 2D Snake in .net 6.<br>
 On this moment I implemented movement based on inverse kinematics. <br>
