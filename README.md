@@ -1,6 +1,7 @@
-# PolySnake
+# Polygonal Snake.
 
-Write from scratch 2D Snake.<br>
+Project goal is write from scratch 2D Snake in .net 6.<br>
+
 Use for this project:
 - OpenTK 
 - OpenGL4
@@ -9,10 +10,8 @@ Support platform:
 - Linux
 - Windows 10
 
-Graphics will be based on 2D polygons.
-
-Keyboard:
-- A turn left
-- D turn right
-- R reset snake
-- Esc exit
+Keyboard control:
+- **A** turn left
+- **D** turn right
+- **R** reset snake
+- **Esc** exit
