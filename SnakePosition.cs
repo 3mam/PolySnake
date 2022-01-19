@@ -9,7 +9,7 @@ public readonly record struct SnakePosition(Vector2 Position, float Direction)
     var direction = target - Position;
     var angle = MathF.Atan2(direction.X, direction.Y);
     direction.Normalize();
-    direction *= -10f;
+    direction *= -15f;
     return new SnakePosition(
       target + direction,
       -(angle * 180f / MathF.PI));
