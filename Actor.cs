@@ -1,3 +1,4 @@
+using System.Drawing;
 using OpenTK.Graphics.OpenGL4;
 using PolySnake.Rendering;
 using OpenTK.Mathematics;
@@ -17,6 +18,7 @@ public class Actor
   private float _size = 1.0f;
   private float _radius;
   private Vector3 _dimensionScene;
+  private Color _color;
 
   public CollideCircle Boundary
   {
@@ -37,7 +39,7 @@ public class Actor
   {
     GL.BindBuffer(BufferTarget.ArrayBuffer, _buffer);
     GL.BufferData(BufferTarget.ArrayBuffer, data.Length * sizeof(float), data, BufferUsageHint.StaticDraw);
-    _bufferSize = data.Length / 4;
+    _bufferSize = data.Length / 2;
   }
 
   public void Position(Vector2 cord)
@@ -70,6 +72,11 @@ public class Actor
     _radius = radius;
   }
 
+  public void Color(Color color)
+  {
+    _color = color;
+  }
+  
   public bool Collide(Actor actor) => Boundary == actor.Boundary;
 
   public void Draw()
@@ -81,6 +88,7 @@ public class Actor
     _shader.Alpha(_alpha);
     _shader.Index(_index);
     _shader.Size(_size, _size);
+    _shader.Color(_color.R/255f, _color.G/255f, _color.B/255f);
     GL.DrawArrays(PrimitiveType.Triangles, 0, _bufferSize);
   }
 }

@@ -23,15 +23,20 @@ public class Game
       _body = scene.CreateActor(),
       _tail = scene.CreateActor(),
     };
+
+    var red = System.Drawing.Color.Red;
     
     game._head.UploadData(Snake.Head);
     game._head.Scale(game._scale);
+    game._head.Color(red);
 
     game._body.UploadData(Snake.Body);
     game._body.Scale(game._scale);
+    game._body.Color(red);
 
     game._tail.UploadData(Snake.Tail);
     game._tail.Scale(game._scale);
+    game._tail.Color(red);
 
     game._starPosition = new Vector2(scene.Width / 4, scene.Height / 2);
     game.InitSnake(game._starPosition);

@@ -32,9 +32,6 @@ public class Window : GameWindow
   {
     base.OnLoad();
     _scene = Scene.Create(1000, 500, 1f);
-    var colors = new byte[32 * 3];
-    colors[0] = 255;
-    _scene.UploadPalette(colors,0);
     _game = Game.Create(_scene);
   }
 

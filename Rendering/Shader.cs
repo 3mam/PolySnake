@@ -7,7 +7,7 @@ public class Shader
   private int _program;
   private int _angle;
   private int _position;
-  private int _switchPalette;
+  private int _color;
   private int _index;
   private int _camera;
   private int _alpha;
@@ -23,14 +23,12 @@ public class Shader
     var index = GL.GetUniformLocation(program, "index");
     var camera = GL.GetUniformLocation(program, "camera");
     var position = GL.GetUniformLocation(program, "position");
-    var switchPalette = GL.GetUniformLocation(program, "switch_palette");
     var alpha = GL.GetUniformLocation(program, "alpha");
-    var palette = GL.GetUniformLocation(program, "palette");
+    var color = GL.GetUniformLocation(program, "color");
     var size = GL.GetUniformLocation(program, "size");
     var vertexPosition = GL.GetAttribLocation(program, "vertex_position");
     var dimensions = GL.GetUniformLocation(program, "dimensions");
 
-    GL.Uniform1(palette, 0);
     GL.Uniform1(index, 0f);
     GL.Uniform1(alpha, 1f);
 
@@ -39,7 +37,7 @@ public class Shader
       _program = program,
       _angle = angle,
       _position = position,
-      _switchPalette = switchPalette,
+      _color = color,
       _index = index,
       _camera = camera,
       _alpha = alpha,
@@ -49,9 +47,9 @@ public class Shader
     };
   }
 
-  public void Palette(int val)
+  public void Color(float red, float green, float blue)
   {
-    GL.Uniform1(_switchPalette, val);
+    GL.Uniform3(_color, red, green, blue);
   }
 
   public void Index(int val)
@@ -93,6 +91,6 @@ public class Shader
   {
     GL.UseProgram(_program);
     GL.EnableVertexAttribArray(_vertexPosition);
-    GL.VertexAttribPointer(_vertexPosition, 4, VertexAttribPointerType.Float, false, 0, 0);
+    GL.VertexAttribPointer(_vertexPosition, 2, VertexAttribPointerType.Float, false, 0, 0);
   }
 }
