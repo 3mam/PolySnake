@@ -7,13 +7,13 @@ public class Game
   private Actor _head = default!;
   private Actor _body = default!;
   private Actor _tail = default!;
-  private SnakePosition _snakeHeadPosition;
-  private SnakePosition[] _snakeBodyPositions = new SnakePosition[100]!;
-  private SnakePosition _snakeTailPosition;
+  private SnakePosition _snakeHeadPosition = default!;
+  private SnakePosition[] _snakeBodyPositions = new SnakePosition[100];
+  private SnakePosition _snakeTailPosition = default!;
   private int _snakeLenght = 30;
   private float _scale = 0.025f;
   private float _speed = 200f;
-  private Vector2 _starPosition = default!; 
+  private Vector2 _starPosition;
 
   public static Game Create(Scene scene)
   {
@@ -25,7 +25,7 @@ public class Game
     };
 
     var red = System.Drawing.Color.Red;
-    
+
     game._head.UploadData(Snake.Head);
     game._head.Scale(game._scale);
     game._head.Color(red);
@@ -52,9 +52,10 @@ public class Game
       MathF.Cos(radian) * speed,
       MathF.Sin(radian) * speed
     );
+    Console.WriteLine(direct);
     _snakeHeadPosition = new SnakePosition(headPosition, direct);
     _snakeBodyPositions[0] = _snakeBodyPositions[0].Motion(_snakeHeadPosition.Position);
-    
+
     for (var i = 1; i < _snakeLenght; i++)
       _snakeBodyPositions[i] = _snakeBodyPositions[i].Motion(_snakeBodyPositions[i - 1].Position);
 
@@ -76,7 +77,7 @@ public class Game
 
   public void Draw()
   {
-    _head.Rotation(_snakeHeadPosition.Direction-90f);
+    _head.Rotation(_snakeHeadPosition.Direction - 90f);
     _head.Position(_snakeHeadPosition.Position);
     _head.Draw();
 
