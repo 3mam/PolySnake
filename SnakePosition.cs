@@ -6,13 +6,14 @@ namespace PolySnake;
 public class SnakePosition
 {
   private readonly float _direction;
-  public Vector2 Position { get;}
+  public Vector2 Position { get; }
+
   public float Direction
   {
     get => _direction switch
     {
-      < 0 => 360f + _direction,
-      > 360 => _direction - 360f,
+      > 180 => -(360 - _direction),
+      < -180 => 360 - _direction,
       _ => _direction
     };
     private init => _direction = value;
