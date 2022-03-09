@@ -42,9 +42,9 @@ public class Window : GameWindow
       Close();
     var direction = 0f;
     if (KeyboardState.IsKeyDown(Keys.A))
-      direction = 2f;
+      direction = 1f;
     if (KeyboardState.IsKeyDown(Keys.D))
-      direction = -2f;
+      direction = -1f;
     if (KeyboardState.IsKeyDown(Keys.R))
       _game.Reset();
     _game.Move((float)e.Time, direction);

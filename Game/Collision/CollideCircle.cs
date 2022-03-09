@@ -27,14 +27,9 @@ public readonly struct CollideCircle
     point.Deconstruct(out X, out Y, out R);
   }
 
-  public bool Collide(CollideCircle circle)
-  {
-    var x = X - circle.X;
-    var y = Y - circle.Y;
-    var distance = MathF.Sqrt((x * x) + (y * y));
-    var radius = R + circle.R;
-    return distance <= radius;
-  }
+  public bool Collide(CollideCircle circle) =>
+    Collision.Collide.CircleToCirecle(this, circle);
+
 
   public static bool operator ==(CollideCircle a, CollideCircle b) =>
     a.Collide(b);

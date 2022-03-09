@@ -12,7 +12,7 @@ public class Game
   private SnakePosition _snakeTailPosition = default!;
   private int _snakeLenght = 30;
   private float _scale = 0.025f;
-  private float _speed = 200f;
+  private float _speed = 50f;
   private Vector2 _starPosition;
 
   public static Game Create(Scene scene)
@@ -52,7 +52,7 @@ public class Game
       MathF.Cos(radian) * speed,
       MathF.Sin(radian) * speed
     );
-    Console.WriteLine(direct);
+    Console.WriteLine($"{direct} {MathF.Atan2(headPosition.X, headPosition.Y)*180f/MathF.PI}");
     _snakeHeadPosition = new SnakePosition(headPosition, direct);
     _snakeBodyPositions[0] = _snakeBodyPositions[0].Motion(_snakeHeadPosition.Position);
 
