@@ -1,10 +1,25 @@
 using Microsoft.VisualBasic.CompilerServices;
 using OpenTK.Mathematics;
 
-namespace PolySnake.Collision;
+namespace Game.Collision;
 
 public readonly struct CollideCircle
 {
+  public bool Equals(CollideCircle other)
+  {
+    return X.Equals(other.X) && Y.Equals(other.Y) && R.Equals(other.R);
+  }
+
+  public override bool Equals(object? obj)
+  {
+    return obj is CollideCircle other && Equals(other);
+  }
+
+  public override int GetHashCode()
+  {
+    return HashCode.Combine(X, Y, R);
+  }
+
   public readonly float X;
   public readonly float Y;
   public readonly float R;
@@ -30,6 +45,8 @@ public readonly struct CollideCircle
   public bool Collide(CollideCircle circle) =>
     Collision.Collide.CircleToCirecle(this, circle);
 
+  public bool Collide(CollideLine line) =>
+    Collision.Collide.LineToCircle(line, this);
 
   public static bool operator ==(CollideCircle a, CollideCircle b) =>
     a.Collide(b);
@@ -37,12 +54,9 @@ public readonly struct CollideCircle
   public static bool operator !=(CollideCircle a, CollideCircle b) =>
     !a.Collide(b);
 
-  public bool Equals(CollideCircle other) =>
-    X.Equals(other.X) && Y.Equals(other.Y) && R.Equals(other.R);
+  public static bool operator ==(CollideCircle a, CollideLine b) =>
+    a.Collide(b);
 
-  public override bool Equals(object? obj) =>
-    obj is CollideCircle other && Equals(other);
-
-  public override int GetHashCode() =>
-    HashCode.Combine(X, Y, R);
+  public static bool operator !=(CollideCircle a, CollideLine b) =>
+    !a.Collide(b);
 }
