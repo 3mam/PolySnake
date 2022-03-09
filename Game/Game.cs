@@ -1,6 +1,6 @@
 using OpenTK.Mathematics;
 
-namespace PolySnake;
+namespace Game;
 
 public class Game
 {

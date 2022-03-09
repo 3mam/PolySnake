@@ -3,10 +3,10 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL4;
-using PolySnake.Collision;
-using PolySnake.Rendering;
+using Game.Collision;
+using Game.Rendering;
 
-namespace PolySnake;
+namespace Game;
 
 public class Window : GameWindow
 {

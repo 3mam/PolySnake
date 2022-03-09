@@ -1,4 +1,4 @@
-namespace PolySnake.Rendering;
+namespace Game.Rendering;
 
 public static class ShaderDefault
 {

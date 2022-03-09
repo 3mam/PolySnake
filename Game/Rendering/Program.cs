@@ -1,6 +1,6 @@
 using OpenTK.Graphics.OpenGL4;
 
-namespace PolySnake.Rendering;
+namespace Game.Rendering;
 
 public static class Program
 {

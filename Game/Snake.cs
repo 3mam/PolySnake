@@ -1,4 +1,4 @@
-namespace PolySnake;
+namespace Game;
 
 public static class Snake
 {

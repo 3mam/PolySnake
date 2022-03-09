@@ -1,10 +1,10 @@
 using System.Drawing;
 using OpenTK.Graphics.OpenGL4;
-using PolySnake.Rendering;
+using Game.Rendering;
 using OpenTK.Mathematics;
-using PolySnake.Collision;
+using Game.Collision;
 
-namespace PolySnake;
+namespace Game;
 
 public class Actor
 {

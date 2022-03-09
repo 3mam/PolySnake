@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using OpenTK.Mathematics;
 
-namespace PolySnake;
+namespace Game;
 
 public class SnakePosition
 {

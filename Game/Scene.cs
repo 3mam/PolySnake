@@ -1,9 +1,9 @@
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-using PolySnake.Rendering;
+using Game.Rendering;
 using Vector2 = System.Numerics.Vector2;
 
-namespace PolySnake;
+namespace Game;
 
 public class Scene
 {
