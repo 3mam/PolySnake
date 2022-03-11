@@ -48,6 +48,7 @@ public class Window : GameWindow
     if (KeyboardState.IsKeyDown(Keys.R))
       _game.Reset();
     _game.Move((float)e.Time, direction);
+    //_game.CheckCollide();
   }
 
   protected override void OnResize(ResizeEventArgs e)
@@ -75,6 +76,7 @@ public class Window : GameWindow
   protected override void OnRenderFrame(FrameEventArgs e)
   {
     base.OnRenderFrame(e);
+    _game.CheckCollide();
     _scene.Clear();
     _game.Draw();
     SwapBuffers();
