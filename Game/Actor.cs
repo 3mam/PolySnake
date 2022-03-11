@@ -19,16 +19,6 @@ public class Actor
   private float _radius;
   private Vector3 _dimensionScene;
   private Color _color;
-
-  public CollideCircle Boundary
-  {
-    get
-    {
-      var correctRadius = _radius / (1.0f / (_dimensionScene.Z * _size)) * 0.1f * _dimensionScene.X;
-      return new CollideCircle(_position, correctRadius);
-    }
-  }
-
   public static Actor Create(Shader shader, Vector3 dimension) => new()
   {
     _shader = shader,
@@ -76,9 +66,6 @@ public class Actor
   {
     _color = color;
   }
-  
-  public bool Collide(Actor actor) => Boundary == actor.Boundary;
-
   public void Draw()
   {
     GL.BindBuffer(BufferTarget.ArrayBuffer, _buffer);
