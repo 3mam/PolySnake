@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic.CompilerServices;
 using OpenTK.Mathematics;
 
 namespace Game.Collision;

@@ -2,7 +2,6 @@ using System.Drawing;
 using OpenTK.Graphics.OpenGL4;
 using Game.Rendering;
 using OpenTK.Mathematics;
-using Game.Collision;
 
 namespace Game;
 

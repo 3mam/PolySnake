@@ -1,7 +1,6 @@
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using Game.Rendering;
-using Vector2 = System.Numerics.Vector2;
 
 namespace Game;
 

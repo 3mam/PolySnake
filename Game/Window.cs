@@ -3,8 +3,6 @@ using OpenTK.Windowing.GraphicsLibraryFramework;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL4;
-using Game.Collision;
-using Game.Rendering;
 
 namespace Game;
 
