@@ -74,7 +74,6 @@ public class Window : GameWindow
   protected override void OnRenderFrame(FrameEventArgs e)
   {
     base.OnRenderFrame(e);
-    _game.CheckCollide();
     _scene.Clear();
     _game.Draw();
     SwapBuffers();
