@@ -15,13 +15,10 @@ public class Actor
   private float _alpha = 1.0f;
   private float _angle;
   private float _size = 1.0f;
-  private float _radius;
-  private Vector3 _dimensionScene;
   private Color _color;
   public static Actor Create(Shader shader, Vector3 dimension) => new()
   {
     _shader = shader,
-    _dimensionScene = dimension,
   };
 
   public void UploadData(float[] data)
@@ -55,12 +52,7 @@ public class Actor
   {
     _size = size;
   }
-
-  public void Radius(float radius)
-  {
-    _radius = radius;
-  }
-
+  
   public void Color(Color color)
   {
     _color = color;
