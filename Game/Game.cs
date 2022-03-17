@@ -6,19 +6,19 @@ namespace Game;
 
 public class Game
 {
-  private Scene _scene = default!;
-  private Actor _head = default!;
-  private Actor _body = default!;
-  private Actor _tail = default!;
-  private Actor _level = default!;
-  private Actor _apple = default!;
+  private readonly Scene _scene; 
+  private readonly Actor _head;
+  private readonly Actor _body;
+  private readonly Actor _tail;
+  private readonly Actor _level;
+  private readonly Actor _apple;
   private SnakePosition _snakeHeadPosition = default!;
   private readonly SnakePosition[] _snakeBodyPositions = new SnakePosition[100];
   private SnakePosition _snakeTailPosition = default!;
   private readonly int _snakeLenght = 30;
   private readonly float _scale = 0.025f;
   private readonly float _speed = 650f;
-  private Vector2 _starPosition;
+  private readonly Vector2 _starPosition;
 
   private readonly Func<bool, bool> _shakeCameraDuration = 
     Timer.Init(new TimeSpan(0,0,0,0,200).Ticks);
