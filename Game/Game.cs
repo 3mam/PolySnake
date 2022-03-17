@@ -35,24 +35,17 @@ public class Game
 
   private readonly CollideLine _wallBottom =
     new CollideLine(new Vector2(0f, 50f), new Vector2(2000f, 50f));
-  
-  public static Game Create(Scene scene)
-  {
-    var game = new Game
-    {
-      _scene = scene,
-      _head = scene.CreateActor(),
-      _body = scene.CreateActor(),
-      _tail = scene.CreateActor(),
-      _level = scene.CreateActor(),
-      _apple = scene.CreateActor(),
-    };
-    game.Init();
-    return game;
-  }
 
-  private void Init()
+  public static Game Create(Scene scene) => new Game(scene);
+
+  private Game(Scene scene)
   {
+    _scene = scene;
+    _head = scene.CreateActor();
+    _body = scene.CreateActor();
+    _tail = scene.CreateActor();
+    _level = scene.CreateActor();
+    _apple = scene.CreateActor();
     
     var red = Color.Red;
 
