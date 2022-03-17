@@ -19,24 +19,24 @@ public readonly struct CollideCircle
     return HashCode.Combine(X, Y, R);
   }
 
-  public readonly float X;
-  public readonly float Y;
-  public readonly float R;
+  public readonly double X;
+  public readonly double Y;
+  public readonly double R;
 
-  public CollideCircle(float x, float y, float radius)
+  public CollideCircle(double x, double y, double radius)
   {
     X = x;
     Y = y;
     R = radius;
   }
 
-  public CollideCircle(Vector2 point, float radius)
+  public CollideCircle(Vector2d point, double radius)
   {
     point.Deconstruct(out X, out Y);
     R = radius;
   }
 
-  public CollideCircle(Vector3 point)
+  public CollideCircle(Vector3d point)
   {
     point.Deconstruct(out X, out Y, out R);
   }

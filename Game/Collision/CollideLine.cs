@@ -19,12 +19,12 @@ public readonly struct CollideLine
     return HashCode.Combine(X1, Y1, X2, Y2);
   }
 
-  public readonly float X1;
-  public readonly float Y1;
-  public readonly float X2;
-  public readonly float Y2;
+  public readonly double X1;
+  public readonly double Y1;
+  public readonly double X2;
+  public readonly double Y2;
   
-  public CollideLine(float x1, float y1, float x2, float y2)
+  public CollideLine(double x1, double y1, double x2, double y2)
   {
     X1 = x1;
     Y1 = y1;
