@@ -13,7 +13,7 @@ public class Game
   private Actor _level = default!;
   private Actor _apple = default!;
   private SnakePosition _snakeHeadPosition = default!;
-  private SnakePosition[] _snakeBodyPositions = new SnakePosition[100];
+  private readonly SnakePosition[] _snakeBodyPositions = new SnakePosition[100];
   private SnakePosition _snakeTailPosition = default!;
   private int _snakeLenght = 30;
   private float _scale = 0.025f;
@@ -81,13 +81,13 @@ public class Game
 
   private void SnakeMove(Vector2 position, float direction)
   {
-    _snakeHeadPosition = new SnakePosition(position, direction);
-    _snakeBodyPositions[0] = _snakeBodyPositions[0].Motion(_snakeHeadPosition.Position);
+    _snakeHeadPosition.Update(position, direction);
+    _snakeBodyPositions[0].Motion(_snakeHeadPosition.Position);
 
     for (var i = 1; i < _snakeLenght; i++)
-      _snakeBodyPositions[i] = _snakeBodyPositions[i].Motion(_snakeBodyPositions[i - 1].Position);
+      _snakeBodyPositions[i].Motion(_snakeBodyPositions[i - 1].Position);
 
-    _snakeTailPosition = _snakeTailPosition.Motion(_snakeBodyPositions[_snakeLenght - 1].Position);
+    _snakeTailPosition.Motion(_snakeBodyPositions[_snakeLenght - 1].Position);
   }
 
   public void Move(float delta, float direction)
