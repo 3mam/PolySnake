@@ -15,29 +15,27 @@ public class Game
   private SnakePosition _snakeHeadPosition = default!;
   private readonly SnakePosition[] _snakeBodyPositions = new SnakePosition[100];
   private SnakePosition _snakeTailPosition = default!;
-  private int _snakeLenght = 30;
-  private float _scale = 0.025f;
-  private float _speed = 650f;
+  private readonly int _snakeLenght = 30;
+  private readonly float _scale = 0.025f;
+  private readonly float _speed = 650f;
   private Vector2 _starPosition;
-  private long _time;
 
-  private long _shakeCameraTimeEnd;
-  private const long ShakeCameraDuration = 8;
-  private const float ShakeCameraRange = -25f;
+  private readonly Func<bool, bool> _shakeCameraDuration = 
+    Timer.Init(new TimeSpan(0,0,0,0,200).Ticks);
+  private readonly float _shakeCameraRange = -25f;
 
-  private CollideLine _wallLeft =
+  private readonly CollideLine _wallLeft =
     new CollideLine(new Vector2(100f, 1000f), new Vector2(100f, 0f));
 
-  private CollideLine _wallTop =
+  private readonly CollideLine _wallTop =
     new CollideLine(new Vector2(0f, 950f), new Vector2(2000f, 950f));
 
-  private CollideLine _wallRight =
+  private readonly CollideLine _wallRight =
     new CollideLine(new Vector2(1900f, 0f), new Vector2(1900f, 1000f));
 
-  private CollideLine _wallBottom =
+  private readonly CollideLine _wallBottom =
     new CollideLine(new Vector2(0f, 50f), new Vector2(2000f, 50f));
-
-
+  
   public static Game Create(Scene scene)
   {
     var game = new Game
@@ -72,10 +70,10 @@ public class Game
     game._level.Position(new Vector2(scene.Width, scene.Height));
     game._level.Rotation(90f);
     game._level.Scale(5f);
-    
+
     game._apple.UploadData(Assets.Apple);
     game._apple.Color(Color.Chartreuse);
-    
+
     return game;
   }
 
@@ -102,7 +100,7 @@ public class Game
     SnakeMove(headPosition, direct);
   }
 
-  public void DirectMove(float direction)
+  private void DirectMove(float direction)
   {
     var radian = direction / 180f * MathF.PI;
     var headPosition = _snakeHeadPosition.Position + new Vector2(
@@ -127,16 +125,12 @@ public class Game
 
   public void Draw()
   {
-    _time++;
-    var collide = CheckCollide();
-    if (collide)
-      _shakeCameraTimeEnd = _time + ShakeCameraDuration;
-
-    if (_time <= _shakeCameraTimeEnd)
-      ShakeCamera(ShakeCameraRange);
+    var collide = CheckWallCollide();
+    if (_shakeCameraDuration(collide))
+      ShakeCameraRandomly(_shakeCameraRange);
     else
-      ShakeCamera(0);
-
+      ShakeCameraRandomly(0);
+    
     _level.Draw();
 
     _head.Rotation(_snakeHeadPosition.Direction - 90f);
@@ -153,8 +147,8 @@ public class Game
     _tail.Rotation(_snakeTailPosition.Direction);
     _tail.Position(_snakeTailPosition.Position);
     _tail.Draw();
-    
-    _apple.Position(new Vector2(200f,200f));
+
+    _apple.Position(new Vector2(200f, 200f));
     _apple.Scale(_scale);
     _apple.Draw();
   }
@@ -163,8 +157,8 @@ public class Game
   {
     InitSnake(_starPosition);
   }
-
-  private void ShakeCamera(float range)
+  
+  private void ShakeCameraRandomly(float range)
   {
     var random = new Random();
     var between = (range + range + 1);
@@ -172,8 +166,8 @@ public class Game
     var y = (float) random.NextDouble() * between - range;
     _scene.Camera(x, y);
   }
-
-  private bool CheckCollide()
+  
+  private bool CheckWallCollide()
   {
     var head = new CollideCircle(_snakeHeadPosition.Position, 15f);
     var collide = false;
