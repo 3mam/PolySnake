@@ -47,36 +47,39 @@ public class Game
       _level = scene.CreateActor(),
       _apple = scene.CreateActor(),
     };
-
-    var red = Color.Red;
-
-    game._head.UploadData(Assets.Head);
-    game._head.Scale(game._scale);
-    game._head.Color(red);
-
-    game._body.UploadData(Assets.Body);
-    game._body.Scale(game._scale);
-    game._body.Color(red);
-
-    game._tail.UploadData(Assets.Tail);
-    game._tail.Scale(game._scale);
-    game._tail.Color(red);
-
-    game._starPosition = new Vector2(scene.Width / 4, scene.Height / 2);
-    game.InitSnake(game._starPosition);
-
-    game._level.UploadData(Assets.Level);
-    game._level.Color(Color.SeaGreen);
-    game._level.Position(new Vector2(scene.Width, scene.Height));
-    game._level.Rotation(90f);
-    game._level.Scale(5f);
-
-    game._apple.UploadData(Assets.Apple);
-    game._apple.Color(Color.Chartreuse);
-
+    game.Init();
     return game;
   }
 
+  private void Init()
+  {
+    
+    var red = Color.Red;
+
+    _head.UploadData(Assets.Head);
+    _head.Scale(_scale);
+    _head.Color(red);
+
+    _body.UploadData(Assets.Body);
+    _body.Scale(_scale);
+    _body.Color(red);
+
+    _tail.UploadData(Assets.Tail);
+    _tail.Scale(_scale);
+    _tail.Color(red);
+
+    _starPosition = new Vector2(_scene.Width / 4, _scene.Height / 2);
+    InitSnake(_starPosition);
+
+    _level.UploadData(Assets.Level);
+    _level.Color(Color.SeaGreen);
+    _level.Position(new Vector2(_scene.Width, _scene.Height));
+    _level.Rotation(90f);
+    _level.Scale(5f);
+
+    _apple.UploadData(Assets.Apple);
+    _apple.Color(Color.Chartreuse);
+  }
   private void SnakeMove(Vector2 position, float direction)
   {
     _snakeHeadPosition.Update(position, direction);
