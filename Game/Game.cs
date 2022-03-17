@@ -6,7 +6,7 @@ namespace Game;
 
 public class Game
 {
-  private readonly Scene _scene; 
+  private readonly Scene _scene;
   private readonly Actor _head;
   private readonly Actor _body;
   private readonly Actor _tail;
@@ -20,21 +20,22 @@ public class Game
   private readonly float _speed = 650f;
   private readonly Vector2 _starPosition;
 
-  private readonly Func<bool, bool> _shakeCameraDuration = 
-    Timer.Init(new TimeSpan(0,0,0,0,200).Ticks);
+  private readonly Func<bool, bool> _shakeCameraDuration =
+    Timer.Init(new TimeSpan(0, 0, 0, 0, 200).Ticks);
+
   private readonly float _shakeCameraRange = -25f;
 
   private readonly CollideLine _wallLeft =
-    new CollideLine(new Vector2(100f, 1000f), new Vector2(100f, 0f));
+    new(new Vector2(100f, 1000f), new Vector2(100f, 0f));
 
   private readonly CollideLine _wallTop =
-    new CollideLine(new Vector2(0f, 950f), new Vector2(2000f, 950f));
+    new(new Vector2(0f, 950f), new Vector2(2000f, 950f));
 
   private readonly CollideLine _wallRight =
-    new CollideLine(new Vector2(1900f, 0f), new Vector2(1900f, 1000f));
+    new(new Vector2(1900f, 0f), new Vector2(1900f, 1000f));
 
   private readonly CollideLine _wallBottom =
-    new CollideLine(new Vector2(0f, 50f), new Vector2(2000f, 50f));
+    new(new Vector2(0f, 50f), new Vector2(2000f, 50f));
 
   public static Game Create(Scene scene) => new Game(scene);
 
@@ -46,7 +47,7 @@ public class Game
     _tail = scene.CreateActor();
     _level = scene.CreateActor();
     _apple = scene.CreateActor();
-    
+
     var red = Color.Red;
 
     _head.UploadData(Assets.Head);
@@ -73,6 +74,7 @@ public class Game
     _apple.UploadData(Assets.Apple);
     _apple.Color(Color.Chartreuse);
   }
+
   private void SnakeMove(Vector2 position, float direction)
   {
     _snakeHeadPosition.Update(position, direction);
@@ -126,7 +128,7 @@ public class Game
       ShakeCameraRandomly(_shakeCameraRange);
     else
       ShakeCameraRandomly(0);
-    
+
     _level.Draw();
 
     _head.Rotation(_snakeHeadPosition.Direction - 90f);
@@ -153,7 +155,7 @@ public class Game
   {
     InitSnake(_starPosition);
   }
-  
+
   private void ShakeCameraRandomly(float range)
   {
     var random = new Random();
@@ -162,7 +164,7 @@ public class Game
     var y = (float) random.NextDouble() * between - range;
     _scene.Camera(x, y);
   }
-  
+
   private bool CheckWallCollide()
   {
     var head = new CollideCircle(_snakeHeadPosition.Position, 15f);
