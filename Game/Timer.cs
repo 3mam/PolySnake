@@ -2,7 +2,7 @@ namespace Game;
 
 public static class Timer
 {
-  public static Func<bool, bool> Init(long duration)
+  public static Func<bool, bool> Create(long duration)
   {
     long timeEnd = 0;
     return (bool start) =>
