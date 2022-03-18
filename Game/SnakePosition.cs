@@ -5,7 +5,7 @@ namespace Game;
 public class SnakePosition
 {
   private float _direction;
-  public Vector2 Position { get; private set; }
+  public Vector2 Position { get; set; }
 
   public float Direction
   {
@@ -15,7 +15,7 @@ public class SnakePosition
       < -180 => 360 - _direction,
       _ => _direction
     };
-    private set => _direction = value;
+    set => _direction = value;
   }
 
   public SnakePosition(Vector2 position, float direction)
@@ -33,10 +33,14 @@ public class SnakePosition
     Position = target + direction;
     Direction = -(angle * 180f / MathF.PI);
   }
-
-  public void Update(Vector2 position, float direction)
+  
+  public void Move(float speed, float direction)
   {
-    Position = position;
-    Direction = direction;
+    Direction += (direction * speed);
+    var radian = Direction / 180f * MathF.PI;
+    Position += new Vector2(
+      MathF.Cos(radian) * speed,
+      MathF.Sin(radian) * speed
+    );
   }
 }

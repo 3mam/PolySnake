@@ -21,7 +21,7 @@ public class Game
   private readonly Vector2 _starPosition;
 
   private readonly Func<bool, bool> _shakeCameraDuration =
-    Timer.Init(new TimeSpan(0, 0, 0, 0, 200).Ticks);
+    Timer.Create(new TimeSpan(0, 0, 0, 0, 200).Ticks);
 
   private readonly float _shakeCameraRange = -25f;
 
@@ -75,9 +75,8 @@ public class Game
     _apple.Color(Color.Chartreuse);
   }
 
-  private void SnakeMove(Vector2 position, float direction)
+  private void SnakeMove()
   {
-    _snakeHeadPosition.Update(position, direction);
     _snakeBodyPositions[0].Motion(_snakeHeadPosition.Position);
 
     for (var i = 1; i < _snakeLenght; i++)
@@ -88,24 +87,8 @@ public class Game
 
   public void Move(float delta, float direction)
   {
-    var speed = _speed * delta;
-    var direct = _snakeHeadPosition.Direction + (direction * speed);
-    var radian = direct / 180f * MathF.PI;
-    var headPosition = _snakeHeadPosition.Position + new Vector2(
-      MathF.Cos(radian) * speed,
-      MathF.Sin(radian) * speed
-    );
-    SnakeMove(headPosition, direct);
-  }
-
-  private void DirectMove(float direction)
-  {
-    var radian = direction / 180f * MathF.PI;
-    var headPosition = _snakeHeadPosition.Position + new Vector2(
-      MathF.Cos(radian),
-      MathF.Sin(radian)
-    );
-    SnakeMove(headPosition, direction);
+    _snakeHeadPosition.Move(_speed * delta, direction);
+    SnakeMove();
   }
 
   private void InitSnake(Vector2 startPosition)
@@ -169,27 +152,32 @@ public class Game
   {
     var head = new CollideCircle(_snakeHeadPosition.Position, 15f);
     var collide = false;
+    const float recoil = 100f;
     if (_wallLeft == head)
     {
-      DirectMove(180f - _snakeHeadPosition.Direction);
+      _snakeHeadPosition.Direction = 180f - _snakeHeadPosition.Direction;
+      _snakeHeadPosition.Position += new Vector2(recoil,0);
       collide = true;
     }
 
     if (_wallRight == head)
     {
-      DirectMove(180f - _snakeHeadPosition.Direction);
+      _snakeHeadPosition.Direction = 180f - _snakeHeadPosition.Direction;
+      _snakeHeadPosition.Position -= new Vector2(recoil,0);
       collide = true;
     }
 
     if (_wallTop == head)
     {
-      DirectMove(-_snakeHeadPosition.Direction);
+      _snakeHeadPosition.Direction = -_snakeHeadPosition.Direction;
+      _snakeHeadPosition.Position -= new Vector2(0,recoil);
       collide = true;
     }
 
     if (_wallBottom == head)
     {
-      DirectMove(MathF.Abs(_snakeHeadPosition.Direction));
+      _snakeHeadPosition.Direction = MathF.Abs(_snakeHeadPosition.Direction);
+      _snakeHeadPosition.Position += new Vector2(0,recoil);
       collide = true;
     }
 
