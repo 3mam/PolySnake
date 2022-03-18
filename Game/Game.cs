@@ -75,20 +75,15 @@ public class Game
     _apple.Color(Color.Chartreuse);
   }
 
-  private void SnakeMove()
+  public void Move(float delta, float direction)
   {
+    _snakeHeadPosition.Move(_speed * delta, direction);
     _snakeBodyPositions[0].Motion(_snakeHeadPosition.Position);
 
     for (var i = 1; i < _snakeLenght; i++)
       _snakeBodyPositions[i].Motion(_snakeBodyPositions[i - 1].Position);
 
     _snakeTailPosition.Motion(_snakeBodyPositions[_snakeLenght - 1].Position);
-  }
-
-  public void Move(float delta, float direction)
-  {
-    _snakeHeadPosition.Move(_speed * delta, direction);
-    SnakeMove();
   }
 
   private void InitSnake(Vector2 startPosition)
