@@ -147,7 +147,7 @@ public class Game
   {
     var head = new CollideCircle(_snakeHeadPosition.Position, 15f);
     var collide = false;
-    const float recoil = 100f;
+    const float recoil = 5f;
     if (_wallLeft == head)
     {
       _snakeHeadPosition.Direction = 180f - _snakeHeadPosition.Direction;
