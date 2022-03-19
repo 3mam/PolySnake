@@ -11,9 +11,9 @@ public class Game
   private readonly Actor _tail;
   private readonly Actor _level;
   private readonly Actor _apple;
-  private SnakePosition _snakeHeadPosition = default!;
+  private SnakePosition _snakeHeadPosition;
   private readonly SnakePosition[] _snakeBodyPositions = new SnakePosition[100];
-  private SnakePosition _snakeTailPosition = default!;
+  private SnakePosition _snakeTailPosition;
   private readonly int _snakeLenght = 10;
   private readonly float _scale = 0.025f;
   private readonly float _speed = 300f;
