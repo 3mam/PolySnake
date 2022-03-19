@@ -1,5 +1,4 @@
 using System.Drawing;
-using Game.Collision;
 using OpenTK.Mathematics;
 
 namespace Game;
@@ -19,24 +18,12 @@ public class Game
   private readonly float _scale = 0.025f;
   private readonly float _speed = 650f;
   private readonly Vector2 _starPosition;
+  private readonly Walls _walls;
 
   private readonly Func<bool, bool> _shakeCameraDuration =
     Timer.Create(new TimeSpan(0, 0, 0, 0, 200).Ticks);
 
   private readonly float _shakeCameraRange = -25f;
-
-  private readonly CollideLine _wallLeft =
-    new(new Vector2(100f, 1000f), new Vector2(100f, 0f));
-
-  private readonly CollideLine _wallTop =
-    new(new Vector2(0f, 950f), new Vector2(2000f, 950f));
-
-  private readonly CollideLine _wallRight =
-    new(new Vector2(1900f, 0f), new Vector2(1900f, 1000f));
-
-  private readonly CollideLine _wallBottom =
-    new(new Vector2(0f, 50f), new Vector2(2000f, 50f));
-
   public static Game Create(Scene scene) => new Game(scene);
 
   private Game(Scene scene)
@@ -73,6 +60,7 @@ public class Game
 
     _apple.UploadData(Assets.Apple);
     _apple.Color(Color.Chartreuse);
+    _walls = Walls.SmashWith(_snakeHeadPosition);
   }
 
   public void Move(float delta, float direction)
@@ -101,7 +89,7 @@ public class Game
 
   public void Draw()
   {
-    var collide = CheckWallCollide();
+    var collide = _walls.CheckCollide();
     if (_shakeCameraDuration(collide))
       ShakeCameraRandomly(_shakeCameraRange);
     else
@@ -141,41 +129,5 @@ public class Game
     var x = (float) random.NextDouble() * between - range;
     var y = (float) random.NextDouble() * between - range;
     _scene.Camera(x, y);
-  }
-
-  private bool CheckWallCollide()
-  {
-    var head = new CollideCircle(_snakeHeadPosition.Position, 15f);
-    var collide = false;
-    const float recoil = 5f;
-    if (_wallLeft == head)
-    {
-      _snakeHeadPosition.Direction = 180f - _snakeHeadPosition.Direction;
-      _snakeHeadPosition.Position += new Vector2(recoil,0);
-      collide = true;
-    }
-
-    if (_wallRight == head)
-    {
-      _snakeHeadPosition.Direction = 180f - _snakeHeadPosition.Direction;
-      _snakeHeadPosition.Position -= new Vector2(recoil,0);
-      collide = true;
-    }
-
-    if (_wallTop == head)
-    {
-      _snakeHeadPosition.Direction = -_snakeHeadPosition.Direction;
-      _snakeHeadPosition.Position -= new Vector2(0,recoil);
-      collide = true;
-    }
-
-    if (_wallBottom == head)
-    {
-      _snakeHeadPosition.Direction = MathF.Abs(_snakeHeadPosition.Direction);
-      _snakeHeadPosition.Position += new Vector2(0,recoil);
-      collide = true;
-    }
-
-    return collide;
   }
 }
