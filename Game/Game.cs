@@ -14,10 +14,11 @@ public class Game
   private SnakePosition _snakeHeadPosition = default!;
   private readonly SnakePosition[] _snakeBodyPositions = new SnakePosition[100];
   private SnakePosition _snakeTailPosition = default!;
-  private readonly int _snakeLenght = 30;
+  private readonly int _snakeLenght = 10;
   private readonly float _scale = 0.025f;
-  private readonly float _speed = 650f;
+  private readonly float _speed = 300f;
   private readonly Vector2 _starPosition;
+  private readonly float _starDirection = 0f;
   private readonly Walls _walls;
 
   private readonly Func<bool, bool> _shakeCameraDuration =
@@ -50,7 +51,11 @@ public class Game
     _tail.Color(red);
 
     _starPosition = new Vector2(_scene.Width / 4, _scene.Height / 2);
-    InitSnake(_starPosition);
+    _snakeHeadPosition = new SnakePosition(_starPosition, _starDirection);
+    for (var i = 0; i < _snakeLenght; i++)
+      _snakeBodyPositions[i] = new SnakePosition(_starPosition, _starDirection);
+    _snakeTailPosition = new SnakePosition(_starPosition, _starDirection);
+    Reset();
 
     _level.UploadData(Assets.Level);
     _level.Color(Color.SeaGreen);
@@ -72,19 +77,6 @@ public class Game
       _snakeBodyPositions[i].Motion(_snakeBodyPositions[i - 1].Position);
 
     _snakeTailPosition.Motion(_snakeBodyPositions[_snakeLenght - 1].Position);
-  }
-
-  private void InitSnake(Vector2 startPosition)
-  {
-    _snakeHeadPosition = new SnakePosition(startPosition, 0f);
-    for (var i = 0; i < _snakeLenght; i++)
-    {
-      _snakeBodyPositions[i] = new SnakePosition(
-        startPosition - new Vector2(0, 15f + (10f * i)), 0);
-    }
-
-    _snakeTailPosition = new SnakePosition(
-      startPosition - new Vector2(0, 15f + (10f * _snakeLenght - 1)), 0);
   }
 
   public void Draw()
@@ -119,7 +111,11 @@ public class Game
 
   public void Reset()
   {
-    InitSnake(_starPosition);
+    _snakeHeadPosition.Position = _starPosition;
+    _snakeHeadPosition.Direction = _starDirection;
+    for (var i = 0; i < _snakeLenght; i++)
+      _snakeBodyPositions[i].Position = _starPosition - new Vector2(15f * i, 0);
+    _snakeTailPosition.Position = _starPosition - new Vector2(15f * _snakeLenght, 0);
   }
 
   private void ShakeCameraRandomly(float range)
