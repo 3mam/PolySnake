@@ -50,4 +50,13 @@ public class Scene
     _camera.X = x;
     _camera.Y = y;
   }
+  
+  public void ShakeCameraRandomly(float range)
+  {
+    var random = new Random();
+    var between = (range + range + 1);
+    var x = (float) random.NextDouble() * between - range;
+    var y = (float) random.NextDouble() * between - range;
+    Camera(x, y);
+  }
 }

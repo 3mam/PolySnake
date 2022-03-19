@@ -83,9 +83,9 @@ public class Game
   {
     var collide = _walls.CheckCollide();
     if (_shakeCameraDuration(collide))
-      ShakeCameraRandomly(_shakeCameraRange);
+      _scene.ShakeCameraRandomly(_shakeCameraRange);
     else
-      ShakeCameraRandomly(0);
+      _scene.ShakeCameraRandomly(0);
 
     _level.Draw();
 
@@ -116,14 +116,5 @@ public class Game
     for (var i = 0; i < _snakeLenght; i++)
       _snakeBodyPositions[i].Position = _starPosition - new Vector2(15f * i, 0);
     _snakeTailPosition.Position = _starPosition - new Vector2(15f * _snakeLenght, 0);
-  }
-
-  private void ShakeCameraRandomly(float range)
-  {
-    var random = new Random();
-    var between = (range + range + 1);
-    var x = (float) random.NextDouble() * between - range;
-    var y = (float) random.NextDouble() * between - range;
-    _scene.Camera(x, y);
   }
 }
