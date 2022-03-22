@@ -1,15 +1,16 @@
 namespace Game;
 
-public static class Timer
+public class Timer
 {
-  public static Func<bool, bool> Create(long duration)
+  private long _timeEnd;
+  private readonly long _millisecond;
+
+  public Timer(int millisecond) =>
+    _millisecond = new TimeSpan(0, 0, 0, 0, millisecond).Ticks;
+  public bool Trigger(bool start)
   {
-    long timeEnd = 0;
-    return (bool start) =>
-    {
-      if (start)
-        timeEnd = DateTime.Now.Ticks + duration;
-      return DateTime.Now.Ticks <= timeEnd;
-    };
+    if (start)
+      _timeEnd = DateTime.Now.Ticks + _millisecond;
+    return DateTime.Now.Ticks <= _timeEnd;
   }
 }
