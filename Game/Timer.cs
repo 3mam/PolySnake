@@ -8,20 +8,14 @@ public class Timer
   public Timer(int millisecond) =>
     _millisecond = new TimeSpan(0, 0, 0, 0, millisecond).Ticks;
 
-  public bool Finally(bool trigger)
+  public bool Duration(bool looping = false)
   {
-    if (trigger)
+    var isTime = DateTime.Now.Ticks < _timeEnd;
+    if (looping && !isTime)
       Reset();
-    return DateTime.Now.Ticks <= _timeEnd;
-  }
-
-  public bool Finally()
-  {
-    if (DateTime.Now.Ticks <= _timeEnd)
-      return false;
-    Reset();
-    return true;
+    return isTime;
   }
 
   public void Reset() => _timeEnd = DateTime.Now.Ticks + _millisecond;
+  public void Stop() => _timeEnd = 0;
 }
