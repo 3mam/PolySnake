@@ -4,20 +4,17 @@ namespace Game.Collision;
 
 public readonly struct CollideCircle
 {
-  public bool Equals(CollideCircle other)
-  {
-    return X.Equals(other.X) && Y.Equals(other.Y) && R.Equals(other.R);
-  }
+  private bool Equals(CollideCircle other)
+    => X.Equals(other.X) && Y.Equals(other.Y) && R.Equals(other.R);
 
   public override bool Equals(object? obj)
   {
-    return obj is CollideCircle other && Equals(other);
+    if (ReferenceEquals(null, obj)) return false;
+    return obj.GetType() == GetType() && Equals((CollideCircle) obj);
   }
 
   public override int GetHashCode()
-  {
-    return HashCode.Combine(X, Y, R);
-  }
+    => HashCode.Combine(X, Y, R);
 
   public readonly double X;
   public readonly double Y;
@@ -32,30 +29,26 @@ public readonly struct CollideCircle
 
   public CollideCircle(Vector2d point, double radius)
   {
-    point.Deconstruct(out X, out Y);
+    X = point.X;
+    Y = point.Y;
     R = radius;
   }
 
-  public CollideCircle(Vector3d point)
-  {
-    point.Deconstruct(out X, out Y, out R);
-  }
+  private bool Collide(CollideCircle circle)
+    => Collision.Collide.CircleToCircle(this, circle);
 
-  public bool Collide(CollideCircle circle) =>
-    Collision.Collide.CircleToCirecle(this, circle);
+  private bool Collide(CollideLine line)
+    => Collision.Collide.LineToCircle(line, this);
 
-  public bool Collide(CollideLine line) =>
-    Collision.Collide.LineToCircle(line, this);
+  public static bool operator ==(CollideCircle a, CollideCircle b)
+    => a.Collide(b);
 
-  public static bool operator ==(CollideCircle a, CollideCircle b) =>
-    a.Collide(b);
+  public static bool operator !=(CollideCircle a, CollideCircle b)
+    => !a.Collide(b);
 
-  public static bool operator !=(CollideCircle a, CollideCircle b) =>
-    !a.Collide(b);
+  public static bool operator ==(CollideCircle a, CollideLine b)
+    => a.Collide(b);
 
-  public static bool operator ==(CollideCircle a, CollideLine b) =>
-    a.Collide(b);
-
-  public static bool operator !=(CollideCircle a, CollideLine b) =>
-    !a.Collide(b);
+  public static bool operator !=(CollideCircle a, CollideLine b)
+    => !a.Collide(b);
 }

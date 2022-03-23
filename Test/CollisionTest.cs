@@ -11,7 +11,7 @@ public class CollisionTest
   {
     var a = new CollideCircle(10, 10, 10);
     var b = new CollideCircle(15, 15, 10);
-    Assert.IsTrue(Collide.CircleToCirecle(a, b));
+    Assert.IsTrue(Collide.CircleToCircle(a, b));
   }
 
   [TestMethod]
