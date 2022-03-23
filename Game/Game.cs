@@ -1,4 +1,5 @@
 using System.Drawing;
+using Game.Collision;
 using OpenTK.Mathematics;
 
 namespace Game;
@@ -12,17 +13,18 @@ public class Game
   private readonly Actor _level;
   private readonly Actor _apple;
   private readonly SnakePosition _snakeHeadPosition;
-  private readonly SnakePosition[] _snakeBodyPositions = new SnakePosition[100];
+  private readonly SnakePosition[] _snakeBodyPositions = new SnakePosition[1000];
   private readonly SnakePosition _snakeTailPosition;
-  private readonly int _snakeLenght = 10;
+  private int _snakeLenght = 0;
   private readonly float _scale = 0.025f;
   private readonly float _speed = 300f;
   private readonly Vector2 _starPosition;
-  private readonly float _starDirection = 0f;
+  private readonly float _starDirection = 0.01f;
   private readonly Walls _walls;
+  private readonly PowerUps _power;
 
-  private readonly Func<bool, bool> _shakeCameraDuration =
-    Timer.Create(new TimeSpan(0, 0, 0, 0, 200).Ticks);
+  private readonly Timer _shakeCameraDuration = new(200);
+  private readonly Timer _foodReposition = new Timer(10000);
 
   private readonly float _shakeCameraRange = -25f;
   public static Game Create(Scene scene) => new Game(scene);
@@ -50,11 +52,14 @@ public class Game
     _tail.Scale(_scale);
     _tail.Color(red);
 
-    _starPosition = new Vector2(_scene.Width / 4, _scene.Height / 2);
+    _starPosition = new Vector2(_scene.Width, _scene.Height);
     _snakeHeadPosition = new SnakePosition(_starPosition, _starDirection);
-    for (var i = 0; i < _snakeLenght; i++)
+    for (var i = 0; i < _snakeBodyPositions.Length; i++)
       _snakeBodyPositions[i] = new SnakePosition(_starPosition, _starDirection);
     _snakeTailPosition = new SnakePosition(_starPosition, _starDirection);
+    
+    _walls = Walls.SmashWith(_snakeHeadPosition);
+    _power = PowerUps.SmashWith(_snakeHeadPosition);
     Reset();
 
     _level.UploadData(Assets.Level);
@@ -65,7 +70,7 @@ public class Game
 
     _apple.UploadData(Assets.Apple);
     _apple.Color(Color.Chartreuse);
-    _walls = Walls.SmashWith(_snakeHeadPosition);
+    _apple.Scale(_scale+0.01f);
   }
 
   public void Move(float delta, float direction)
@@ -82,7 +87,7 @@ public class Game
   public void Draw()
   {
     var collide = _walls.CheckCollide();
-    if (_shakeCameraDuration(collide))
+    if (_shakeCameraDuration.Finally(collide))
       _scene.ShakeCameraRandomly(_shakeCameraRange);
     else
       _scene.ShakeCameraRandomly(0);
@@ -104,17 +109,30 @@ public class Game
     _tail.Position(_snakeTailPosition.Position);
     _tail.Draw();
 
-    _apple.Position(new Vector2(200f, 200f));
-    _apple.Scale(_scale);
+    if (_power.CheckFoodCollide())
+    {
+      _snakeLenght++;
+      _power.PlaceFoodRandomly();
+      _foodReposition.Reset();
+    }
+    if (_foodReposition.Finally())
+      _power.PlaceFoodRandomly();
+
+
+    _apple.Position(_power.FoodPosition);
     _apple.Draw();
   }
 
   public void Reset()
   {
+    _snakeLenght = 3;
     _snakeHeadPosition.Position = _starPosition;
     _snakeHeadPosition.Direction = _starDirection;
     for (var i = 0; i < _snakeLenght; i++)
       _snakeBodyPositions[i].Position = _starPosition - new Vector2(15f * i, 0);
     _snakeTailPosition.Position = _starPosition - new Vector2(15f * _snakeLenght, 0);
+    
+    _power.PlaceFoodRandomly();
+    _foodReposition.Reset();
   }
 }
