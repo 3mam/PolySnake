@@ -9,8 +9,10 @@ public class PowerUps
   private const int Height = 34;
   private readonly Vector2[] _net = new Vector2[Width * Height];
   private int _idFood = 0;
+  private int _idSpeed = 0;
   private readonly SnakePosition _snake;
   public Vector2 FoodPosition => _net[_idFood];
+  public Vector2 SpeedPosition => _net[_idSpeed];
 
   private PowerUps(SnakePosition snake)
   {
@@ -26,4 +28,10 @@ public class PowerUps
     new CollideCircle(_net[_idFood], 15f) == new CollideCircle(_snake.Position, 15f);
 
   public void PlaceFoodRandomly() => _idFood = new Random().Next(0, Width * Height);
+  
+  public bool CheckSpeedCollide() =>
+    new CollideCircle(_net[_idSpeed], 15f) == new CollideCircle(_snake.Position, 15f);
+  
+  public void PlaceSpeedRandomly() => _idSpeed = new Random().Next(0, Width * Height);
+
 }
