@@ -45,7 +45,7 @@ public class Window : GameWindow
       direction = -1f;
     if (KeyboardState.IsKeyDown(Keys.R))
       _game.Reset();
-    _game.Move((float)e.Time, direction);
+    _game.Snake.Move((float)e.Time, direction);
     //_game.CheckCollide();
   }
 
