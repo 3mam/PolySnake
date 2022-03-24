@@ -7,10 +7,10 @@ namespace Game;
 public class Scene
 {
   private readonly Shader _shader = Shader.Load(ShaderDefault.Vertex, ShaderDefault.Fragment);
-  public float Width;
-  public float Height;
+  private float _width;
+  private float _height;
   private float _scale;
-  private Vector2 _camera = new();
+  private Vector2 _camera;
 
   private Scene()
   {
@@ -28,8 +28,8 @@ public class Scene
   {
     var scene = new Scene();
     scene._shader.Dimensions(width, height, scale);
-    scene.Width = width;
-    scene.Height = height;
+    scene._width = width;
+    scene._height = height;
     scene._scale = scale;
     return scene;
   }
@@ -42,16 +42,12 @@ public class Scene
   }
 
   public Actor CreateActor() =>
-    Actor.Create(_shader, new Vector3(Width, Height, _scale));
+    Actor.Create(_shader, new Vector3(_width, _height, _scale));
 
-  public void Camera(float x, float y)
-  {
-    _shader.Camera(x, y);
-    _camera.X = x;
-    _camera.Y = y;
-  }
-  
-  public void ShakeCameraRandomly(float range)
+  private void Camera(float x, float y)
+   => _shader.Camera(x, y);
+
+    public void ShakeCameraRandomly(float range)
   {
     var random = new Random();
     var between = (range + range + 1);
