@@ -9,10 +9,12 @@ public class Game
   private readonly Level _level = new();
   private readonly Walls _walls;
   private readonly PowerUps _powers;
+  private readonly Hud _hud = new ();
 
   private readonly Timer _shakeCameraDuration = new(200);
 
   public readonly Snake Snake = new();
+
 
   public Game()
   {
@@ -34,7 +36,7 @@ public class Game
       Environment.Scene.ShakeCameraRandomly(Environment.ShakeCameraRange);
     else
       Environment.Scene.Camera(Environment.CameraPosition);
-
+    _hud.Draw();
     _level.Draw();
     Snake.Draw();
     _powers.Draw();

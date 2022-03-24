@@ -9,7 +9,7 @@ public static class Environment
   public const float CenterHeight = 500f;
   public const int MaxSnakeLenght = 10000;
   public const int SnakeLenght = 3;
-  public static readonly Vector2 CameraPosition = new (0, -40);
+  public static readonly Vector2 CameraPosition = new (0, -15);
   public const float ShakeCameraRange = -25f;
   public const float Scale = 0.025f;
   public const float Speed  = 300f;
@@ -22,5 +22,6 @@ public static class Environment
   public static readonly Color FoodColor = Color.Chartreuse;
   public static readonly Color SpeedColor = Color.Gold;
   public static readonly Color LevelColor = Color.SeaGreen;
-  
+  public static readonly Color HudColor = Color.White;
+
 }
