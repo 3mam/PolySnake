@@ -11,7 +11,7 @@ public class Level
   {
     _level = Environment.Scene.CreateActor();
     _level.UploadData(Assets.Level);
-    _level.Color(Color.SeaGreen);
+    _level.Color(Environment.LevelColor);
     _level.Position(new Vector2(Environment.CenterWidth, Environment.CenterHeight));
     _level.Rotation(90f);
     _level.Scale(5f);

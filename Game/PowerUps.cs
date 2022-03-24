@@ -21,15 +21,18 @@ public class PowerUps
   private readonly Timer _speedShowUp = new(10000);
   private readonly Timer _speedDuration = new(3000);
 
+  public Action FoodLogic { private get; set; } = default!;
+  public Action<bool> SpeedLogic { private get; set; } = default!;
+
   private PowerUps()
   {
     _apple.UploadData(Assets.Apple);
-    _apple.Color(Color.Chartreuse);
+    _apple.Color(Environment.FoodColor);
     _apple.Scale(Environment.Scale + 0.01f);
 
     _thunder.UploadData(Assets.Thunder);
     _thunder.Scale(Environment.Scale + 0.01f);
-    _thunder.Color(Color.Gold);
+    _thunder.Color(Environment.SpeedColor);
 
     for (var y = 0; y < NetHeight; y++)
     for (var x = 0; x < NetWidth; x++)
@@ -47,14 +50,13 @@ public class PowerUps
   private bool CheckSpeedCollide() =>
     new CollideCircle(_net[_idSpeed], 15f) == new CollideCircle(_snake.Position, 15f);
 
-  public void PlaceSpeedRandomly() => _idSpeed = new Random().Next(0, NetWidth * NetHeight);
+  private void PlaceSpeedRandomly() => _idSpeed = new Random().Next(0, NetWidth * NetHeight);
 
   public void Draw()
   {
-    
     if (CheckFoodCollide())
     {
-      Environment.SnakeLenght++;
+      FoodLogic();
       PlaceFoodRandomly();
       _foodReposition.Reset();
     }
@@ -67,14 +69,14 @@ public class PowerUps
 
     if (CheckSpeedCollide())
     {
-      Environment.Speed = 450f;
+      SpeedLogic(true);
       _speedDuration.Reset();
       _speedVisibilityDuration.Stop();
     }
 
     if (!_speedDuration.Duration())
-      Environment.Speed = 300f;
-    
+      SpeedLogic(false);
+
     _thunder.Position(SpeedPosition);
     if (_speedVisibilityDuration.Duration())
       _thunder.Draw();

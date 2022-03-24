@@ -19,6 +19,10 @@ public class Game
   {
     _walls = Walls.SmashWith(Snake.Head);
     _powers = PowerUps.SmashWith(Snake.Head);
+
+    _powers.FoodLogic = () => Snake.SnakeLenght++;
+    _powers.SpeedLogic = boost => Snake.Speed = boost ? Environment.SpeedUp : Environment.Speed;
+
     Reset();
   }
 
