@@ -10,7 +10,6 @@ public class Scene
   private float _width;
   private float _height;
   private float _scale;
-  private Vector2 _camera;
 
   private Scene()
   {
