@@ -15,11 +15,11 @@ public class Snake
 
   public SnakePosition Position => _snakeHeadPosition;
 
-  public Snake(Scene scene)
+  public Snake()
   {
-    _head = scene.CreateActor();
-    _body = scene.CreateActor();
-    _tail = scene.CreateActor();
+    _head = Environment.Scene.CreateActor();
+    _body = Environment.Scene.CreateActor();
+    _tail = Environment.Scene.CreateActor();
     var red = Color.Red;
     
     _head.UploadData(Assets.Head);

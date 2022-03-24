@@ -8,7 +8,6 @@ namespace Game;
 
 public class Window : GameWindow
 {
-  private Scene _scene = default!;
   private Game _game = default!;
   private Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
     : base(gameWindowSettings, nativeWindowSettings)
@@ -29,8 +28,8 @@ public class Window : GameWindow
   protected override void OnLoad()
   {
     base.OnLoad();
-    _scene = Scene.Create(1000, 500, 1f);
-    _game = Game.Create(_scene);
+    Environment.Scene = Scene.Create(Environment.Width, Environment.Height, 1f);
+    _game = new Game();
   }
 
   protected override void OnUpdateFrame(FrameEventArgs e)
@@ -74,7 +73,7 @@ public class Window : GameWindow
   protected override void OnRenderFrame(FrameEventArgs e)
   {
     base.OnRenderFrame(e);
-    _scene.Clear();
+    Environment.Scene.Clear();
     _game.Draw();
     SwapBuffers();
   }
