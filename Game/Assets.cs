@@ -2,8 +2,7 @@ namespace Game;
 
 public static class Assets
 {
-  public static readonly float[] Head = new[]
-  {
+  public static readonly float[] Head = {
     -0.25f, 1f,
     -0.5f, -1f,
     -1f, -0.3f,
@@ -21,8 +20,7 @@ public static class Assets
     1f, -0.3f,
   };
 
-  public static readonly float[] Body = new[]
-  {
+  public static readonly float[] Body = {
     0f, 0.6f,
     -0.6f, -0.3f,
     -0.6f, 0.3f,
@@ -40,8 +38,7 @@ public static class Assets
     0.6f, -0.3f,
   };
 
-  public static readonly float[] Tail = new[]
-  {
+  public static readonly float[] Tail = {
     0f, 0.6f,
     0f, -0.6f,
     -0.6f, 0.3f,
@@ -50,9 +47,8 @@ public static class Assets
     0.6f, 0.3f,
     0f, -0.6f,
   };
-  
-  public static readonly float[] Level = new[]
-  {
+
+  public static readonly float[] Level = {
     -0.18f, -0.32f,
     -0.18f, 0.32f,
     0.18f, 0.32f,
@@ -60,9 +56,8 @@ public static class Assets
     0.18f, -0.32f,
     -0.18f, -0.32f,
   };
-  
-  public static readonly float[] Apple = new[]
-  {
+
+  public static readonly float[] Apple = {
     0.3488602042198181f, -0.06326080858707428f,
     0.5607052445411682f, 0.32197126746177673f,
     0.2954246699810028f, 0.39952874183654785f,
@@ -119,8 +114,7 @@ public static class Assets
     -0.44186699390411377f, -0.06326080858707428f,
   };
 
-  public static readonly float[] Thunder = new[]
-  {
+  public static readonly float[] Thunder = {
     -0.5890124440193176f, -0.11780249327421188f,
     0.11780249327421188f, 0.11780249327421188f,
     -0.11780249327421188f, -0.11780249327421188f,
@@ -135,8 +129,7 @@ public static class Assets
     0.7068149447441101f, 0.11780249327421188f,
   };
 
-  public static readonly float[] Life = new[]
-  {
+  public static readonly float[] Life = {
     0.5618988871574402f, 0.16586536169052124f,
     0.6400238871574402f, 0.04086536169052124f,
     0.6400238871574402f, 0.16586536169052124f,
@@ -254,5 +247,32 @@ public static class Assets
     -0.11778861284255981f, -0.20913463830947876f,
     -0.055288612842559814f, 0.04086536169052124f,
     -0.055288612842559814f, -0.02163463830947876f,
+  };
+
+  public static readonly float[] Heart = {
+    0.0000f, 0.4284f,
+    0.7098f, 0.8077f,
+    0.1605f, 0.8077f,
+    0.8993f, 0.0182f,
+    0.0000f, 0.4284f,
+    0.8993f, 0.4284f,
+    0.0000f, 0.4284f,
+    0.8993f, 0.0182f,
+    0.0000f, -0.8531f,
+    0.7098f, 0.8077f,
+    0.0000f, 0.4284f,
+    0.8993f, 0.4284f,
+    0.0000f, 0.4284f,
+    -0.1605f, 0.8077f,
+    -0.7098f, 0.8077f,
+    -0.8993f, 0.0182f,
+    -0.8993f, 0.4284f,
+    0.0000f, 0.4284f,
+    0.0000f, 0.4284f,
+    0.0000f, -0.8531f,
+    -0.8993f, 0.0182f,
+    -0.7098f, 0.8077f,
+    -0.8993f, 0.4284f,
+    0.0000f, 0.4284f,
   };
 }
