@@ -30,7 +30,7 @@ public class Game
     if (_shakeCameraDuration.Duration())
       Environment.Scene.ShakeCameraRandomly(ShakeCameraRange);
     else
-      Environment.Scene.ShakeCameraRandomly(0);
+      Environment.Scene.Camera(Environment.CameraPosition);
 
     _level.Draw();
     Snake.Draw();

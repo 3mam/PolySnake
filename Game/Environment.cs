@@ -7,6 +7,7 @@ public static class Environment
   public const float CenterWidth = 1000f;
   public const float CenterHeight = 500f;
   public const int MaxSnakeLenght = 10000;
+  public static readonly Vector2 CameraPosition = new (0, -40);
   private static int _snakeLenght = 3;
 
   public static int SnakeLenght

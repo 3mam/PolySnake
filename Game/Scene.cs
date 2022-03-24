@@ -10,6 +10,7 @@ public class Scene
   private float _width;
   private float _height;
   private float _scale;
+  private Vector2 _camera;
 
   private Scene()
   {
@@ -43,15 +44,21 @@ public class Scene
   public Actor CreateActor() =>
     Actor.Create(_shader, new Vector3(_width, _height, _scale));
 
-  private void Camera(float x, float y)
-   => _shader.Camera(x, y);
-
-    public void ShakeCameraRandomly(float range)
+  public void Camera(Vector2 position)
   {
+    _camera = position;
+    _shader.Camera(_camera.X, _camera.Y);
+  }
+
+  public void ShakeCameraRandomly(float range)
+  {
+    if (range == 0)
+      return;
     var random = new Random();
     var between = (range + range + 1);
     var x = (float) random.NextDouble() * between - range;
     var y = (float) random.NextDouble() * between - range;
-    Camera(x, y);
+    _shader.Camera(_camera.X + x, _camera.Y + y);
   }
+  
 }
