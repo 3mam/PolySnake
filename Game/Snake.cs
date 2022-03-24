@@ -19,7 +19,7 @@ public class Snake
     _body = Environment.Scene.CreateActor();
     _tail = Environment.Scene.CreateActor();
     var red = Color.Red;
-    
+
     _head.UploadData(Assets.Head);
     _head.Scale(Environment.Scale);
     _head.Color(red);
@@ -31,13 +31,13 @@ public class Snake
     _tail.UploadData(Assets.Tail);
     _tail.Scale(Environment.Scale);
     _tail.Color(red);
-    
+
     Head = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
     for (var i = 0; i < _snakeBodyPositions.Length; i++)
       _snakeBodyPositions[i] = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
     _snakeTailPosition = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
   }
-  
+
   public void Move(float delta, float direction)
   {
     Head.Move(Environment.Speed * delta, direction);
@@ -65,7 +65,33 @@ public class Snake
     _tail.Rotation(_snakeTailPosition.Direction);
     _tail.Position(_snakeTailPosition.Position);
     _tail.Draw();
+  }
 
+  public bool MoveWhenSmashWithWall(Wall wall)
+  {
+    const float recoil = 5f;
+    switch (wall)
+    {
+      case Wall.Left:
+        Head.Direction = 180f - Head.Direction;
+        Head.Position += new Vector2(recoil, 0);
+        return true;
+      case Wall.Right:
+        Head.Direction = 180f - Head.Direction;
+        Head.Position -= new Vector2(recoil, 0);
+        return true;
+      case Wall.Top:
+        Head.Direction = -Head.Direction;
+        Head.Position -= new Vector2(0, recoil);
+        return true;
+      case Wall.Bottom:
+        Head.Direction = MathF.Abs(Head.Direction);
+        Head.Position += new Vector2(0, recoil);
+        return true;
+      case Wall.None:
+      default:
+        return false;
+    }
   }
 
   public void Reset()

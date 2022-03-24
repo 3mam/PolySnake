@@ -22,39 +22,17 @@ public sealed class Walls
   private Walls(SnakePosition snake) => _snake = snake;
   public static Walls SmashWith(SnakePosition snake) => new(snake);
 
-  public bool CheckCollide()
+  public Wall CheckCollideWith(Snake snake)
   {
-    var head = new CollideCircle(_snake.Position, 15f);
-    var collide = false;
-    const float recoil = 5f;
+    var head = new CollideCircle(snake.Head.Position, 15f);
     if (_wallLeft == head)
-    {
-      _snake.Direction = 180f - _snake.Direction;
-      _snake.Position += new Vector2(recoil, 0);
-      collide = true;
-    }
-
+      return Wall.Left;
     if (_wallRight == head)
-    {
-      _snake.Direction = 180f - _snake.Direction;
-      _snake.Position -= new Vector2(recoil, 0);
-      collide = true;
-    }
-
+      return Wall.Right;
     if (_wallTop == head)
-    {
-      _snake.Direction = -_snake.Direction;
-      _snake.Position -= new Vector2(0, recoil);
-      collide = true;
-    }
-
+      return Wall.Top;
     if (_wallBottom == head)
-    {
-      _snake.Direction = MathF.Abs(_snake.Direction);
-      _snake.Position += new Vector2(0, recoil);
-      collide = true;
-    }
-
-    return collide;
+      return Wall.Bottom;
+    return Wall.None;
   }
 }

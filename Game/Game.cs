@@ -17,14 +17,15 @@ public class Game
 
   public Game()
   {
-    _walls = Walls.SmashWith(Snake.Position);
-    _powers = PowerUps.SmashWith(Snake.Position);
+    _walls = Walls.SmashWith(Snake.Head);
+    _powers = PowerUps.SmashWith(Snake.Head);
     Reset();
   }
 
   public void Draw()
   {
-    if (_walls.CheckCollide())
+    var walls = _walls.CheckCollideWith(Snake);
+    if (Snake.MoveWhenSmashWithWall(walls))
       _shakeCameraDuration.Reset();
     if (_shakeCameraDuration.Duration())
       Environment.Scene.ShakeCameraRandomly(ShakeCameraRange);
