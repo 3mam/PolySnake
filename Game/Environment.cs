@@ -10,6 +10,7 @@ public static class Environment
   public const int MaxSnakeLenght = 10000;
   public const int SnakeLenght = 3;
   public static readonly Vector2 CameraPosition = new (0, -40);
+  public const float ShakeCameraRange = -25f;
   public const float Scale = 0.025f;
   public const float Speed  = 300f;
   public const float SpeedUp  = 450f;

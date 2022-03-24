@@ -11,7 +11,6 @@ public class Game
   private readonly PowerUps _powers;
 
   private readonly Timer _shakeCameraDuration = new(200);
-  private const float ShakeCameraRange = -25f;
 
   public readonly Snake Snake = new();
 
@@ -32,7 +31,7 @@ public class Game
     if (Snake.MoveWhenSmashWithWall(wall))
       _shakeCameraDuration.Reset();
     if (_shakeCameraDuration.Duration())
-      Environment.Scene.ShakeCameraRandomly(ShakeCameraRange);
+      Environment.Scene.ShakeCameraRandomly(Environment.ShakeCameraRange);
     else
       Environment.Scene.Camera(Environment.CameraPosition);
 
