@@ -8,12 +8,10 @@ public class Snake
   private readonly Actor _head;
   private readonly Actor _body;
   private readonly Actor _tail;
-  
-  private readonly SnakePosition _snakeHeadPosition;
+
   private readonly SnakePosition[] _snakeBodyPositions = new SnakePosition[Environment.MaxSnakeLenght];
   private readonly SnakePosition _snakeTailPosition;
-
-  public SnakePosition Position => _snakeHeadPosition;
+  public SnakePosition Head { get; }
 
   public Snake()
   {
@@ -34,7 +32,7 @@ public class Snake
     _tail.Scale(Environment.Scale);
     _tail.Color(red);
     
-    _snakeHeadPosition = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
+    Head = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
     for (var i = 0; i < _snakeBodyPositions.Length; i++)
       _snakeBodyPositions[i] = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
     _snakeTailPosition = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
@@ -42,8 +40,8 @@ public class Snake
   
   public void Move(float delta, float direction)
   {
-    _snakeHeadPosition.Move(Environment.Speed * delta, direction);
-    _snakeBodyPositions[0].Motion(_snakeHeadPosition.Position);
+    Head.Move(Environment.Speed * delta, direction);
+    _snakeBodyPositions[0].Motion(Head.Position);
 
     for (var i = 1; i < Environment.SnakeLenght; i++)
       _snakeBodyPositions[i].Motion(_snakeBodyPositions[i - 1].Position);
@@ -53,8 +51,8 @@ public class Snake
 
   public void Draw()
   {
-    _head.Rotation(_snakeHeadPosition.Direction - 90f);
-    _head.Position(_snakeHeadPosition.Position);
+    _head.Rotation(Head.Direction - 90f);
+    _head.Position(Head.Position);
     _head.Draw();
 
     for (var i = 0; i < Environment.SnakeLenght; i++)
@@ -73,8 +71,8 @@ public class Snake
   public void Reset()
   {
     Environment.SnakeLenght = 3;
-    _snakeHeadPosition.Position = Environment.StarPosition;
-    _snakeHeadPosition.Direction = Environment.StarDirection;
+    Head.Position = Environment.StarPosition;
+    Head.Direction = Environment.StarDirection;
     for (var i = 0; i < Environment.SnakeLenght; i++)
       _snakeBodyPositions[i].Position = Environment.StarPosition - new Vector2(15f * i, 0);
     _snakeTailPosition.Position = Environment.StarPosition - new Vector2(15f * Environment.SnakeLenght, 0);
