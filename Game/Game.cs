@@ -24,8 +24,8 @@ public class Game
 
   public void Draw()
   {
-    var walls = _walls.CheckCollideWith(Snake);
-    if (Snake.MoveWhenSmashWithWall(walls))
+    var wall = _walls.CheckCollideWith(Snake);
+    if (Snake.MoveWhenSmashWithWall(wall))
       _shakeCameraDuration.Reset();
     if (_shakeCameraDuration.Duration())
       Environment.Scene.ShakeCameraRandomly(ShakeCameraRange);
