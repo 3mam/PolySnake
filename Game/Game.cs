@@ -24,7 +24,7 @@ public class Game
 
     _level.UploadData(Assets.Level);
     _level.Color(Color.SeaGreen);
-    _level.Position(new Vector2(Environment.Width, Environment.Height));
+    _level.Position(new Vector2(Environment.CenterWidth, Environment.CenterHeight));
     _level.Rotation(90f);
     _level.Scale(5f);
   }

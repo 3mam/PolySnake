@@ -28,7 +28,7 @@ public class Window : GameWindow
   protected override void OnLoad()
   {
     base.OnLoad();
-    Environment.Scene = Scene.Create(Environment.Width, Environment.Height, 1f);
+    Environment.Scene = Scene.Create(Environment.CenterWidth, Environment.CenterHeight, 1f);
     _game = new Game();
   }
 
