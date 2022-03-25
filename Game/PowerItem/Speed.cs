@@ -18,7 +18,7 @@ public class Speed : IPowerUp
   private readonly Vector2[] _net =
     new Vector2[Environment.PowerUpNetWidth * Environment.PowerUpNetHeight];
 
-  private bool _visable;
+  private bool _visible;
 
   public Speed(Snake snake)
   {
@@ -40,7 +40,7 @@ public class Speed : IPowerUp
 
   public void Draw()
   {
-    if (_visable)
+    if (_visible)
     {
       _thunder.Position(_net[_id]);
       _thunder.Draw();
@@ -60,11 +60,11 @@ public class Speed : IPowerUp
         _speedDuration.Reset();
         _speedVisibilityDuration.Stop();
       }
-      _visable = true;
+      _visible = true;
     }
     else
     {
-      _visable = false;
+      _visible = false;
     }
 
     if (!_speedShowUp.Duration(true))
