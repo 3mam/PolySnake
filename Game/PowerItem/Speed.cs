@@ -2,7 +2,7 @@ using Game.Collision;
 using Game.Interface;
 using OpenTK.Mathematics;
 
-namespace Game.PowerUp;
+namespace Game.PowerItem;
 
 public class Speed :
   ITrigger, IDraw, IUpdate, IReset

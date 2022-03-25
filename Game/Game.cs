@@ -1,4 +1,4 @@
-using Game.PowerUp;
+using Game.PowerItem;
 
 namespace Game;
 
