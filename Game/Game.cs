@@ -1,7 +1,4 @@
-using System.Drawing;
-using Game.Collision;
 using Game.PowerUp;
-using OpenTK.Mathematics;
 
 namespace Game;
 
