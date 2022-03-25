@@ -1,3 +1,4 @@
+using Game.Interface;
 using Game.PowerItem;
 
 namespace Game;
@@ -9,7 +10,7 @@ public class Game
   private readonly Hud _hud = new();
   private readonly Timer _shakeCameraDuration = new(200);
   private readonly Snake _snake = new();
-  private readonly (Food food, Speed speed) _power;
+  private readonly (IPowerUp food, IPowerUp speed) _power;
 
   private void SnakeSize()
     => _snake.Lenght += 1;
