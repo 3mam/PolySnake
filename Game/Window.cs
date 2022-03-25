@@ -44,7 +44,8 @@ public class Window : GameWindow
     if (KeyboardState.IsKeyDown(Keys.R))
       _game.Reset();
     _game.Move((float)e.Time, direction);
-    //_game.CheckCollide();
+
+    _game.Update();
   }
 
   protected override void OnResize(ResizeEventArgs e)
