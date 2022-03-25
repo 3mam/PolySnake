@@ -9,23 +9,24 @@ public class Snake
   private readonly Actor _body;
   private readonly Actor _tail;
 
-  private readonly SnakePosition[] _snakeBodyPositions = new SnakePosition[Environment.MaxSnakeLenght];
-  private readonly SnakePosition _snakeTailPosition;
-  public SnakePosition Head { get; }
+  private readonly SnakePosition[] _bodyPositions = new SnakePosition[Environment.MaxSnakeLenght];
+  private readonly SnakePosition _tailPosition;
+  private readonly SnakePosition _headPosition;
   
-  private int _snakeLenght = Environment.SnakeLenght;
-  public int SnakeLenght
+  private int _lenght = Environment.SnakeLenght;
+  public int Lenght
   {
-    get => _snakeLenght;
+    get => _lenght;
     set
     {
       if (value >= Environment.MaxSnakeLenght)
-        _snakeLenght = Environment.MaxSnakeLenght - 1;
+        _lenght = Environment.MaxSnakeLenght - 1;
       else
-        _snakeLenght = value;
+        _lenght = value;
     }
   }
-
+  public Vector2 Position => _headPosition.Position;
+  
   public float Speed { get; set; } = Environment.Speed;
 
   public Snake()
@@ -46,38 +47,38 @@ public class Snake
     _tail.Scale(Environment.Scale);
     _tail.Color(Environment.SnakeColor);
 
-    Head = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
-    for (var i = 0; i < _snakeBodyPositions.Length; i++)
-      _snakeBodyPositions[i] = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
-    _snakeTailPosition = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
+    _headPosition = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
+    for (var i = 0; i < _bodyPositions.Length; i++)
+      _bodyPositions[i] = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
+    _tailPosition = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
   }
 
   public void Move(float delta, float direction)
   {
-    Head.Move(Speed * delta, direction);
-    _snakeBodyPositions[0].Motion(Head.Position);
+    _headPosition.Move(Speed * delta, direction);
+    _bodyPositions[0].Motion(_headPosition.Position);
 
-    for (var i = 1; i < SnakeLenght; i++)
-      _snakeBodyPositions[i].Motion(_snakeBodyPositions[i - 1].Position);
+    for (var i = 1; i < Lenght; i++)
+      _bodyPositions[i].Motion(_bodyPositions[i - 1].Position);
 
-    _snakeTailPosition.Motion(_snakeBodyPositions[SnakeLenght - 1].Position);
+    _tailPosition.Motion(_bodyPositions[Lenght - 1].Position);
   }
 
   public void Draw()
   {
-    _head.Rotation(Head.Direction - 90f);
-    _head.Position(Head.Position);
+    _head.Rotation(_headPosition.Direction - 90f);
+    _head.Position(_headPosition.Position);
     _head.Draw();
 
-    for (var i = 0; i < SnakeLenght; i++)
+    for (var i = 0; i < Lenght; i++)
     {
-      _body.Rotation(_snakeBodyPositions[i].Direction);
-      _body.Position(_snakeBodyPositions[i].Position);
+      _body.Rotation(_bodyPositions[i].Direction);
+      _body.Position(_bodyPositions[i].Position);
       _body.Draw();
     }
 
-    _tail.Rotation(_snakeTailPosition.Direction);
-    _tail.Position(_snakeTailPosition.Position);
+    _tail.Rotation(_tailPosition.Direction);
+    _tail.Position(_tailPosition.Position);
     _tail.Draw();
   }
 
@@ -87,20 +88,20 @@ public class Snake
     switch (wall)
     {
       case Wall.Left:
-        Head.Direction = 180f - Head.Direction;
-        Head.Position += new Vector2(recoil, 0);
+        _headPosition.Direction = 180f - _headPosition.Direction;
+        _headPosition.Position += new Vector2(recoil, 0);
         return true;
       case Wall.Right:
-        Head.Direction = 180f - Head.Direction;
-        Head.Position -= new Vector2(recoil, 0);
+        _headPosition.Direction = 180f - _headPosition.Direction;
+        _headPosition.Position -= new Vector2(recoil, 0);
         return true;
       case Wall.Top:
-        Head.Direction = -Head.Direction;
-        Head.Position -= new Vector2(0, recoil);
+        _headPosition.Direction = -_headPosition.Direction;
+        _headPosition.Position -= new Vector2(0, recoil);
         return true;
       case Wall.Bottom:
-        Head.Direction = MathF.Abs(Head.Direction);
-        Head.Position += new Vector2(0, recoil);
+        _headPosition.Direction = MathF.Abs(_headPosition.Direction);
+        _headPosition.Position += new Vector2(0, recoil);
         return true;
       case Wall.None:
       default:
@@ -111,11 +112,11 @@ public class Snake
   public void Reset()
   {
     Speed = Environment.Speed;
-    SnakeLenght = Environment.SnakeLenght;
-    Head.Position = Environment.StarPosition;
-    Head.Direction = Environment.StarDirection;
-    for (var i = 0; i < SnakeLenght; i++)
-      _snakeBodyPositions[i].Position = Head.Position - new Vector2(15f * i, 0);
-    _snakeTailPosition.Position = Head.Position - new Vector2(15f * SnakeLenght, 0);
+    Lenght = Environment.SnakeLenght;
+    _headPosition.Position = Environment.StarPosition;
+    _headPosition.Direction = Environment.StarDirection;
+    for (var i = 0; i < Lenght; i++)
+      _bodyPositions[i].Position = _headPosition.Position - new Vector2(15f * i, 0);
+    _tailPosition.Position = _headPosition.Position - new Vector2(15f * Lenght, 0);
   }
 }
