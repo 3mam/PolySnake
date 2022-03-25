@@ -13,7 +13,7 @@ public static class Environment
   public const float ShakeCameraRange = -25f;
   public const float Scale = 0.025f;
   public const float Speed  = 300f;
-  public const float SpeedUp  = 450f;
+
   public static readonly Scene Scene = Scene.Create(CenterWidth, CenterHeight, 1f);
   public static Vector2 StarPosition => new(CenterWidth, CenterHeight);
   public const float StarDirection = 0.01f;
@@ -26,5 +26,11 @@ public static class Environment
   public static readonly Color SpeedColor = Color.Gold;
   public static readonly Color LevelColor = Color.SeaGreen;
   public static readonly Color HudColor = Color.White;
+
+  public const float SpeedUp  = 450f;
+  public const int FoodReplaceTime = 10000; // 10s
+  public const int SpeedUpDuration = 3000; // 3s
+  public const int SpeedVisibilityTime = 5000; // 5s
+  public const int ShowSpeedItemAtTime = 10000; // 10s
 
 }

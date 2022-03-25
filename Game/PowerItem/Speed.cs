@@ -7,9 +7,9 @@ namespace Game.PowerItem;
 public class Speed : IPowerUp
 {
   private readonly Actor _thunder = Environment.Scene.CreateActor();
-  private readonly Timer _speedVisibilityDuration = new(5000);
-  private readonly Timer _speedShowUp = new(10000);
-  private readonly Timer _speedDuration = new(3000);
+  private readonly Timer _speedVisibilityDuration = new(Environment.SpeedVisibilityTime);
+  private readonly Timer _speedShowUp = new(Environment.ShowSpeedItemAtTime);
+  private readonly Timer _speedDuration = new(Environment.SpeedUpDuration);
 
   private int _id;
   private Action<bool> _trigger = default!;

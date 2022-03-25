@@ -7,7 +7,7 @@ namespace Game.PowerItem;
 public class Food : IPowerUp
 {
   private readonly Actor _apple = Environment.Scene.CreateActor();
-  private readonly Timer _foodReposition = new(10000);
+  private readonly Timer _foodReposition = new(Environment.FoodReplaceTime);
   private int _id;
   private Action _trigger = default!;
   private readonly Snake _snake;
