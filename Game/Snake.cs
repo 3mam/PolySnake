@@ -58,7 +58,7 @@ public class Snake
     _headPosition.Move(Speed * delta, direction);
     _bodyPositions[0].Motion(_headPosition.Position);
 
-    for (var i = 1; i < Lenght; i++)
+    for (var i = 1; i <= Lenght; i++)
       _bodyPositions[i].Motion(_bodyPositions[i - 1].Position);
 
     _tailPosition.Motion(_bodyPositions[Lenght - 1].Position);
