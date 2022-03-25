@@ -1,6 +1,6 @@
 namespace Game;
 
-public enum Wall
+public enum EWall
 {
   None,
   Left,

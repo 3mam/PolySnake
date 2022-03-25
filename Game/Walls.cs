@@ -17,17 +17,17 @@ public sealed class Walls
   private readonly CollideLine _wallBottom =
     new(new Vector2(0f, 50f), new Vector2(2000f, 50f));
 
-  public Wall CheckCollideWith(Snake snake)
+  public EWall CheckCollideWith(Snake snake)
   {
     var head = new CollideCircle(snake.Position, 15f);
     if (_wallLeft == head)
-      return Wall.Left;
+      return EWall.Left;
     if (_wallRight == head)
-      return Wall.Right;
+      return EWall.Right;
     if (_wallTop == head)
-      return Wall.Top;
+      return EWall.Top;
     if (_wallBottom == head)
-      return Wall.Bottom;
-    return Wall.None;
+      return EWall.Bottom;
+    return EWall.None;
   }
 }
