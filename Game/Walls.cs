@@ -17,14 +17,9 @@ public sealed class Walls
   private readonly CollideLine _wallBottom =
     new(new Vector2(0f, 50f), new Vector2(2000f, 50f));
 
-  private readonly SnakePosition _snake;
-
-  private Walls(SnakePosition snake) => _snake = snake;
-  public static Walls SmashWith(SnakePosition snake) => new(snake);
-
   public Wall CheckCollideWith(Snake snake)
   {
-    var head = new CollideCircle(snake.Head.Position, 15f);
+    var head = new CollideCircle(snake.Position, 15f);
     if (_wallLeft == head)
       return Wall.Left;
     if (_wallRight == head)
