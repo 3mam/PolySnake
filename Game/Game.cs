@@ -29,12 +29,6 @@ public class Game
 
   public void Update()
   {
-    _power.food.Update();
-    _power.speed.Update();
-  }
-
-  public void Draw()
-  {
     Environment.Scene.Clear();
     var wall = _walls.CheckCollideWith(_snake);
     if (_snake.MoveWhenSmashWithWall(wall))
@@ -43,6 +37,12 @@ public class Game
       Environment.Scene.ShakeCameraRandomly(Environment.ShakeCameraRange);
     else
       Environment.Scene.Camera(Environment.CameraPosition);
+    _power.food.Update();
+    _power.speed.Update();
+  }
+
+  public void Draw()
+  {
     _hud.Draw();
     _level.Draw();
     _power.food.Draw();
