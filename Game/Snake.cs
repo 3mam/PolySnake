@@ -82,28 +82,28 @@ public class Snake
     _tail.Draw();
   }
 
-  public bool MoveWhenSmashWithWall(EWall eWall)
+  public bool MoveWhenSmashWithWall(WallsList wallsList)
   {
     const float recoil = 5f;
-    switch (eWall)
+    switch (wallsList)
     {
-      case EWall.Left:
+      case WallsList.Left:
         _headPosition.Direction = 180f - _headPosition.Direction;
         _headPosition.Position += new Vector2(recoil, 0);
         return true;
-      case EWall.Right:
+      case WallsList.Right:
         _headPosition.Direction = 180f - _headPosition.Direction;
         _headPosition.Position -= new Vector2(recoil, 0);
         return true;
-      case EWall.Top:
+      case WallsList.Top:
         _headPosition.Direction = -_headPosition.Direction;
         _headPosition.Position -= new Vector2(0, recoil);
         return true;
-      case EWall.Bottom:
+      case WallsList.Bottom:
         _headPosition.Direction = MathF.Abs(_headPosition.Direction);
         _headPosition.Position += new Vector2(0, recoil);
         return true;
-      case EWall.None:
+      case WallsList.None:
       default:
         return false;
     }
