@@ -26,11 +26,13 @@ public class Scene
 
   public static Scene Create(float width, float height, float scale)
   {
-    var scene = new Scene();
+    var scene = new Scene()
+    {
+      _width = width,
+      _height = height,
+      _scale = scale,
+    };
     scene._shader.Dimensions(width, height, scale);
-    scene._width = width;
-    scene._height = height;
-    scene._scale = scale;
     return scene;
   }
 
@@ -60,5 +62,4 @@ public class Scene
     var y = (float) random.NextDouble() * between - range;
     _shader.Camera(_camera.X + x, _camera.Y + y);
   }
-  
 }
