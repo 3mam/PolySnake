@@ -4,8 +4,7 @@ using OpenTK.Mathematics;
 
 namespace Game.PowerItem;
 
-public class Speed :
-  ITrigger, IDraw, IUpdate, IReset
+public class Speed : IPowerUp
 {
   private readonly Actor _thunder = Environment.Scene.CreateActor();
   private readonly Timer _speedVisibilityDuration = new(5000);

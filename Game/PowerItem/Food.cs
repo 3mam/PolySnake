@@ -4,8 +4,7 @@ using OpenTK.Mathematics;
 
 namespace Game.PowerItem;
 
-public class Food :
-  ITrigger, IDraw, IUpdate, IReset
+public class Food : IPowerUp
 {
   private readonly Actor _apple = Environment.Scene.CreateActor();
   private readonly Timer _foodReposition = new(10000);
