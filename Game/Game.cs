@@ -21,12 +21,14 @@ public class Game
 
     _powers.FoodLogic = () => _snake.SnakeLenght++;
     _powers.SpeedLogic = boost => _snake.Speed = boost ? Environment.SpeedUp : Environment.Speed;
-
+   
     Reset();
   }
 
   public void Draw()
   {
+    Environment.Scene.Clear();
+
     var wall = _walls.CheckCollideWith(_snake);
     if (_snake.MoveWhenSmashWithWall(wall))
       _shakeCameraDuration.Reset();

@@ -28,7 +28,6 @@ public class Window : GameWindow
   protected override void OnLoad()
   {
     base.OnLoad();
-    Environment.Scene = Scene.Create(Environment.CenterWidth, Environment.CenterHeight, 1f);
     _game = new Game();
   }
 
@@ -73,7 +72,6 @@ public class Window : GameWindow
   protected override void OnRenderFrame(FrameEventArgs e)
   {
     base.OnRenderFrame(e);
-    Environment.Scene.Clear();
     _game.Draw();
     SwapBuffers();
   }
