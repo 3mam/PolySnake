@@ -18,6 +18,9 @@ public static class Environment
   public static Vector2 StarPosition => new(CenterWidth, CenterHeight);
   public const float StarDirection = 0.01f;
   
+  public const int PowerUpNetWidth = 35;
+  public const int PowerUpNetHeight = 34;
+
   public static readonly Color SnakeColor = Color.Red;
   public static readonly Color FoodColor = Color.Chartreuse;
   public static readonly Color SpeedColor = Color.Gold;
