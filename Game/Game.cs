@@ -18,6 +18,8 @@ public class Game
   private void SnakeSpeed(bool boost)
     => _snake.Speed = boost ? Environment.SpeedUp : Environment.Speed;
 
+  private float _direction;
+  
   public Game()
   {
     _power.food = new Food(_snake);
@@ -27,9 +29,9 @@ public class Game
     Reset();
   }
 
-  public void Update()
+  public void Update(float delta)
   {
-    Environment.Scene.Clear();
+    _snake.Move(delta, _direction);
     var wall = _walls.CheckCollideWith(_snake);
     if (_snake.MoveWhenSmashWithWall(wall))
       _shakeCameraDuration.Reset();
@@ -43,6 +45,7 @@ public class Game
 
   public void Draw()
   {
+    Environment.Scene.Clear();
     _hud.Draw();
     _level.Draw();
     _power.food.Draw();
@@ -57,5 +60,5 @@ public class Game
     _power.speed.Reset();
   }
 
-  public void Move(float delta, float direction) => _snake.Move(delta, direction);
+  public void Move(float direction) => _direction = direction;
 }

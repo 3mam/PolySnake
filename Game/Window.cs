@@ -9,6 +9,7 @@ namespace Game;
 public class Window : GameWindow
 {
   private Game _game = default!;
+
   private Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
     : base(gameWindowSettings, nativeWindowSettings)
   {
@@ -43,9 +44,9 @@ public class Window : GameWindow
       direction = -1f;
     if (KeyboardState.IsKeyDown(Keys.R))
       _game.Reset();
-    _game.Move((float)e.Time, direction);
+    _game.Move(direction);
 
-    _game.Update();
+    _game.Update((float) e.Time);
   }
 
   protected override void OnResize(ResizeEventArgs e)
