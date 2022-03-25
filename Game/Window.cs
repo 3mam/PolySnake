@@ -44,7 +44,7 @@ public class Window : GameWindow
       direction = -1f;
     if (KeyboardState.IsKeyDown(Keys.R))
       _game.Reset();
-    _game.Move(direction);
+    _game.SnakeMove(direction);
 
     _game.Update((float) e.Time);
   }

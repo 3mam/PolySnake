@@ -60,5 +60,5 @@ public class Game
     _power.speed.Reset();
   }
 
-  public void Move(float direction) => _direction = direction;
+  public void SnakeMove(float direction) => _direction = direction;
 }
