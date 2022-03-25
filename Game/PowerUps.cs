@@ -67,19 +67,21 @@ public class PowerUps
     _apple.Position(FoodPosition);
     _apple.Draw();
 
-    if (CheckSpeedCollide())
-    {
-      SpeedLogic(true);
-      _speedDuration.Reset();
-      _speedVisibilityDuration.Stop();
-    }
 
     if (!_speedDuration.Duration())
       SpeedLogic(false);
 
-    _thunder.Position(SpeedPosition);
     if (_speedVisibilityDuration.Duration())
+    {
+      if (CheckSpeedCollide())
+      {
+        SpeedLogic(true);
+        _speedDuration.Reset();
+        _speedVisibilityDuration.Stop();
+      }
+      _thunder.Position(SpeedPosition);
       _thunder.Draw();
+    }
 
     if (!_speedShowUp.Duration(true))
     {
