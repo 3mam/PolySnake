@@ -3,10 +3,10 @@ namespace Game;
 public class Timer
 {
   private long _timeEnd;
-  private readonly long _millisecond;
+  private readonly long _ticks;
 
   public Timer(int millisecond) =>
-    _millisecond = new TimeSpan(0, 0, 0, 0, millisecond).Ticks;
+    _ticks = new TimeSpan(0, 0, 0, 0, millisecond).Ticks;
 
   public bool Duration(bool persistent = false)
   {
@@ -16,6 +16,6 @@ public class Timer
     return isTime;
   }
 
-  public void Reset() => _timeEnd = DateTime.Now.Ticks + _millisecond;
+  public void Reset() => _timeEnd = DateTime.Now.Ticks + _ticks;
   public void Stop() => _timeEnd = 0;
 }
