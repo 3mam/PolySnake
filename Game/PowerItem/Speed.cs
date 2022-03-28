@@ -37,7 +37,8 @@ public class Speed : IPowerUp
   public void Collide(ICollide snake) =>
     _collide = new CollideCircle(_net[_id], 15f) == (CollideCircle) snake;
 
-  public void Trigger(object fn) => _trigger = (Action<bool>) fn;
+  public void Trigger(Action<bool> fn) 
+    => _trigger += fn;
 
   public void Draw()
   {

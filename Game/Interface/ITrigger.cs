@@ -2,5 +2,5 @@ namespace Game.Interface;
 
 public interface ITrigger
 {
-  void Trigger(object fn);
+  void Trigger(Action<bool> fn);
 }

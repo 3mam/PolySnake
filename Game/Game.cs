@@ -12,8 +12,11 @@ public class Game
   private readonly Snake _snake = new();
   private readonly (IPowerUp food, IPowerUp speed) _power;
 
-  private void SnakeSize()
-    => _snake.Lenght += 1;
+  private void SnakeSize(bool trigger)
+  {
+    if (trigger)
+      _snake.Lenght += 1;
+  }
 
   private void SnakeSpeed(bool boost)
     => _snake.Speed = boost ? Environment.SpeedUp : Environment.Speed;

@@ -9,7 +9,7 @@ public class Food : IPowerUp
   private readonly Actor _apple = Environment.Scene.CreateActor();
   private readonly Timer _foodReposition = new(Environment.FoodReplaceTime);
   private int _id;
-  private Action _trigger = default!;
+  private Action<bool> _trigger = default!;
 
   private readonly Vector2[] _net =
     new Vector2[Environment.PowerUpNetWidth * Environment.PowerUpNetHeight];
@@ -33,8 +33,8 @@ public class Food : IPowerUp
   public void Collide(ICollide snake)
     => _collide = new CollideCircle(_net[_id], 15f) == (CollideCircle) snake;
 
-  public void Trigger(object fn)
-    => _trigger = (Action) fn;
+  public void Trigger(Action<bool> fn)
+    => _trigger += fn;
 
   public void Draw()
   {
@@ -46,9 +46,10 @@ public class Food : IPowerUp
   {
     if (_collide)
     {
-      _trigger();
+      _trigger(true);
       PlaceRandomly();
-      _foodReposition.Reset();
+      _foodReposition.Reset();      
+      _trigger(false);
     }
 
     if (!_foodReposition.Duration(true))
