@@ -1,10 +1,13 @@
 using System.Drawing;
+using Game.Collision;
+using Game.Interface;
 using OpenTK.Mathematics;
 
 namespace Game;
 
 public class Snake
 {
+  private Action<ICollide> _collideList;
   private readonly Actor _head;
   private readonly Actor _body;
   private readonly Actor _tail;
@@ -12,8 +15,10 @@ public class Snake
   private readonly SnakePosition[] _bodyPositions = new SnakePosition[Environment.MaxSnakeLenght];
   private readonly SnakePosition _tailPosition;
   private readonly SnakePosition _headPosition;
-  
+
   private int _lenght = Environment.SnakeLenght;
+  private const float CollideRadius = 15f;
+
   public int Lenght
   {
     get => _lenght;
@@ -25,8 +30,9 @@ public class Snake
         _lenght = value;
     }
   }
+
   public Vector2 Position => _headPosition.Position;
-  
+
   public float Speed { get; set; } = Environment.Speed;
 
   public Snake()
@@ -62,6 +68,7 @@ public class Snake
       _bodyPositions[i].Motion(_bodyPositions[i - 1].Position);
 
     _tailPosition.Motion(_bodyPositions[Lenght - 1].Position);
+    CheckCollide();
   }
 
   public void Draw()
@@ -84,7 +91,7 @@ public class Snake
 
   public bool MoveWhenSmashWithWall(WallsList wallsList)
   {
-    const float recoil = 5f;
+    const float recoil = 10f;
     switch (wallsList)
     {
       case WallsList.Left:
@@ -118,5 +125,14 @@ public class Snake
     for (var i = 0; i < Lenght; i++)
       _bodyPositions[i].Position = _headPosition.Position - new Vector2(15f * i, 0);
     _tailPosition.Position = _headPosition.Position - new Vector2(15f * Lenght, 0);
+  }
+
+  public void CollideWith(ICollideEvent item)
+    => _collideList+=item.Collide;
+
+  private void CheckCollide()
+  {
+    var snake = new CollideCircle(_headPosition.Position, CollideRadius);
+    _collideList(snake);
   }
 }

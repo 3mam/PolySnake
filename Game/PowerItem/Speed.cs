@@ -13,16 +13,15 @@ public class Speed : IPowerUp
 
   private int _id;
   private Action<bool> _trigger = default!;
-  private readonly Snake _snake;
 
   private readonly Vector2[] _net =
     new Vector2[Environment.PowerUpNetWidth * Environment.PowerUpNetHeight];
 
   private bool _visible;
+  private bool _collide;
 
-  public Speed(Snake snake)
+  public Speed()
   {
-    _snake = snake;
     _thunder.UploadData(Assets.Thunder);
     _thunder.Scale(Environment.Scale + 0.01f);
     _thunder.Color(Environment.SpeedColor);
@@ -31,10 +30,12 @@ public class Speed : IPowerUp
     for (var x = 0; x < Environment.PowerUpNetWidth; x++)
       _net[(y * Environment.PowerUpNetWidth) + x] = new Vector2(145f + (50f * x), 90f + (25f * y));
   }
-  private void PlaceRandomly() => _id = new Random().Next(0, _net.Length);
 
-  private bool CheckCollide() =>
-    new CollideCircle(_net[_id], 15f) == new CollideCircle(_snake.Position, 15f);
+  private void PlaceRandomly()
+    => _id = new Random().Next(0, _net.Length);
+
+  public void Collide(ICollide snake) =>
+    _collide = new CollideCircle(_net[_id], 15f) == (CollideCircle) snake;
 
   public void Trigger(object fn) => _trigger = (Action<bool>) fn;
 
@@ -54,12 +55,13 @@ public class Speed : IPowerUp
 
     if (_speedVisibilityDuration.Duration())
     {
-      if (CheckCollide())
+      if (_collide)
       {
         _trigger(true);
         _speedDuration.Reset();
         _speedVisibilityDuration.Stop();
       }
+
       _visible = true;
     }
     else

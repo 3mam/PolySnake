@@ -1,9 +1,10 @@
 using Game.Collision;
+using Game.Interface;
 using OpenTK.Mathematics;
 
 namespace Game;
 
-public sealed class Walls
+public sealed class Walls : ICollideEvent
 {
   private readonly CollideLine _wallLeft =
     new(new Vector2(100f, 1000f), new Vector2(100f, 0f));
@@ -17,17 +18,20 @@ public sealed class Walls
   private readonly CollideLine _wallBottom =
     new(new Vector2(0f, 50f), new Vector2(2000f, 50f));
 
-  public WallsList CheckCollideWith(Snake snake)
+  public WallsList Current { get; private set; } = WallsList.None;
+
+ public void Collide(ICollide item)
   {
-    var head = new CollideCircle(snake.Position, 15f);
+    var head = (CollideCircle) item;
     if (_wallLeft == head)
-      return WallsList.Left;
-    if (_wallRight == head)
-      return WallsList.Right;
-    if (_wallTop == head)
-      return WallsList.Top;
-    if (_wallBottom == head)
-      return WallsList.Bottom;
-    return WallsList.None;
+      Current = WallsList.Left;
+    else if (_wallRight == head)
+      Current = WallsList.Right;
+    else if (_wallTop == head)
+      Current = WallsList.Top;
+    else if (_wallBottom == head)
+      Current = WallsList.Bottom;
+    else 
+      Current = WallsList.None;
   }
 }

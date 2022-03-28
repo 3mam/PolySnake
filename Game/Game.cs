@@ -22,9 +22,12 @@ public class Game
   
   public Game()
   {
-    _power.food = new Food(_snake);
+    _snake.CollideWith(_walls);
+    _power.food = new Food();
+    _snake.CollideWith(_power.food);
     _power.food.Trigger(SnakeSize);
-    _power.speed = new Speed(_snake);
+    _power.speed = new Speed();  
+    _snake.CollideWith(_power.speed);
     _power.speed.Trigger(SnakeSpeed);
     Reset();
   }
@@ -32,13 +35,13 @@ public class Game
   public void Update(float delta)
   {
     _snake.Move(delta, _direction);
-    var wall = _walls.CheckCollideWith(_snake);
-    if (_snake.MoveWhenSmashWithWall(wall))
+    if (_snake.MoveWhenSmashWithWall(_walls.Current))
       _shakeCameraDuration.Reset();
     if (_shakeCameraDuration.Duration())
       Environment.Scene.ShakeCameraRandomly(Environment.ShakeCameraRange);
     else
       Environment.Scene.Camera(Environment.CameraPosition);
+
     _power.food.Update();
     _power.speed.Update();
   }

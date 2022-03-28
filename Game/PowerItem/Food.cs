@@ -10,14 +10,14 @@ public class Food : IPowerUp
   private readonly Timer _foodReposition = new(Environment.FoodReplaceTime);
   private int _id;
   private Action _trigger = default!;
-  private readonly Snake _snake;
 
   private readonly Vector2[] _net =
     new Vector2[Environment.PowerUpNetWidth * Environment.PowerUpNetHeight];
-  
-  public Food(Snake snake)
+
+  private bool _collide;
+
+  public Food()
   {
-    _snake = snake;
     _apple.UploadData(Assets.Apple);
     _apple.Color(Environment.FoodColor);
     _apple.Scale(Environment.Scale + 0.01f);
@@ -27,12 +27,14 @@ public class Food : IPowerUp
       _net[(y * Environment.PowerUpNetWidth) + x] = new Vector2(145f + (50f * x), 90f + (25f * y));
   }
 
-  private void PlaceRandomly() => _id = new Random().Next(0, _net.Length);
+  private void PlaceRandomly()
+    => _id = new Random().Next(0, _net.Length);
 
-  private bool CheckCollide() =>
-    new CollideCircle(_net[_id], 15f) == new CollideCircle(_snake.Position, 15f);
+  public void Collide(ICollide snake)
+    => _collide = new CollideCircle(_net[_id], 15f) == (CollideCircle) snake;
 
-  public void Trigger(object fn) => _trigger = (Action) fn;
+  public void Trigger(object fn)
+    => _trigger = (Action) fn;
 
   public void Draw()
   {
@@ -42,7 +44,7 @@ public class Food : IPowerUp
 
   public void Update()
   {
-    if (CheckCollide())
+    if (_collide)
     {
       _trigger();
       PlaceRandomly();
