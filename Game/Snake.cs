@@ -89,24 +89,23 @@ public class Snake
 
   public bool MoveWhenSmashWithWall(WallsList wallsList)
   {
-    const float recoil = 10f;
     switch (wallsList)
     {
       case WallsList.Left:
         _headPosition.Direction = 180f - _headPosition.Direction;
-        _headPosition.Position += new Vector2(recoil, 0);
+        _headPosition.Position += new Vector2(Environment.Recoil, 0);
         return true;
       case WallsList.Right:
         _headPosition.Direction = 180f - _headPosition.Direction;
-        _headPosition.Position -= new Vector2(recoil, 0);
+        _headPosition.Position -= new Vector2(Environment.Recoil, 0);
         return true;
       case WallsList.Top:
         _headPosition.Direction = -_headPosition.Direction;
-        _headPosition.Position -= new Vector2(0, recoil);
+        _headPosition.Position -= new Vector2(0, Environment.Recoil);
         return true;
       case WallsList.Bottom:
         _headPosition.Direction = MathF.Abs(_headPosition.Direction);
-        _headPosition.Position += new Vector2(0, recoil);
+        _headPosition.Position += new Vector2(0, Environment.Recoil);
         return true;
       case WallsList.None:
       default:
