@@ -31,8 +31,6 @@ public class Snake
     }
   }
 
-  public Vector2 Position => _headPosition.Position;
-
   public float Speed { get; set; } = Environment.Speed;
 
   public Snake()
