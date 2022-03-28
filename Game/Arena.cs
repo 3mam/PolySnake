@@ -3,11 +3,11 @@ using OpenTK.Mathematics;
 
 namespace Game;
 
-public class Level
+public class Arena
 {
   private readonly Actor _level;
 
-  public Level()
+  public Arena()
   {
     _level = Settings.Scene.CreateActor();
     _level.UploadData(Assets.Level);

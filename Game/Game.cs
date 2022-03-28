@@ -5,7 +5,7 @@ namespace Game;
 
 public class Game
 {
-  private readonly Level _level = new();
+  private readonly Arena _arena = new();
   private readonly Walls _walls = new();
   private readonly Hud _hud = new();
   private readonly Timer _shakeCameraDuration = new(200);
@@ -53,7 +53,7 @@ public class Game
   {
     Settings.Scene.Clear();
     _hud.Draw();
-    _level.Draw();
+    _arena.Draw();
     _power.food.Draw();
     _power.speed.Draw();
     _snake.Draw();
