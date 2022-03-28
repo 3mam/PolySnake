@@ -6,16 +6,16 @@ namespace Game.PowerItem;
 
 public class Speed : IPowerUp
 {
-  private readonly Actor _thunder = Environment.Scene.CreateActor();
-  private readonly Timer _speedVisibilityDuration = new(Environment.SpeedVisibilityTime);
-  private readonly Timer _speedShowUp = new(Environment.ShowSpeedItemAtTime);
-  private readonly Timer _speedDuration = new(Environment.SpeedUpDuration);
+  private readonly Actor _thunder = Settings.Scene.CreateActor();
+  private readonly Timer _speedVisibilityDuration = new(Settings.SpeedVisibilityTime);
+  private readonly Timer _speedShowUp = new(Settings.ShowSpeedItemAtTime);
+  private readonly Timer _speedDuration = new(Settings.SpeedUpDuration);
 
   private int _id;
   private Action<bool> _trigger = default!;
 
   private readonly Vector2[] _net =
-    new Vector2[Environment.PowerUpNetWidth * Environment.PowerUpNetHeight];
+    new Vector2[Settings.PowerUpNetWidth * Settings.PowerUpNetHeight];
 
   private bool _visible;
   private bool _collide;
@@ -23,12 +23,12 @@ public class Speed : IPowerUp
   public Speed()
   {
     _thunder.UploadData(Assets.Thunder);
-    _thunder.Scale(Environment.Scale + 0.01f);
-    _thunder.Color(Environment.SpeedColor);
+    _thunder.Scale(Settings.Scale + 0.01f);
+    _thunder.Color(Settings.SpeedColor);
 
-    for (var y = 0; y < Environment.PowerUpNetHeight; y++)
-    for (var x = 0; x < Environment.PowerUpNetWidth; x++)
-      _net[(y * Environment.PowerUpNetWidth) + x] = new Vector2(145f + (50f * x), 90f + (25f * y));
+    for (var y = 0; y < Settings.PowerUpNetHeight; y++)
+    for (var x = 0; x < Settings.PowerUpNetWidth; x++)
+      _net[(y * Settings.PowerUpNetWidth) + x] = new Vector2(145f + (50f * x), 90f + (25f * y));
   }
 
   private void PlaceRandomly()

@@ -12,11 +12,11 @@ public class Snake
   private readonly Actor _body;
   private readonly Actor _tail;
 
-  private readonly SnakePosition[] _bodyPositions = new SnakePosition[Environment.MaxSnakeLenght];
+  private readonly SnakePosition[] _bodyPositions = new SnakePosition[Settings.MaxSnakeLenght];
   private readonly SnakePosition _tailPosition;
   private readonly SnakePosition _headPosition;
 
-  private int _lenght = Environment.SnakeLenght;
+  private int _lenght = Settings.SnakeLenght;
   private const float CollideRadius = 15f;
 
   public int Lenght
@@ -24,37 +24,37 @@ public class Snake
     get => _lenght;
     set
     {
-      if (value >= Environment.MaxSnakeLenght)
-        _lenght = Environment.MaxSnakeLenght - 1;
+      if (value >= Settings.MaxSnakeLenght)
+        _lenght = Settings.MaxSnakeLenght - 1;
       else
         _lenght = value;
     }
   }
 
-  public float Speed { get; set; } = Environment.Speed;
+  public float Speed { get; set; } = Settings.Speed;
 
   public Snake()
   {
-    _head = Environment.Scene.CreateActor();
-    _body = Environment.Scene.CreateActor();
-    _tail = Environment.Scene.CreateActor();
+    _head = Settings.Scene.CreateActor();
+    _body = Settings.Scene.CreateActor();
+    _tail = Settings.Scene.CreateActor();
 
     _head.UploadData(Assets.Head);
-    _head.Scale(Environment.Scale);
-    _head.Color(Environment.SnakeColor);
+    _head.Scale(Settings.Scale);
+    _head.Color(Settings.SnakeColor);
 
     _body.UploadData(Assets.Body);
-    _body.Scale(Environment.Scale);
-    _body.Color(Environment.SnakeColor);
+    _body.Scale(Settings.Scale);
+    _body.Color(Settings.SnakeColor);
 
     _tail.UploadData(Assets.Tail);
-    _tail.Scale(Environment.Scale);
-    _tail.Color(Environment.SnakeColor);
+    _tail.Scale(Settings.Scale);
+    _tail.Color(Settings.SnakeColor);
 
-    _headPosition = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
+    _headPosition = new SnakePosition(Settings.StarPosition, Settings.StarDirection);
     for (var i = 0; i < _bodyPositions.Length; i++)
-      _bodyPositions[i] = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
-    _tailPosition = new SnakePosition(Environment.StarPosition, Environment.StarDirection);
+      _bodyPositions[i] = new SnakePosition(Settings.StarPosition, Settings.StarDirection);
+    _tailPosition = new SnakePosition(Settings.StarPosition, Settings.StarDirection);
   }
 
   public void Move(float delta, float direction)
@@ -93,19 +93,19 @@ public class Snake
     {
       case WallsList.Left:
         _headPosition.Direction = 180f - _headPosition.Direction;
-        _headPosition.Position += new Vector2(Environment.Recoil, 0);
+        _headPosition.Position += new Vector2(Settings.Recoil, 0);
         return true;
       case WallsList.Right:
         _headPosition.Direction = 180f - _headPosition.Direction;
-        _headPosition.Position -= new Vector2(Environment.Recoil, 0);
+        _headPosition.Position -= new Vector2(Settings.Recoil, 0);
         return true;
       case WallsList.Top:
         _headPosition.Direction = -_headPosition.Direction;
-        _headPosition.Position -= new Vector2(0, Environment.Recoil);
+        _headPosition.Position -= new Vector2(0, Settings.Recoil);
         return true;
       case WallsList.Bottom:
         _headPosition.Direction = MathF.Abs(_headPosition.Direction);
-        _headPosition.Position += new Vector2(0, Environment.Recoil);
+        _headPosition.Position += new Vector2(0, Settings.Recoil);
         return true;
       case WallsList.None:
       default:
@@ -115,10 +115,10 @@ public class Snake
 
   public void Reset()
   {
-    Speed = Environment.Speed;
-    Lenght = Environment.SnakeLenght;
-    _headPosition.Position = Environment.StarPosition;
-    _headPosition.Direction = Environment.StarDirection;
+    Speed = Settings.Speed;
+    Lenght = Settings.SnakeLenght;
+    _headPosition.Position = Settings.StarPosition;
+    _headPosition.Direction = Settings.StarDirection;
     for (var i = 0; i < Lenght; i++)
       _bodyPositions[i].Position = _headPosition.Position - new Vector2(15f * i, 0);
     _tailPosition.Position = _headPosition.Position - new Vector2(15f * Lenght, 0);

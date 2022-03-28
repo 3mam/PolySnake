@@ -6,25 +6,25 @@ namespace Game.PowerItem;
 
 public class Food : IPowerUp
 {
-  private readonly Actor _apple = Environment.Scene.CreateActor();
-  private readonly Timer _foodReposition = new(Environment.FoodReplaceTime);
+  private readonly Actor _apple = Settings.Scene.CreateActor();
+  private readonly Timer _foodReposition = new(Settings.FoodReplaceTime);
   private int _id;
   private Action<bool> _trigger = default!;
 
   private readonly Vector2[] _net =
-    new Vector2[Environment.PowerUpNetWidth * Environment.PowerUpNetHeight];
+    new Vector2[Settings.PowerUpNetWidth * Settings.PowerUpNetHeight];
 
   private bool _collide;
 
   public Food()
   {
     _apple.UploadData(Assets.Apple);
-    _apple.Color(Environment.FoodColor);
-    _apple.Scale(Environment.Scale + 0.01f);
+    _apple.Color(Settings.FoodColor);
+    _apple.Scale(Settings.Scale + 0.01f);
 
-    for (var y = 0; y < Environment.PowerUpNetHeight; y++)
-    for (var x = 0; x < Environment.PowerUpNetWidth; x++)
-      _net[(y * Environment.PowerUpNetWidth) + x] = new Vector2(145f + (50f * x), 90f + (25f * y));
+    for (var y = 0; y < Settings.PowerUpNetHeight; y++)
+    for (var x = 0; x < Settings.PowerUpNetWidth; x++)
+      _net[(y * Settings.PowerUpNetWidth) + x] = new Vector2(145f + (50f * x), 90f + (25f * y));
   }
 
   private void PlaceRandomly()

@@ -9,10 +9,10 @@ public class Level
 
   public Level()
   {
-    _level = Environment.Scene.CreateActor();
+    _level = Settings.Scene.CreateActor();
     _level.UploadData(Assets.Level);
-    _level.Color(Environment.LevelColor);
-    _level.Position(new Vector2(Environment.CenterWidth, Environment.CenterHeight));
+    _level.Color(Settings.LevelColor);
+    _level.Position(new Vector2(Settings.CenterWidth, Settings.CenterHeight));
     _level.Rotation(90f);
     _level.Scale(5f);
   }

@@ -3,7 +3,7 @@ using OpenTK.Mathematics;
 
 namespace Game;
 
-public static class Environment
+public static class Settings
 {
   public const float CenterWidth = 1000f;
   public const float CenterHeight = 500f;
