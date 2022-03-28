@@ -11,6 +11,7 @@ public class Game
   private readonly Timer _shakeCameraDuration = new(200);
   private readonly Snake _snake = new();
   private readonly (IPowerUp food, IPowerUp speed) _power;
+  private readonly SpawnPoints _spawnPoints = new();
 
   private void SnakeSize(bool trigger)
   {
@@ -28,9 +29,11 @@ public class Game
     _snake.CollideWith(_walls);
     _power.food = new Food();
     _snake.CollideWith(_power.food);
+    _power.food.SpawnPoints(_spawnPoints);
     _power.food.Trigger(SnakeSize);
     _power.speed = new Speed();  
     _snake.CollideWith(_power.speed);
+    _power.speed.SpawnPoints(_spawnPoints);
     _power.speed.Trigger(SnakeSpeed);
     Reset();
   }

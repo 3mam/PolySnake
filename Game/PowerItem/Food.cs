@@ -8,37 +8,36 @@ public class Food : IPowerUp
 {
   private readonly Actor _apple = Settings.Scene.CreateActor();
   private readonly Timer _foodReposition = new(Settings.FoodReplaceTime);
-  private int _id;
   private Action<bool> _trigger = default!;
 
-  private readonly Vector2[] _net =
-    new Vector2[Settings.PowerUpNetWidth * Settings.PowerUpNetHeight];
-
   private bool _collide;
-
+  private SpawnPoints _spawnPoints = default!;
+  private Vector2 _spawnPoint;
+  private int _pointId;
+  
   public Food()
   {
     _apple.UploadData(Assets.Apple);
     _apple.Color(Settings.FoodColor);
     _apple.Scale(Settings.Scale + 0.01f);
-
-    for (var y = 0; y < Settings.PowerUpNetHeight; y++)
-    for (var x = 0; x < Settings.PowerUpNetWidth; x++)
-      _net[(y * Settings.PowerUpNetWidth) + x] = new Vector2(145f + (50f * x), 90f + (25f * y));
-  }
+}
 
   private void PlaceRandomly()
-    => _id = new Random().Next(0, _net.Length);
+  {
+    var p = _spawnPoints.RandomPoint();
+    _pointId = p.id;
+    _spawnPoint = p.point;
+  }
 
   public void Collide(ICollide snake)
-    => _collide = new CollideCircle(_net[_id], 15f) == (CollideCircle) snake;
+    => _collide = new CollideCircle(_spawnPoint, 15f) == (CollideCircle) snake;
 
   public void Trigger(Action<bool> fn)
     => _trigger += fn;
 
   public void Draw()
   {
-    _apple.Position(_net[_id]);
+    _apple.Position(_spawnPoint);
     _apple.Draw();
   }
 
@@ -47,18 +46,24 @@ public class Food : IPowerUp
     if (_collide)
     {
       _trigger(true);
-      PlaceRandomly();
-      _foodReposition.Reset();      
+        Reset();
       _trigger(false);
     }
 
     if (!_foodReposition.Duration(true))
+    {
+      _spawnPoints.FreePoint(_pointId);
       PlaceRandomly();
+    }
   }
 
   public void Reset()
   {
     _foodReposition.Reset();
+    _spawnPoints.FreePoint(_pointId);
     PlaceRandomly();
   }
+
+  public void SpawnPoints(SpawnPoints spawnPoints)
+    => _spawnPoints = spawnPoints;
 }
