@@ -1,8 +1,9 @@
+using Game.Interface;
 using OpenTK.Mathematics;
 
 namespace Game.Collision;
 
-public readonly struct CollideCircle
+public readonly struct CollideCircle : ICollide
 {
   private bool Equals(CollideCircle other)
     => X.Equals(other.X) && Y.Equals(other.Y) && R.Equals(other.R);
@@ -34,10 +35,10 @@ public readonly struct CollideCircle
     R = radius;
   }
 
-  private bool Collide(CollideCircle circle)
+  public bool Collide(CollideCircle circle)
     => Collision.Collide.CircleToCircle(this, circle);
 
-  private bool Collide(CollideLine line)
+  public bool Collide(CollideLine line)
     => Collision.Collide.LineToCircle(line, this);
 
   public static bool operator ==(CollideCircle a, CollideCircle b)
