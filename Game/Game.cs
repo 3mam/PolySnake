@@ -54,7 +54,7 @@ public class Game
 
   public void Draw()
   {
-    Settings.Scene.Clear();
+    Scene.Clear();
     _hud.Draw();
     _arena.Draw();
     _power.food.Draw();

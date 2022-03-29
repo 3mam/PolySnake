@@ -28,7 +28,7 @@ public class Scene
     return scene;
   }
 
-  public void Clear()
+  public static void Clear()
   {
     GL.ClearColor(1f, 0.5f, 0.5f, 1f);
     GL.ClearDepth(1);
