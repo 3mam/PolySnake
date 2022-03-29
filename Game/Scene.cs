@@ -7,9 +7,6 @@ namespace Game;
 public class Scene
 {
   private readonly Shader _shader = Shader.Load(ShaderDefault.Vertex, ShaderDefault.Fragment);
-  private float _width;
-  private float _height;
-  private float _scale;
   private Vector2 _camera;
 
   private Scene()
@@ -26,12 +23,7 @@ public class Scene
 
   public static Scene Create(float width, float height, float scale)
   {
-    var scene = new Scene()
-    {
-      _width = width,
-      _height = height,
-      _scale = scale,
-    };
+    var scene = new Scene();
     scene._shader.Dimensions(width, height, scale);
     return scene;
   }
@@ -43,8 +35,7 @@ public class Scene
     GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
   }
 
-  public Actor CreateActor() =>
-    Actor.Create(_shader, new Vector3(_width, _height, _scale));
+  public Actor CreateActor() => new(_shader);
 
   public void Camera(Vector2 position)
   {

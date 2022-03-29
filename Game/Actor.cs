@@ -16,10 +16,10 @@ public class Actor
   private float _angle;
   private float _size = 1.0f;
   private Color _color;
-  public static Actor Create(Shader shader, Vector3 dimension) => new()
+  public Actor (Shader shader)
   {
-    _shader = shader,
-  };
+    _shader = shader;
+  }
 
   public void UploadData(float[] data)
   {
