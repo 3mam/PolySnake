@@ -1,8 +1,8 @@
+using Game.Collision;
+using Game.Interface;
 using OpenTK.Mathematics;
-using Poly.Collision;
-using Poly.Interface;
 
-namespace Poly;
+namespace Game;
 
 public sealed class Walls : ICollideEvent
 {

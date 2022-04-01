@@ -1,7 +1,7 @@
 using System;
 using OpenTK.Mathematics;
 
-namespace Poly;
+namespace Game;
 
 public class SpawnPoints
 {

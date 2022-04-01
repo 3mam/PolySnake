@@ -1,8 +1,8 @@
 using System.Net.Sockets;
-using Poly.Interface;
-using Poly.PowerItem;
+using Game.Interface;
+using Game.PowerItem;
 
-namespace Poly;
+namespace Game;
 
 public class Game
 {

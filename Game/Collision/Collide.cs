@@ -1,6 +1,6 @@
 using System;
 
-namespace Poly.Collision;
+namespace Game.Collision;
 
 public static class Collide
 {

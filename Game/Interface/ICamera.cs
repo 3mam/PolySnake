@@ -1,6 +1,6 @@
 using OpenTK.Mathematics;
 
-namespace Poly.Interface;
+namespace Game.Interface;
 
 public interface ICamera
 {

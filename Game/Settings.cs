@@ -1,7 +1,7 @@
 using System.Drawing;
 using OpenTK.Mathematics;
 
-namespace Poly;
+namespace Game;
 
 public static class Settings
 {

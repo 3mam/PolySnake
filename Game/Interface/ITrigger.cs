@@ -1,6 +1,6 @@
 using System;
 
-namespace Poly.Interface;
+namespace Game.Interface;
 
 public interface ITrigger
 {

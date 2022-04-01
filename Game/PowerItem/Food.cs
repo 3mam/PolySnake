@@ -1,9 +1,9 @@
 using System;
+using Game.Collision;
+using Game.Interface;
 using OpenTK.Mathematics;
-using Poly.Collision;
-using Poly.Interface;
 
-namespace Poly.PowerItem;
+namespace Game.PowerItem;
 
 public class Food : IPowerUp
 {

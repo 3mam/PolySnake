@@ -1,3 +1,4 @@
+using Game;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -8,7 +9,7 @@ namespace Poly;
 
 public class Window : GameWindow
 {
-  private Game _game = default!;
+  private Game.Game _game = default!;
 
   private Window(GameWindowSettings gameWindowSettings, NativeWindowSettings nativeWindowSettings)
     : base(gameWindowSettings, nativeWindowSettings)
@@ -40,7 +41,7 @@ public class Window : GameWindow
       actor.UploadData(asset);
       AssetManager.AddActor((AssetList) name, actor);
     }
-    _game = new Game(scene);
+    _game = new global::Game.Game(scene);
   }
 
   protected override void OnUpdateFrame(FrameEventArgs e)

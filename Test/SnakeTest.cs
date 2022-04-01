@@ -1,6 +1,6 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Poly;
+using Game;
 using OpenTK.Mathematics;
 
 namespace Test;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
-using Poly.Interface;
+using Game.Interface;
 
-namespace Poly;
+namespace Game;
 
 public static class AssetManager
 {

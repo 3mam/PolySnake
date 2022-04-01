@@ -1,6 +1,6 @@
 using System.Drawing;
 
-namespace Poly.Interface;
+namespace Game.Interface;
 
 public interface IColor
 {

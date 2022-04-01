@@ -1,6 +1,6 @@
 using System;
 
-namespace Poly;
+namespace Game;
 
 public class Timer
 {

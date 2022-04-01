@@ -1,7 +1,7 @@
+using Game.Interface;
 using OpenTK.Mathematics;
-using Poly.Interface;
 
-namespace Poly;
+namespace Game;
 
 public class Hud
 {

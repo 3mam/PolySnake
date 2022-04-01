@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Poly.Collision;
+using Game.Collision;
 
 namespace Test;
 
