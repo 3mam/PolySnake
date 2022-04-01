@@ -7,6 +7,8 @@
         <IsPackable>false</IsPackable>
 
         <Company />
+
+        <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
