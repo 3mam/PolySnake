@@ -57,7 +57,7 @@ public class Snake
   public void Move(float delta, float direction)
   {
     _headPosition.Move(Speed * delta, direction);
-    _bodyPositions[0].Motion(_headPosition.Position);
+    _bodyPositions[0].Motion(_headPosition.Position + new Vector2(0.001f, 0.001f));
 
     for (var i = 1; i <= Lenght; i++)
       _bodyPositions[i].Motion(_bodyPositions[i - 1].Position);
