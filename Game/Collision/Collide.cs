@@ -1,4 +1,6 @@
-namespace Game.Collision;
+using System;
+
+namespace Poly.Collision;
 
 public static class Collide
 {

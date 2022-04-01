@@ -1,4 +1,4 @@
-namespace Game.Interface;
+namespace Poly.Interface;
 
 public interface ISpawnPoints
 {

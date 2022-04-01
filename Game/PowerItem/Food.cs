@@ -1,12 +1,13 @@
-using Game.Collision;
-using Game.Interface;
+using System;
 using OpenTK.Mathematics;
+using Poly.Collision;
+using Poly.Interface;
 
-namespace Game.PowerItem;
+namespace Poly.PowerItem;
 
 public class Food : IPowerUp
 {
-  private readonly Actor _apple = Settings.Scene.CreateActor();
+  private readonly IActor _apple;
   private readonly Timer _foodReposition = new(Settings.FoodReplaceTime);
   private Action<bool> _trigger = default!;
 
@@ -17,7 +18,7 @@ public class Food : IPowerUp
   
   public Food()
   {
-    _apple.UploadData(Assets.Apple);
+    _apple = AssetManager.GetActor(AssetList.Apple);
     _apple.Color(Settings.FoodColor);
     _apple.Scale(Settings.Scale + 0.01f);
 }

@@ -1,4 +1,4 @@
-namespace Game;
+namespace Poly;
 
 public static class Assets
 {

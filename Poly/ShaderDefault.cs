@@ -1,4 +1,4 @@
-namespace Game.Rendering;
+namespace Poly;
 
 public static class ShaderDefault
 {

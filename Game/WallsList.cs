@@ -1,4 +1,4 @@
-namespace Game;
+namespace Poly;
 
 public enum WallsList
 {

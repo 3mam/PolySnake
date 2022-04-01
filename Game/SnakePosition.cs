@@ -1,6 +1,7 @@
+using System;
 using OpenTK.Mathematics;
 
-namespace Game;
+namespace Poly;
 
 public class SnakePosition
 {

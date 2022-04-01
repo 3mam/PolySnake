@@ -1,7 +1,8 @@
-using Game.Interface;
+using System;
 using OpenTK.Mathematics;
+using Poly.Interface;
 
-namespace Game.Collision;
+namespace Poly.Collision;
 
 public readonly struct CollideLine : ICollide
 {

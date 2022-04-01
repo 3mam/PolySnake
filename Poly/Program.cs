@@ -1,6 +1,6 @@
 using OpenTK.Graphics.OpenGL4;
 
-namespace Game.Rendering;
+namespace Poly;
 
 public static class Program
 {

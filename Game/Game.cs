@@ -1,10 +1,12 @@
-using Game.Interface;
-using Game.PowerItem;
+using System.Net.Sockets;
+using Poly.Interface;
+using Poly.PowerItem;
 
-namespace Game;
+namespace Poly;
 
 public class Game
 {
+  private readonly IScene _scene;
   private readonly Arena _arena = new();
   private readonly Walls _walls = new();
   private readonly Hud _hud = new();
@@ -24,8 +26,9 @@ public class Game
 
   private float _direction;
   
-  public Game()
+  public Game(IScene scene)
   {
+    _scene = scene;
     _snake.CollideWith(_walls);
     _power.food = new Food();
     _snake.CollideWith(_power.food);
@@ -44,9 +47,9 @@ public class Game
     if (_snake.MoveWhenSmashWithWall(_walls.Current))
       _shakeCameraDuration.Reset();
     if (_shakeCameraDuration.Duration())
-      Settings.Scene.ShakeCameraRandomly(Settings.ShakeCameraRange);
+      _scene.ShakeCameraRandomly(Settings.ShakeCameraRange);
     else
-      Settings.Scene.Camera(Settings.CameraPosition);
+      _scene.Camera(Settings.CameraPosition);
 
     _power.food.Update();
     _power.speed.Update();
@@ -54,7 +57,7 @@ public class Game
 
   public void Draw()
   {
-    Scene.Clear();
+    _scene.Clear();
     _hud.Draw();
     _arena.Draw();
     _power.food.Draw();

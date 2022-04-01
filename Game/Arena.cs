@@ -1,16 +1,15 @@
-using System.Drawing;
 using OpenTK.Mathematics;
+using Poly.Interface;
 
-namespace Game;
+namespace Poly;
 
 public class Arena
 {
-  private readonly Actor _level;
+  private readonly IActor _level;
 
   public Arena()
   {
-    _level = Settings.Scene.CreateActor();
-    _level.UploadData(Assets.Level);
+    _level = AssetManager.GetActor(AssetList.Level);
     _level.Color(Settings.LevelColor);
     _level.Position(new Vector2(Settings.CenterWidth, Settings.CenterHeight));
     _level.Rotation(90f);

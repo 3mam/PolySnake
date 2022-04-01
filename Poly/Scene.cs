@@ -1,10 +1,10 @@
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
-using Game.Rendering;
+using Poly.Interface;
 
-namespace Game;
+namespace Poly;
 
-public class Scene
+public class Scene : IScene
 {
   private readonly Shader _shader = Shader.Load(ShaderDefault.Vertex, ShaderDefault.Fragment);
   private Vector2 _camera;
@@ -28,7 +28,7 @@ public class Scene
     return scene;
   }
 
-  public static void Clear()
+  public void Clear()
   {
     GL.ClearColor(1f, 0.5f, 0.5f, 1f);
     GL.ClearDepth(1);

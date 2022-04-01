@@ -1,11 +1,11 @@
 using System.Drawing;
 using OpenTK.Graphics.OpenGL4;
-using Game.Rendering;
 using OpenTK.Mathematics;
+using Poly.Interface;
 
-namespace Game;
+namespace Poly;
 
-public class Actor
+public class Actor : IActor
 {
   private readonly int _buffer = GL.GenBuffer();
   private int _bufferSize;

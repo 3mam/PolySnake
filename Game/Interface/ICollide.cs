@@ -1,6 +1,6 @@
-using Game.Collision;
+using Poly.Collision;
 
-namespace Game.Interface;
+namespace Poly.Interface;
 
 public interface ICollide
 {

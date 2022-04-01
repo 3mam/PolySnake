@@ -1,16 +1,16 @@
-using System.Drawing;
-using Game.Collision;
-using Game.Interface;
+using System;
 using OpenTK.Mathematics;
+using Poly.Collision;
+using Poly.Interface;
 
-namespace Game;
+namespace Poly;
 
 public class Snake
 {
   private Action<ICollide> _collideList = default!;
-  private readonly Actor _head;
-  private readonly Actor _body;
-  private readonly Actor _tail;
+  private readonly IActor _head;
+  private readonly IActor _body;
+  private readonly IActor _tail;
 
   private readonly SnakePosition[] _bodyPositions = new SnakePosition[Settings.MaxSnakeLenght];
   private readonly SnakePosition _tailPosition;
@@ -35,19 +35,16 @@ public class Snake
 
   public Snake()
   {
-    _head = Settings.Scene.CreateActor();
-    _body = Settings.Scene.CreateActor();
-    _tail = Settings.Scene.CreateActor();
+    _head = AssetManager.GetActor(AssetList.Head);
+    _body = AssetManager.GetActor(AssetList.Body);
+    _tail = AssetManager.GetActor(AssetList.Tail);
 
-    _head.UploadData(Assets.Head);
     _head.Scale(Settings.Scale);
     _head.Color(Settings.SnakeColor);
 
-    _body.UploadData(Assets.Body);
     _body.Scale(Settings.Scale);
     _body.Color(Settings.SnakeColor);
 
-    _tail.UploadData(Assets.Tail);
     _tail.Scale(Settings.Scale);
     _tail.Color(Settings.SnakeColor);
 

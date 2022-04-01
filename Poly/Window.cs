@@ -1,10 +1,10 @@
-using OpenTK.Windowing.Common;
-using OpenTK.Windowing.GraphicsLibraryFramework;
-using OpenTK.Windowing.Desktop;
-using OpenTK.Mathematics;
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Desktop;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
-namespace Game;
+namespace Poly;
 
 public class Window : GameWindow
 {
@@ -29,7 +29,18 @@ public class Window : GameWindow
   protected override void OnLoad()
   {
     base.OnLoad();
-    _game = new Game();
+    var scene = Scene.Create(Settings.CenterWidth, Settings.CenterHeight, 1f);
+    foreach (var name in Enum.GetValues(typeof(AssetList)))
+    {
+      if ((AssetList) name == AssetList.None)
+        continue;
+      var actor = scene.CreateActor();
+      var obj = typeof(Assets).GetField(name.ToString() ?? string.Empty);
+      var asset = (float[]) obj?.GetValue(null)!;
+      actor.UploadData(asset);
+      AssetManager.AddActor((AssetList) name, actor);
+    }
+    _game = new Game(scene);
   }
 
   protected override void OnUpdateFrame(FrameEventArgs e)

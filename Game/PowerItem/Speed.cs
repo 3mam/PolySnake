@@ -1,12 +1,13 @@
-using Game.Collision;
-using Game.Interface;
+using System;
 using OpenTK.Mathematics;
+using Poly.Collision;
+using Poly.Interface;
 
-namespace Game.PowerItem;
+namespace Poly.PowerItem;
 
 public class Speed : IPowerUp
 {
-  private readonly Actor _thunder = Settings.Scene.CreateActor();
+  private readonly IActor _thunder;
   private readonly Timer _speedVisibilityDuration = new(Settings.SpeedVisibilityTime);
   private readonly Timer _speedShowUp = new(Settings.ShowSpeedItemAtTime);
   private readonly Timer _speedDuration = new(Settings.SpeedUpDuration);
@@ -20,7 +21,7 @@ public class Speed : IPowerUp
 
   public Speed()
   {
-    _thunder.UploadData(Assets.Thunder);
+    _thunder = AssetManager.GetActor(AssetList.Thunder);
     _thunder.Scale(Settings.Scale + 0.01f);
     _thunder.Color(Settings.SpeedColor);
   }

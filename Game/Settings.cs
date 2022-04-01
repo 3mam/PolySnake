@@ -1,7 +1,7 @@
 using System.Drawing;
 using OpenTK.Mathematics;
 
-namespace Game;
+namespace Poly;
 
 public static class Settings
 {
@@ -14,7 +14,7 @@ public static class Settings
   public const float Scale = 0.025f;
   public const float Speed  = 300f;
 
-  public static readonly Scene Scene = Scene.Create(CenterWidth, CenterHeight, 1f);
+  //public static readonly Scene Scene = Scene.Create(CenterWidth, CenterHeight, 1f);
   public static Vector2 StarPosition => new(CenterWidth, CenterHeight);
   public const float StarDirection = 0.01f;
   public const float Recoil = 5f;
