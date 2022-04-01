@@ -5,6 +5,7 @@
 
 @code{
     static Game _game;
+
     protected override void OnInitialized()
     {
     }
@@ -29,14 +30,19 @@
             _game = new Game(scene);
             _game.SnakeMove(-1);
             await Js.InvokeVoidAsync("loop");
-
         }
     }
 
     [JSInvokable]
-    public static void Run(float val)
+    public static void Run(float val, string key)
     {
-        _game.SnakeMove(0);
+        var direction = key switch
+        {
+            "q" => 1f,
+            "e" => -1f,
+            _ => 0f
+            };
+        _game.SnakeMove(direction);
         _game.Update(val);
         _game.Draw();
     }
