@@ -10,5 +10,6 @@ public enum AssetList
   Apple,
   Thunder,
   Life,
-  Heart
+  Heart,
+  Score
 }
