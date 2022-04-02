@@ -1,3 +1,4 @@
+using System;
 using System.Net.Sockets;
 using Game.Interface;
 using Game.PowerItem;
@@ -14,6 +15,17 @@ public class Game
   private readonly Snake _snake = new();
   private readonly (IPowerUp food, IPowerUp speed) _power;
   private readonly SpawnPoints _spawnPoints = new();
+  private int _life = Settings.Life;
+
+  private int Life
+  {
+    get => _life;
+    set
+    {
+      if (_life is > 0 and <= Settings.MaxLife)
+        _life = value;
+    }
+  }
 
   private void SnakeSize(bool trigger)
   {
@@ -43,14 +55,21 @@ public class Game
 
   public void Update(float delta)
   {
-    _snake.Move(delta, _direction);
-    if (_snake.MoveWhenSmashWithWall(_walls.Current))
-      _shakeCameraDuration.Reset();
     if (_shakeCameraDuration.Duration())
       _scene.ShakeCameraRandomly(Settings.ShakeCameraRange);
     else
       _scene.Camera(Settings.CameraPosition);
-
+    
+    //if (Life == 0)
+    //  return;
+    
+    _snake.Move(delta, _direction);
+    if (_snake.MoveWhenSmashWithWall(_walls.Current))
+    {
+      _shakeCameraDuration.Reset();
+      Life--;
+    }
+    _hud.Update(Life);
     _power.food.Update();
     _power.speed.Update();
   }
@@ -67,6 +86,7 @@ public class Game
 
   public void Reset()
   {
+    _life = Settings.Life;
     _snake.Reset();
     _power.food.Reset();
     _power.speed.Reset();

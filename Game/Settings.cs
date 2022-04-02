@@ -20,11 +20,16 @@ public static class Settings
   public const int PowerUpNetWidth = 35;
   public const int PowerUpNetHeight = 34;
 
+  public const int Life = 3;
+  public const int MaxLife = 6;
+  
   public static readonly Color SnakeColor = Color.Orange;
   public static readonly Color FoodColor = Color.Chartreuse;
   public static readonly Color SpeedColor = Color.Gold;
   public static readonly Color LevelColor = Color.DarkSlateGray;
-  public static readonly Color HudColor = Color.White;
+  public static readonly Color TextColor = Color.White;
+  public static readonly Color HeartEnableColor = Color.Red;
+  public static readonly Color HeartDisableColor = Color.DimGray;
 
   public const float SpeedUp  = 450f;
   public const int FoodReplaceTime = 10000; // 10s
