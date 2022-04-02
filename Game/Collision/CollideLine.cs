@@ -1,3 +1,4 @@
+#nullable enable
 using System;
 using Game.Interface;
 using OpenTK.Mathematics;
@@ -6,15 +7,6 @@ namespace Game.Collision;
 
 public readonly struct CollideLine : ICollide
 {
-  private bool Equals(CollideLine other)
-    => X1.Equals(other.X1) && Y1.Equals(other.Y1) && X2.Equals(other.X2) && Y2.Equals(other.Y2);
-
-  public override bool Equals(object? obj)
-    => obj is CollideLine other && Equals(other);
-
-  public override int GetHashCode()
-    => HashCode.Combine(X1, Y1, X2, Y2);
-
   public readonly double X1;
   public readonly double Y1;
   public readonly double X2;
@@ -53,4 +45,13 @@ public readonly struct CollideLine : ICollide
 
   public static bool operator !=(CollideLine a, CollideCircle b)
     => !a.Collide(b);
+  
+  private bool Equals(CollideLine other)
+    => X1.Equals(other.X1) && Y1.Equals(other.Y1) && X2.Equals(other.X2) && Y2.Equals(other.Y2);
+
+  public override bool Equals(object? obj)
+    => obj is CollideLine other && Equals(other);
+
+  public override int GetHashCode()
+    => HashCode.Combine(X1, Y1, X2, Y2);
 }
