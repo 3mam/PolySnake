@@ -13,8 +13,6 @@ public static class Settings
   public const float ShakeCameraRange = -25f;
   public const float Scale = 0.025f;
   public const float Speed  = 300f;
-
-  //public static readonly Scene Scene = Scene.Create(CenterWidth, CenterHeight, 1f);
   public static Vector2 StarPosition => new(CenterWidth, CenterHeight);
   public const float StarDirection = 0.01f;
   public const float Recoil = 5f;
@@ -22,10 +20,10 @@ public static class Settings
   public const int PowerUpNetWidth = 35;
   public const int PowerUpNetHeight = 34;
 
-  public static readonly Color SnakeColor = Color.Red;
+  public static readonly Color SnakeColor = Color.Orange;
   public static readonly Color FoodColor = Color.Chartreuse;
   public static readonly Color SpeedColor = Color.Gold;
-  public static readonly Color LevelColor = Color.SeaGreen;
+  public static readonly Color LevelColor = Color.DarkSlateGray;
   public static readonly Color HudColor = Color.White;
 
   public const float SpeedUp  = 450f;

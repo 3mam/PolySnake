@@ -30,7 +30,7 @@ public class Scene : IScene
 
   public void Clear()
   {
-    GL.ClearColor(1f, 0.5f, 0.5f, 1f);
+    GL.ClearColor(0, 0, 0, 1f);
     GL.ClearDepth(1);
     GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
   }
