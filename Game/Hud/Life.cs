@@ -1,7 +1,7 @@
 using Game.Interface;
 using OpenTK.Mathematics;
 
-namespace Game;
+namespace Game.Hud;
 
 public class Life
 {

@@ -10,7 +10,7 @@ public class Game
   private readonly IScene _scene;
   private readonly Arena _arena = new();
   private readonly Walls _walls = new();
-  private readonly Hud _hud = new();
+  private readonly HudDisplay _hudDisplay = new();
   private readonly Timer _shakeCameraDuration = new(200);
   private readonly Snake _snake = new();
   private readonly (IPowerUp food, IPowerUp speed) _power;
@@ -69,7 +69,7 @@ public class Game
       _shakeCameraDuration.Reset();
       Life--;
     }
-    _hud.Update(Life);
+    _hudDisplay.Update(Life, 9237864);
     _power.food.Update();
     _power.speed.Update();
   }
@@ -77,7 +77,7 @@ public class Game
   public void Draw()
   {
     _scene.Clear();
-    _hud.Draw();
+    _hudDisplay.Draw();
     _arena.Draw();    
     _snake.Draw();
     _power.food.Draw();
