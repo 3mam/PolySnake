@@ -59,10 +59,10 @@ public class Game
   {
     _scene.Clear();
     _hud.Draw();
-    _arena.Draw();
+    _arena.Draw();    
+    _snake.Draw();
     _power.food.Draw();
     _power.speed.Draw();
-    _snake.Draw();
   }
 
   public void Reset()
