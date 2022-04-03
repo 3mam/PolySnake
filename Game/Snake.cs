@@ -7,7 +7,7 @@ namespace Game;
 
 public class Snake
 {
-  private Action<ICollide> _collideList = default!;
+  private event Action<ICollide> Collide = default!;
   private readonly IActor _head;
   private readonly IActor _body;
   private readonly IActor _tail;
@@ -122,11 +122,11 @@ public class Snake
   }
 
   public void CollideWith(ICollideEvent item)
-    => _collideList += item.Collide;
+    => Collide += item.Collide;
 
   private void CheckCollide()
   {
     var snake = new CollideCircle(_headPosition.Position, CollideRadius);
-    _collideList(snake);
+    Collide(snake);
   }
 }
