@@ -99,7 +99,7 @@ public class Game
     _menu.Draw();
   }
 
-  public void Reset()
+  private void Reset()
   {
     Life = Settings.Life;
     _snake.Reset();
@@ -108,7 +108,9 @@ public class Game
     _hudDisplay.Update(Life, 0);
   }
 
-  public void SnakeMove(float direction) => _direction = direction;
+  public void SnakeMoveLeft() => _direction = 1;
+  public void SnakeMoveRight() => _direction = -1;
+  public void SnakeMoveStraight() => _direction = 0;
 
   public void ToggleMenu()
   {

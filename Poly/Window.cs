@@ -47,6 +47,8 @@ public class Window : GameWindow
   protected override void OnUpdateFrame(FrameEventArgs e)
   {
     base.OnUpdateFrame(e);
+    _game.SnakeMoveStraight();
+
     if (KeyboardState.IsKeyPressed(Keys.Space) ||
         KeyboardState.IsKeyPressed(Keys.Enter))
       _game.Enter();
@@ -58,16 +60,14 @@ public class Window : GameWindow
     if (KeyboardState.IsKeyPressed(Keys.S) ||
         KeyboardState.IsKeyPressed(Keys.Down))
       _game.SelectPreviousOption();
-    var direction = 0f;
+
     if (KeyboardState.IsKeyDown(Keys.A) ||
         KeyboardState.IsKeyDown(Keys.Left))
-      direction = 1f;
+          _game.SnakeMoveLeft();
     if (KeyboardState.IsKeyDown(Keys.D) ||
         KeyboardState.IsKeyDown(Keys.Right))
-      direction = -1f;
-
-    _game.SnakeMove(direction);
-
+          _game.SnakeMoveRight();
+    
     if (_game.Exit)
       Close();
     
