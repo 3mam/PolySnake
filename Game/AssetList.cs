@@ -21,5 +21,6 @@ public enum AssetList
   N6,
   N7,
   N8,
-  N9
+  N9,
+  Exit
 }
