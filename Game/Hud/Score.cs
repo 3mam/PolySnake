@@ -43,7 +43,7 @@ public class Score
     {
       var s = _scoreString[i];
       var n = int.Parse(s.ToString());
-      _numbers[n].Position(new Vector2(1140 + 35 * i, 980.5f));
+      _numbers[n].Position(new Vector2(1120 + 35 * i, 980.5f));
       _numbers[n].Draw();
     }
   }

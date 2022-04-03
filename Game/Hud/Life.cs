@@ -17,7 +17,7 @@ public class Life
     _life.Color(Settings.TextColor);
     
     for (var i = 0; i < Settings.MaxLife; i++)
-      _hearts[i] = (false, new Vector2(310+60*i, 980));
+      _hearts[i] = (false, new Vector2(300+60*i, 980));
     _heart = AssetManager.GetActor(AssetList.Heart);
     _heart.Scale(0.05f);
   }
