@@ -73,6 +73,7 @@ public class Game
       return;
     
     _snake.Move(delta, _direction);
+    _direction = 0;
     if (_snake.MoveWhenSmashWithWall(_walls.Current))
     {
       _shakeCameraDuration.Reset();
@@ -110,7 +111,6 @@ public class Game
 
   public void SnakeMoveLeft() => _direction = 1;
   public void SnakeMoveRight() => _direction = -1;
-  public void SnakeMoveStraight() => _direction = 0;
 
   public void ToggleMenu()
   {

@@ -47,8 +47,6 @@ public class Window : GameWindow
   protected override void OnUpdateFrame(FrameEventArgs e)
   {
     base.OnUpdateFrame(e);
-    _game.SnakeMoveStraight();
-
     if (KeyboardState.IsKeyPressed(Keys.Space) ||
         KeyboardState.IsKeyPressed(Keys.Enter))
       _game.Enter();
