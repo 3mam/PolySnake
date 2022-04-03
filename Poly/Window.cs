@@ -47,17 +47,30 @@ public class Window : GameWindow
   protected override void OnUpdateFrame(FrameEventArgs e)
   {
     base.OnUpdateFrame(e);
-    if (KeyboardState.IsKeyDown(Keys.Escape))
-      Close();
+    if (KeyboardState.IsKeyPressed(Keys.Space) ||
+        KeyboardState.IsKeyPressed(Keys.Enter))
+      _game.Enter();
+    if (KeyboardState.IsKeyPressed(Keys.Escape))
+      _game.ToggleMenu();
+    if (KeyboardState.IsKeyPressed(Keys.W) ||
+        KeyboardState.IsKeyPressed(Keys.Up))
+      _game.SelectNextOption();
+    if (KeyboardState.IsKeyPressed(Keys.S) ||
+        KeyboardState.IsKeyPressed(Keys.Down))
+      _game.SelectPreviousOption();
     var direction = 0f;
-    if (KeyboardState.IsKeyDown(Keys.A))
+    if (KeyboardState.IsKeyDown(Keys.A) ||
+        KeyboardState.IsKeyDown(Keys.Left))
       direction = 1f;
-    if (KeyboardState.IsKeyDown(Keys.D))
+    if (KeyboardState.IsKeyDown(Keys.D) ||
+        KeyboardState.IsKeyDown(Keys.Right))
       direction = -1f;
-    if (KeyboardState.IsKeyDown(Keys.R))
-      _game.Reset();
+
     _game.SnakeMove(direction);
 
+    if (_game.Exit)
+      Close();
+    
     _game.Update((float) e.Time);
   }
 

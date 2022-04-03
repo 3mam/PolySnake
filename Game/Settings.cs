@@ -30,6 +30,7 @@ public static class Settings
   public static readonly Color TextColor = Color.White;
   public static readonly Color HeartEnableColor = Color.Red;
   public static readonly Color HeartDisableColor = Color.DimGray;
+  public static readonly Color NotSelectedColor = Color.Gray;
 
   public const float SpeedUp  = 450f;
   public const int FoodReplaceTime = 10000; // 10s

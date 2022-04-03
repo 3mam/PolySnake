@@ -1,5 +1,6 @@
 using System;
 using System.Net.Sockets;
+using Game.Hud;
 using Game.Interface;
 using Game.PowerItem;
 
@@ -16,6 +17,8 @@ public class Game
   private readonly (IPowerUp food, IPowerUp speed) _power;
   private readonly SpawnPoints _spawnPoints = new();
   private int _life = Settings.Life;
+  private readonly Menu _menu = new();
+  private bool _start;
 
   private int Life
   {
@@ -27,6 +30,8 @@ public class Game
     }
   }
 
+  public bool Exit { get; private set; }
+
   private void SnakeSize(bool trigger)
   {
     if (trigger)
@@ -37,7 +42,7 @@ public class Game
     => _snake.Speed = boost ? Settings.SpeedUp : Settings.Speed;
 
   private float _direction;
-  
+
   public Game(IScene scene)
   {
     _scene = scene;
@@ -46,13 +51,17 @@ public class Game
     _snake.CollideWith(_power.food);
     _power.food.SpawnPoints(_spawnPoints);
     _power.food.Trigger(SnakeSize);
-    _power.speed = new Speed();  
+    _power.speed = new Speed();
     _snake.CollideWith(_power.speed);
     _power.speed.SpawnPoints(_spawnPoints);
     _power.speed.Trigger(SnakeSpeed);
     Reset();
+    _menu.Visible = true;
+    _menu.DisableContinue = true;
+    _menu.Option = MenuSelect.NewGame;
   }
 
+  
   public void Update(float delta)
   {
     if (_shakeCameraDuration.Duration())
@@ -60,8 +69,8 @@ public class Game
     else
       _scene.Camera(Settings.CameraPosition);
     
-    //if (Life == 0)
-    //  return;
+    if (_menu.Visible)
+      return;
     
     _snake.Move(delta, _direction);
     if (_snake.MoveWhenSmashWithWall(_walls.Current))
@@ -69,6 +78,7 @@ public class Game
       _shakeCameraDuration.Reset();
       Life--;
     }
+
     _hudDisplay.Update(Life, 9237864);
     _power.food.Update();
     _power.speed.Update();
@@ -78,19 +88,64 @@ public class Game
   {
     _scene.Clear();
     _hudDisplay.Draw();
-    _arena.Draw();    
-    _snake.Draw();
-    _power.food.Draw();
-    _power.speed.Draw();
+    _arena.Draw();
+    if (_start)
+    {
+      _snake.Draw();
+      _power.food.Draw();
+      _power.speed.Draw();
+    }
+
+    _menu.Draw();
   }
 
   public void Reset()
   {
-    _life = Settings.Life;
+    Life = Settings.Life;
     _snake.Reset();
     _power.food.Reset();
     _power.speed.Reset();
+    _hudDisplay.Update(Life, 0);
   }
 
   public void SnakeMove(float direction) => _direction = direction;
+
+  public void ToggleMenu()
+  {
+    if (_start)
+    {
+      _menu.Visible = !_menu.Visible;
+      _menu.Option = MenuSelect.Continue;
+    }
+    else
+    {
+      _menu.Visible = true;
+    }
+  }
+
+  public void SelectNextOption()
+    => _menu.SelectOption(-1);
+
+  public void SelectPreviousOption()
+    => _menu.SelectOption(1);
+
+  public void Enter()
+  {
+    switch (_menu.Option)
+    {
+      case MenuSelect.Exit:
+        Exit = true;
+        break;
+      case MenuSelect.NewGame:
+        Reset();
+        _start = true;
+        _menu.DisableContinue = false;
+        _menu.Option = MenuSelect.Continue;
+        _menu.Visible = false;
+        break;
+      case MenuSelect.Continue:
+        _menu.Visible = false;
+        break;
+    }
+  }
 }
