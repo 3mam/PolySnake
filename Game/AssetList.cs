@@ -23,5 +23,6 @@ public enum AssetList
   N8,
   N9,
   Exit,
-  NewGame
+  NewGame,
+  Continue
 }
