@@ -5,7 +5,6 @@
 
 @code{
     static Game _game = default!;
-    static int _direction = 0;
 
     protected override void OnInitialized()
     {
@@ -37,21 +36,11 @@
     [JSInvokable]
     public static void Run(float val)
     {
-        switch (_direction)
-        {
-            case -1:
-                _game.SnakeMoveRight();
-                break;
-            case 1:
-                _game.SnakeMoveLeft();
-                break;
-        }
-            
-            _game.Update(val);
+        _game.Update(val);
         _game.Draw();
     }
 
-    private void KeyDown(KeyboardEventArgs e)
+    private static void KeyDown(KeyboardEventArgs e)
     {
         switch (e.Key)
         {
@@ -59,10 +48,10 @@
                 _game.Enter();
                 break;
             case "ArrowRight":
-                _direction = -1;
+                _game.SnakeMoveRight();
                 break;
             case "ArrowLeft":
-                _direction = 1;
+                _game.SnakeMoveLeft();
                 break;
             case "ArrowUp":
                 _game.SelectNextOption();
@@ -75,23 +64,24 @@
                 break;
         }
     }
-    
-    private void KeyUp(KeyboardEventArgs e)
+
+    private static void KeyUp(KeyboardEventArgs e)
     {
         switch (e.Key)
         {
             case "ArrowRight":
-                _direction = 0;
+                _game.SnakeMoveStraight();
                 break;
             case "ArrowLeft":
-                _direction = 0;
+                _game.SnakeMoveStraight();
                 break;
         }
     }
+
 }
 
 
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
-<canvas width="800" height="600" @onkeydown="@KeyDown" @onkeyup="@KeyUp" tabindex="0"></canvas>
+<canvas width="640" height="360" @onkeydown="@KeyDown" @onkeyup="@KeyUp" tabindex="0"></canvas>
