@@ -7,26 +7,20 @@ function init() {
 var scene = () =>
     Scene.create(800,600,1)
 
-var key = ""
-document.addEventListener('keypress', (event) => {
-    key = event.key
-})
-
-document.addEventListener('keyup', (event) => {
-    key = ""
-})
-
 function loop() {
     let last = 0
     const insideLoop = timestamp => {
         const delta = Math.min(1, (timestamp - last) / 1000)
         last = timestamp
-        DotNet.invokeMethodAsync('Blazor', 'Run', delta, key)
+        DotNet.invokeMethodAsync('Blazor', 'Run', delta)
         window.requestAnimationFrame(insideLoop)
     }
     insideLoop(0)
 }
 
+window.canvasFocus = () => {
+    document.getElementsByTagName("canvas")[0].focus();
+};
 
 function toggleFullScreen() {
     if (!document.fullscreenElement)

@@ -4,7 +4,8 @@
 @inject IJSRuntime Js
 
 @code{
-    static Game _game;
+    static Game _game = default!;
+    static int _direction = 0;
 
     protected override void OnInitialized()
     {
@@ -28,27 +29,69 @@
                 AssetManager.AddActor((AssetList) name, actor);
             }
             _game = new Game(scene);
-            _game.SnakeMove(-1);
+            await Js.InvokeVoidAsync("canvasFocus");
             await Js.InvokeVoidAsync("loop");
         }
     }
 
     [JSInvokable]
-    public static void Run(float val, string key)
+    public static void Run(float val)
     {
-        var direction = key switch
+        switch (_direction)
         {
-            "q" => 1f,
-            "e" => -1f,
-            _ => 0f
-            };
-        _game.SnakeMove(direction);
-        _game.Update(val);
+            case -1:
+                _game.SnakeMoveRight();
+                break;
+            case 1:
+                _game.SnakeMoveLeft();
+                break;
+        }
+            
+            _game.Update(val);
         _game.Draw();
     }
 
+    private void KeyDown(KeyboardEventArgs e)
+    {
+        switch (e.Key)
+        {
+            case "Enter":
+                _game.Enter();
+                break;
+            case "ArrowRight":
+                _direction = -1;
+                break;
+            case "ArrowLeft":
+                _direction = 1;
+                break;
+            case "ArrowUp":
+                _game.SelectNextOption();
+                break;
+            case "ArrowDown":
+                _game.SelectPreviousOption();
+                break;
+            case "Escape":
+                _game.ToggleMenu();
+                break;
+        }
+    }
+    
+    private void KeyUp(KeyboardEventArgs e)
+    {
+        switch (e.Key)
+        {
+            case "ArrowRight":
+                _direction = 0;
+                break;
+            case "ArrowLeft":
+                _direction = 0;
+                break;
+        }
+    }
 }
 
+
 <PageTitle>Index</PageTitle>
+
 <h1>Hello, world!</h1>
-<canvas width="800" height="600"></canvas>
+<canvas width="800" height="600" @onkeydown="@KeyDown" @onkeyup="@KeyUp" tabindex="0"></canvas>
