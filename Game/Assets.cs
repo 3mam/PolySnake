@@ -7,18 +7,15 @@ public static class Assets
     -0.25f, 1f,
     -0.5f, -1f,
     -1f, -0.3f,
-
     -0.25f, 1f,
     0.5f, -1f,
     -0.5f, -1f,
-
     -0.25f, 1f,
     1f, -0.3f,
     0.5f, -1f,
-
     -0.25f, 1f,
     0.25f, 1f,
-    1f, -0.3f,
+    1f, -0.3f
   };
 
   public static readonly float[] Body =
@@ -26,18 +23,15 @@ public static class Assets
     0f, 0.6f,
     -0.6f, -0.3f,
     -0.6f, 0.3f,
-
     0f, 0.6f,
     0f, -0.6f,
     -0.6f, -0.3f,
-
     0f, 0.6f,
     0.6f, -0.3f,
     0f, -0.6f,
-
     0f, 0.6f,
     0.6f, 0.3f,
-    0.6f, -0.3f,
+    0.6f, -0.3f
   };
 
   public static readonly float[] Tail =
@@ -45,10 +39,9 @@ public static class Assets
     0f, 0.6f,
     0f, -0.6f,
     -0.6f, 0.3f,
-
     0f, 0.6f,
     0.6f, 0.3f,
-    0f, -0.6f,
+    0f, -0.6f
   };
 
   public static readonly float[] Level =
@@ -58,7 +51,7 @@ public static class Assets
     0.18f, 0.32f,
     0.18f, 0.32f,
     0.18f, -0.32f,
-    -0.18f, -0.32f,
+    -0.18f, -0.32f
   };
 
   public static readonly float[] Apple =
@@ -116,7 +109,7 @@ public static class Assets
     -0.4419f, -0.0633f,
     -0.0465f, 0.3116f,
     -0.3884f, 0.3995f,
-    -0.4419f, -0.0633f,
+    -0.4419f, -0.0633f
   };
 
   public static readonly float[] Thunder =
@@ -132,7 +125,7 @@ public static class Assets
     0.1178f, 0.1178f,
     -0.1178f, -0.1178f,
     0.1178f, 0.1178f,
-    0.7068f, 0.1178f,
+    0.7068f, 0.1178f
   };
 
   public static readonly float[] Life =
@@ -241,7 +234,7 @@ public static class Assets
     -0.0073f, 0.2253f,
     -0.0073f, -0.2122f,
     0.0552f, 0.0378f,
-    0.0552f, -0.0247f,
+    0.0552f, -0.0247f
   };
 
   public static readonly float[] Heart =
@@ -269,7 +262,7 @@ public static class Assets
     -0.8993f, 0.0182f,
     -0.7098f, 0.8077f,
     -0.8993f, 0.4284f,
-    0.0000f, 0.4284f,
+    0.0000f, 0.4284f
   };
 
   public static readonly float[] Score =
@@ -579,7 +572,7 @@ public static class Assets
     -0.6472f, 0.0340f,
     -0.3347f, 0.2215f,
     -0.3347f, 0.1590f,
-    -0.1784f, 0.1590f,
+    -0.1784f, 0.1590f
   };
 
   public static readonly float[] N0 =
@@ -649,7 +642,7 @@ public static class Assets
     0.0391f, -0.1563f,
     0.0391f, -0.1563f,
     0.0391f, -0.0938f,
-    -0.0391f, -0.0938f,
+    -0.0391f, -0.0938f
   };
 
   public static readonly float[] N1 =
@@ -680,7 +673,7 @@ public static class Assets
     0.0324f, -0.1567f,
     0.0949f, -0.2192f,
     0.0949f, -0.1567f,
-    -0.0926f, -0.1567f,
+    -0.0926f, -0.1567f
   };
 
   public static readonly float[] N2 =
@@ -741,7 +734,7 @@ public static class Assets
     -0.0692f, -0.1557f,
     0.1105f, -0.1557f,
     -0.1083f, -0.1557f,
-    -0.1083f, -0.2182f,
+    -0.1083f, -0.2182f
   };
 
   public static readonly float[] N3 =
@@ -805,7 +798,7 @@ public static class Assets
     -0.0502f, -0.1563f,
     0.0748f, -0.1563f,
     -0.0815f, -0.1563f,
-    -0.0815f, -0.2188f,
+    -0.0815f, -0.2188f
   };
 
   public static readonly float[] N4 =
@@ -866,7 +859,7 @@ public static class Assets
     -0.1202f, -0.0318f,
     0.0361f, -0.2193f,
     0.0986f, -0.2193f,
-    0.0986f, -0.0943f,
+    0.0986f, -0.0943f
   };
 
   public static readonly float[] N5 =
@@ -942,7 +935,7 @@ public static class Assets
     -0.0687f, -0.1569f,
     0.0563f, -0.1569f,
     -0.0843f, -0.1569f,
-    -0.0843f, -0.2194f,
+    -0.0843f, -0.2194f
   };
 
   public static readonly float[] N6 =
@@ -1009,7 +1002,7 @@ public static class Assets
     0.0625f, -0.1559f,
     -0.0156f, -0.2184f,
     0.0781f, -0.2184f,
-    0.0625f, -0.1559f,
+    0.0625f, -0.1559f
   };
 
   public static readonly float[] N7 =
@@ -1073,7 +1066,7 @@ public static class Assets
     -0.0602f, -0.1563f,
     -0.0211f, -0.1563f,
     -0.0836f, -0.1563f,
-    -0.0836f, -0.2188f,
+    -0.0836f, -0.2188f
   };
 
   public static readonly float[] N8 =
@@ -1143,7 +1136,7 @@ public static class Assets
     -0.0391f, -0.0313f,
     0.0625f, -0.1563f,
     -0.0625f, -0.1563f,
-    -0.0625f, -0.2188f,
+    -0.0625f, -0.2188f
   };
 
   public static readonly float[] N9 =
@@ -1210,7 +1203,7 @@ public static class Assets
     0.0221f, -0.2190f,
     -0.0717f, 0.1560f,
     0.0221f, 0.1560f,
-    0.0221f, 0.2185f,
+    0.0221f, 0.2185f
   };
 
   public static readonly float[] Exit =
@@ -1406,7 +1399,7 @@ public static class Assets
     -0.5850f, -0.0384f,
     -0.3975f, -0.1634f,
     -0.5850f, -0.1634f,
-    -0.5850f, -0.2259f,
+    -0.5850f, -0.2259f
   };
 
   public static readonly float[] NewGame =
@@ -2297,7 +2290,7 @@ public static class Assets
     -0.9819f, -0.0945f,
     -1.0444f, -0.2195f,
     -0.9819f, -0.2195f,
-    -0.9819f, -0.1570f,
+    -0.9819f, -0.1570f
   };
 
   public static readonly float[] Continue =
@@ -2673,6 +2666,6 @@ public static class Assets
     -1.1435f, -0.1009f,
     -1.2372f, -0.1009f,
     -1.1747f, -0.1009f,
-    -1.1747f, 0.0866f,
+    -1.1747f, 0.0866f
   };
 }
