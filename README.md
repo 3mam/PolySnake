@@ -1,6 +1,6 @@
 # Polygonal Snake
 
-![Build status](https://github.com/3mam/PolySnake/actions/workflows/dotnet.yml/badge.svg)
+[![Build status](https://github.com/3mam/PolySnake/actions/workflows/dotnet.yml/badge.svg)](https://github.com/3mam/PolySnake/actions)
 
 ![Snake Screenshot](Assets/output.gif)
 
