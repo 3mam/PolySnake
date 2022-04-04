@@ -14,16 +14,19 @@ public class Game
   private readonly Snake _snake = new();
   private readonly (IPowerUp food, IPowerUp speed) _power;
   private readonly SpawnPoints _spawnPoints = new();
-  private int _life = Settings.Life;
   private readonly Menu _menu = new();
+  private int _life = Settings.Life;
   private bool _start;
-
+  private float _direction;
+  private int _score;
+  private int _pointMultiplier;
+  
   private int Life
   {
     get => _life;
     set
     {
-      if (_life is > 0 and <= Settings.MaxLife)
+      if (_life is >= 0 and <= Settings.MaxLife)
         _life = value;
     }
   }
@@ -32,14 +35,24 @@ public class Game
 
   private void SnakeSize(bool trigger)
   {
-    if (trigger)
-      _snake.Lenght += 1;
+    if (!trigger) return;
+    _snake.Lenght += 1;
+    _score += Settings.PointForFood * _pointMultiplier;
   }
 
   private void SnakeSpeed(bool boost)
-    => _snake.Speed = boost ? Settings.SpeedUp : Settings.Speed;
-
-  private float _direction;
+  {
+    if (boost)
+    {
+      _snake.Speed = Settings.SpeedUp;
+      _pointMultiplier = Settings.PointMultiplier;
+    }
+    else
+    {
+      _snake.Speed = Settings.Speed;
+      _pointMultiplier = 1;
+    }
+  }
 
   public Game(IScene scene)
   {
@@ -54,11 +67,16 @@ public class Game
     _power.speed.SpawnPoints(_spawnPoints);
     _power.speed.Trigger(SnakeSpeed);
     Reset();
+    Begin();
+  }
+
+  private void Begin()
+  {
+    _start = false;
     _menu.Visible = true;
     _menu.DisableContinue = true;
     _menu.Option = MenuSelect.NewGame;
   }
-
   
   public void Update(float delta)
   {
@@ -70,6 +88,9 @@ public class Game
     if (_menu.Visible)
       return;
     
+    if (Life == 0)
+      Begin();
+    
     _snake.Move(delta, _direction);
     if (_snake.MoveWhenSmashWithWall(_walls.Current))
     {
@@ -77,7 +98,7 @@ public class Game
       Life--;
     }
 
-    _hudDisplay.Update(Life, 9237864);
+    _hudDisplay.Update(Life, _score);
     _power.food.Update();
     _power.speed.Update();
   }
@@ -100,6 +121,7 @@ public class Game
   private void Reset()
   {
     Life = Settings.Life;
+    _score = 0;
     _snake.Reset();
     _power.food.Reset();
     _power.speed.Reset();

@@ -38,4 +38,6 @@ public static class Settings
   public const int SpeedVisibilityTime = 5000; // 5s
   public const int ShowSpeedItemAtTime = 10000; // 10s
 
+  public const int PointForFood = 100;
+  public const int PointMultiplier = 10;
 }
