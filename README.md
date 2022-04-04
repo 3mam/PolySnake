@@ -1,6 +1,6 @@
 # Polygonal Snake
 
-[![Build status](https://ci.appveyor.com/api/projects/status/915bg3kbrnb9csoc?svg=true)](https://ci.appveyor.com/project/3mam/polysnake)
+![Build status](https://github.com/3mam/PolySnake/actions/workflows/dotnet.yml/badge.svg)
 
 ![Snake Screenshot](Assets/output.gif)
 
