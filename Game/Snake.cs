@@ -1,7 +1,7 @@
 using System;
 using Game.Collision;
 using Game.Interface;
-using OpenTK.Mathematics;
+using Game.Math;
 
 namespace Game;
 
@@ -57,7 +57,7 @@ public class Snake
   public void Move(float delta, float direction)
   {
     _headPosition.Move(Speed * delta, direction);
-    _bodyPositions[0].Motion(_headPosition.Position + new Vector2(0.001f, 0.001f));
+    _bodyPositions[0].Motion(_headPosition.Position);
 
     for (var i = 1; i <= Lenght; i++)
       _bodyPositions[i].Motion(_bodyPositions[i - 1].Position);

@@ -1,24 +1,24 @@
 #nullable enable
 using System;
 using Game.Interface;
-using OpenTK.Mathematics;
+using Game.Math;
 
 namespace Game.Collision;
 
 public readonly struct CollideCircle : ICollide
 {
-  public readonly double X;
-  public readonly double Y;
-  public readonly double R;
+  public readonly float X;
+  public readonly float Y;
+  public readonly float R;
 
-  public CollideCircle(double x, double y, double radius)
+  public CollideCircle(float x, float y, float radius)
   {
     X = x;
     Y = y;
     R = radius;
   }
 
-  public CollideCircle(Vector2d point, double radius)
+  public CollideCircle(Vector2 point, float radius)
   {
     X = point.X;
     Y = point.Y;

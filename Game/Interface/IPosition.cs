@@ -1,4 +1,4 @@
-using OpenTK.Mathematics;
+using Game.Math;
 
 namespace Game.Interface;
 

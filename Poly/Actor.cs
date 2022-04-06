@@ -1,7 +1,7 @@
 using System.Drawing;
 using Game.Interface;
 using OpenTK.Graphics.OpenGL4;
-using OpenTK.Mathematics;
+using Game.Math;
 
 namespace Poly;
 

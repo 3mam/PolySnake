@@ -13,8 +13,5 @@
       <OutputPath>../bin/Release</OutputPath>
     </PropertyGroup>
 
-    <ItemGroup>
-      <PackageReference Include="OpenTK.Mathematics" Version="4.7.1" />
-    </ItemGroup>
 
 </Project>

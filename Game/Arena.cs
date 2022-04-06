@@ -1,5 +1,5 @@
 using Game.Interface;
-using OpenTK.Mathematics;
+using Game.Math;
 
 namespace Game;
 
