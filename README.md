@@ -63,6 +63,3 @@ For Windows.
 
 For Linux.
 > dotnet publish -c Release --runtime linux-x64
-
-For MacOS.
-> dotnet publish -c Release --runtime osx-x64
