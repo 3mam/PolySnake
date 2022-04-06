@@ -1,0 +1,85 @@
+﻿@page "/"
+@using Game
+@inject IJSRuntime Js
+
+@code{
+    static Game _game = default!;
+
+    protected override void OnInitialized()
+    {
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await Js.InvokeVoidAsync("init");
+            var scene = new Scene(Js, Settings.CenterWidth, Settings.CenterHeight, 1f);
+            await scene.Init();
+            foreach (var name in Enum.GetValues(typeof(AssetList)))
+            {
+                if ((AssetList) name == AssetList.None)
+                    continue;
+                var actor = await scene.CreateActor();
+                var obj = typeof(Assets).GetField(name.ToString() ?? string.Empty);
+                var asset = (float[]) obj?.GetValue(null)!;
+                actor.UploadData(asset);
+                AssetManager.AddActor((AssetList) name, actor);
+            }
+            _game = new Game(scene);
+            await Js.InvokeVoidAsync("canvasFocus");
+            await Js.InvokeVoidAsync("loop");
+        }
+    }
+
+    [JSInvokable]
+    public static void Run(float val)
+    {
+        _game.Update(val);
+        _game.Draw();
+    }
+
+    private static void KeyDown(KeyboardEventArgs e)
+    {
+        switch (e.Key)
+        {
+            case "Enter":
+                _game.Enter();
+                break;
+            case "ArrowRight":
+                _game.SnakeMoveRight();
+                break;
+            case "ArrowLeft":
+                _game.SnakeMoveLeft();
+                break;
+            case "ArrowUp":
+                _game.SelectNextOption();
+                break;
+            case "ArrowDown":
+                _game.SelectPreviousOption();
+                break;
+            case "Escape":
+                _game.ToggleMenu();
+                break;
+        }
+    }
+
+    private static void KeyUp(KeyboardEventArgs e)
+    {
+        switch (e.Key)
+        {
+            case "ArrowRight":
+                _game.SnakeMoveStraight();
+                break;
+            case "ArrowLeft":
+                _game.SnakeMoveStraight();
+                break;
+        }
+    }
+
+}
+
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+<canvas width="640" height="360" @onkeydown="@KeyDown" @onkeyup="@KeyUp" tabindex="0"></canvas>
