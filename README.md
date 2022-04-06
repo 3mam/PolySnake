@@ -1,10 +1,11 @@
 # Polygonal Snake
 
 [![Build status](https://github.com/3mam/PolySnake/actions/workflows/dotnet.yml/badge.svg)](https://github.com/3mam/PolySnake/actions)
-
+[![Live demo](https://api.netlify.com/api/v1/badges/11156706-f6b1-41f9-95b9-8fcf7743fd31/deploy-status)](https://elaborate-lily-2c0859.netlify.app)
 ![Snake Screenshot](Assets/output.gif)
 
-Project goal is write from scratch 2D Snake in **.Net 6**.<br>
+## [live demo](https://elaborate-lily-2c0859.netlify.app)
+Project goal is write from scratch 2D Snake in **.Net 6**.<br><br>
 This project contains port for Blazor Server.
 I adding Blazor only for proof of concept.
 Biggest problem of Blazor for now is behavior of floating-point numbers. Is different from desktop version, and
