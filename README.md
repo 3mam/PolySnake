@@ -5,13 +5,12 @@
 ![Snake Screenshot](Assets/output.gif)
 
 ## [live demo](https://elaborate-lily-2c0859.netlify.app)
-Project goal is write from scratch 2D Snake in **.Net 6**.<br><br>
-This project contains port for Blazor Server.
-I adding Blazor only for proof of concept.
-Biggest problem of Blazor for now is behavior of floating-point numbers. Is different from desktop version, and
+Project goal is write from scratch 2D Snake in **.net 6**.<br><br>
+This project contains port for Blazor Server and Webassembly.
+I adding Blazor for proof of concept.
+Biggest problem of Blazor for me is behavior of floating-point numbers. Is different from desktop version, and
 this create some problems with proper calculation.
-I did hack for snake movement to behaves that same why as
-desktop version.
+For reduce problem I don't use **double**.
 
 
 ## Used for this project
@@ -51,10 +50,17 @@ desktop version.
 > dotnet run --project Poly
 
 ### Run browser version.
-> dotnet run --project Blazor
+Blazor server.
+> dotnet run --project BlazorServer
 
-And in browser go to this url.
-> http://127.0.0.1:7777
+In browser go to this url.
+> https://localhost:5267
+
+Blazor webassembly.
+> dotnet run --project BlazorWasm
+
+In browser go to this url.
+> https://localhost:5249
 
 ## Build
 > cd Poly
