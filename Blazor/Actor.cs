@@ -3,7 +3,7 @@ using Game.Interface;
 using Microsoft.JSInterop;
 using Game.Math;
 
-namespace BlazorServer;
+namespace Blazor;
 
 public class Actor : IActor
 {

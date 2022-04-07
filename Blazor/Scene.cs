@@ -2,7 +2,7 @@ using Game.Interface;
 using Microsoft.JSInterop;
 using Game.Math;
 
-namespace BlazorWasm;
+namespace Blazor;
 
 public class Scene : IScene
 {

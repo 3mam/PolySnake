@@ -1,10 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>default</LangVersion>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -16,13 +15,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.2" PrivateAssets="all" />
+    <ProjectReference Include="..\Game\Game.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Blazor\Blazor.csproj" />
-    <ProjectReference Include="..\Game\Game.csproj" />
+    <PackageReference Include="Microsoft.JSInterop" Version="6.0.2" />
   </ItemGroup>
 
 </Project>
