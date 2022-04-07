@@ -48,9 +48,9 @@ public class Scene : IScene
     if (range == 0)
       return;
     var random = new Random();
-    var between = (range + range + 1);
-    var x = (float) random.NextDouble() * between - range;
-    var y = (float) random.NextDouble() * between - range;
+    var between = range * 2 + 1;
+    var x = random.NextSingle() * between - range;
+    var y = random.NextSingle() * between - range;
     _shader.Camera(_camera.X + x, _camera.Y + y);
   }
 }
