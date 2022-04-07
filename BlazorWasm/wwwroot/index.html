@@ -19,12 +19,21 @@
         <a href="" class="reload">Reload</a>
         <a class="dismiss">🗙</a>
     </div>
+
     <script src="./Rendering/ShaderDefault.js"></script>
     <script src="./Rendering/Program.js"></script>
     <script src="./Rendering/Shader.js"></script>
     <script src="./Rendering/Actor.js"></script>
     <script src="./Rendering/Scene.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        var gl = null
+        var canvas = document.createElement('canvas')
+        canvas.id = "gl"
+        canvas.width = 640
+        canvas.height = 360
+        canvas.style.position = "absolute"
+    </script>
     <script src="main.js"></script>
 </body>
 

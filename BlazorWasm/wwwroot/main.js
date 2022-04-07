@@ -1,7 +1,8 @@
 console.log("Hello World!")
 
 function init() {
-    gl = document.getElementsByTagName("canvas")[0].getContext("webgl2")
+    document.getElementById("canvas").appendChild(canvas)
+    gl = document.getElementById("gl").getContext("webgl2")
 }
 
 var scene = () =>
@@ -19,8 +20,8 @@ function loop() {
 }
 
 window.canvasFocus = () => {
-    document.getElementsByTagName("canvas")[0].focus();
-};
+    document.getElementById("canvas").focus()
+}
 
 function toggleFullScreen() {
     if (!document.fullscreenElement)
