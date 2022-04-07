@@ -22,7 +22,7 @@ public class Game
   private float _direction;
   private int _score;
   private int _pointMultiplier;
-  private Vector2 _cameraPostion = Settings.CameraPosition;
+  private Vector2 _cameraPosition = Settings.CameraPosition;
 
   private int Life
   {
@@ -89,8 +89,8 @@ public class Game
     }
     else
     {
-      _cameraPostion = Settings.CameraPosition;
-      _scene.Camera(_cameraPostion);
+      _cameraPosition = Settings.CameraPosition;
+      _scene.Camera(_cameraPosition);
     }
 
     if (_menu.Visible)
@@ -187,6 +187,6 @@ public class Game
     var between = range * 2 + 1;
     var x = random.NextSingle() * between - range;
     var y = random.NextSingle() * between - range;
-    _scene.Camera(new Vector2(_cameraPostion.X + x, _cameraPostion.Y + y));
+    _scene.Camera(new Vector2(_cameraPosition.X + x, _cameraPosition.Y + y));
   }
 }
