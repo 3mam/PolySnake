@@ -7,9 +7,11 @@
 ## [live demo](https://elaborate-lily-2c0859.netlify.app)
 Project goal is write from scratch 2D Snake in **.net 6**.<br><br>
 This project contains port for Blazor Server and Webassembly.
-I adding Blazor for proof of concept.
-Biggest problem of Blazor for me is behavior of floating-point numbers. Is different from desktop version, and
-this create some problems with proper calculation.
+I adding Blazor for proof of concept. Game on Blazor don't
+works 100% same way like desktop version.
+Biggest problem is behavior of floating-point numbers. Is different
+between Desktop and Blazor,
+and this create some problems with proper calculation.
 For reduce problem I don't use **double**.
 
 
