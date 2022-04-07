@@ -11,7 +11,6 @@ public class Scene : IScene
   private readonly float _height;
   private readonly float _scale;
   private IJSObjectReference _handle = default!;
-  private Vector2 _camera;
 
   public Scene(IJSRuntime js, float width, float height, float scale)
   {
@@ -32,18 +31,7 @@ public class Scene : IScene
   {
     _handle.InvokeVoidAsync("clear");
   }
-
-  public void ShakeCameraRandomly(float range)
-  {
-    if (range == 0)
-      return;
-    var random = new Random();
-    var between = range * 2 + 1;
-    var x = random.NextSingle() * between - range;
-    var y = random.NextSingle() * between - range;
-    Camera(new Vector2(_camera.X + x, _camera.Y + y));
-  }
-
+  
   public async Task<Actor> CreateActor()
   {
     var actor = await _handle.InvokeAsync<IJSObjectReference>("createActor");
@@ -57,7 +45,6 @@ public class Scene : IScene
 
   public void Camera(Vector2 position)
   {
-    _camera = position;
     _handle.InvokeVoidAsync("camera", position.X, position.Y);
   }
 }

@@ -1,5 +1,7 @@
+using System;
 using Game.Hud;
 using Game.Interface;
+using Game.Math;
 using Game.PowerItem;
 
 namespace Game;
@@ -20,7 +22,8 @@ public class Game
   private float _direction;
   private int _score;
   private int _pointMultiplier;
-  
+  private Vector2 _cameraPostion = Settings.CameraPosition;
+
   private int Life
   {
     get => _life;
@@ -77,20 +80,25 @@ public class Game
     _menu.DisableContinue = true;
     _menu.Option = MenuSelect.NewGame;
   }
-  
+
   public void Update(float delta)
   {
     if (_shakeCameraDuration.Duration())
-      _scene.ShakeCameraRandomly(Settings.ShakeCameraRange);
+    {
+      ShakeCameraRandomly(Settings.ShakeCameraRange);
+    }
     else
-      _scene.Camera(Settings.CameraPosition);
-    
+    {
+      _cameraPostion = Settings.CameraPosition;
+      _scene.Camera(_cameraPostion);
+    }
+
     if (_menu.Visible)
       return;
-    
+
     if (Life == 0)
       Begin();
-    
+
     _snake.Move(delta, _direction);
     if (_snake.MoveWhenSmashWithWall(_walls.Current))
     {
@@ -169,5 +177,16 @@ public class Game
         _menu.Visible = false;
         break;
     }
+  }
+
+  private void ShakeCameraRandomly(float range)
+  {
+    if (range == 0)
+      return;
+    var random = new Random();
+    var between = range * 2 + 1;
+    var x = random.NextSingle() * between - range;
+    var y = random.NextSingle() * between - range;
+    _scene.Camera(new Vector2(_cameraPostion.X + x, _cameraPostion.Y + y));
   }
 }

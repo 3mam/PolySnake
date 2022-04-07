@@ -7,7 +7,6 @@ namespace Poly;
 public class Scene : IScene
 {
   private readonly Shader _shader = Shader.Load(ShaderDefault.Vertex, ShaderDefault.Fragment);
-  private Vector2 _camera;
 
   private Scene()
   {
@@ -39,18 +38,6 @@ public class Scene : IScene
 
   public void Camera(Vector2 position)
   {
-    _camera = position;
-    _shader.Camera(_camera.X, _camera.Y);
-  }
-
-  public void ShakeCameraRandomly(float range)
-  {
-    if (range == 0)
-      return;
-    var random = new Random();
-    var between = range * 2 + 1;
-    var x = random.NextSingle() * between - range;
-    var y = random.NextSingle() * between - range;
-    _shader.Camera(_camera.X + x, _camera.Y + y);
+    _shader.Camera(position.X, position.Y);
   }
 }
