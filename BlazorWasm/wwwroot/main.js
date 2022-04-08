@@ -1,12 +1,21 @@
 console.log("Hello World!")
 
+const width = 640
+const height = 360
+var gl = null
+var canvas = document.createElement('canvas')
+canvas.id = "gl"
+canvas.width = width
+canvas.height = height
+canvas.style.position = "absolute"
+
 function init() {
     document.getElementById("canvas").appendChild(canvas)
     gl = document.getElementById("gl").getContext("webgl2")
 }
 
 var scene = () =>
-    Scene.create(800,600,1)
+    new Scene(width, height, 1)
 
 function loop() {
     let last = 0
@@ -19,14 +28,6 @@ function loop() {
     insideLoop(0)
 }
 
-window.canvasFocus = () => {
+function canvasFocus() {
     document.getElementById("canvas").focus()
-}
-
-function toggleFullScreen() {
-    if (!document.fullscreenElement)
-        document.documentElement.requestFullscreen()
-    else if (document.exitFullscreen)
-        document.exitFullscreen()
-    screen.orientation.lock('portrait')
 }

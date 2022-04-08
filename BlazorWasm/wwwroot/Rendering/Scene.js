@@ -5,9 +5,14 @@ class Scene {
     #scale
     #camera
 
-    constructor() {
+    constructor(width, height, scale) {
         this.#camera = {x: 0, y: 0}
-
+        this.#shader = Shader.load(ShaderDefault.vertex, ShaderDefault.fragment);
+        this.#width = width
+        this.#height = height
+        this.#scale = scale
+        this.#shader.dimensions(width, height, scale)
+        
         gl.enable(gl.BLEND);
         gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
         gl.enable(gl.DEPTH_TEST)
@@ -15,18 +20,7 @@ class Scene {
         gl.depthFunc(gl.LEQUAL)
         gl.depthRange(-1, 1)
     }
-
-    static create(width, height, scale) {
-        let scene = new Scene()
-        scene.#shader = Shader.load(ShaderDefault.vertex, ShaderDefault.fragment);
-        scene.#width = width
-        scene.#height = height
-        scene.#scale = scale
-        scene.#shader.dimensions(width, height, scale)
-
-        return scene
-    }
-
+    
     clear() {
         gl.clearColor(0, 0, 0, 1.0)
         gl.clearDepth(1.0)
