@@ -5,14 +5,9 @@
 
 @code{
     static Game _game = default!;
-
-    protected override void OnInitialized()
-    {
-    }
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (_game == default!)
         {
             await Js.InvokeVoidAsync("init");
             var scene = new Scene(Js, Settings.CenterWidth, Settings.CenterHeight, 1f);
@@ -28,9 +23,15 @@
                 AssetManager.AddActor((AssetList) name, actor);
             }
             _game = new Game(scene);
-            await Js.InvokeVoidAsync("canvasFocus");
+
             await Js.InvokeVoidAsync("loop");
         }
+        if (firstRender)
+        {
+            await Js.InvokeVoidAsync("init");
+            await Js.InvokeVoidAsync("canvasFocus");
+        }
+
     }
 
     [JSInvokable]
@@ -78,9 +79,48 @@
         }
     }
 
+    private static void Focusout()
+    {
+        _game.Pause();
+    }
+
 }
 
 <PageTitle>Index</PageTitle>
 
 <h1>Hello, world!</h1>
-<canvas width="640" height="360" @onkeydown="@KeyDown" @onkeyup="@KeyUp" tabindex="0"></canvas>
+<div id="canvas" @onkeydown="@KeyDown" @onkeyup="@KeyUp" @onfocusout="@Focusout" tabindex="0"></div>
+<table>
+    <thead>
+    <tr>
+        <th>Key</th>
+        <th>Browser</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Menu</td>
+        <td>Escape</td>
+    </tr>
+    <tr>
+        <td>Option Up</td>
+        <td>ArrowUp</td>
+    </tr>
+    <tr>
+        <td>Option Down</td>
+        <td>ArrowDown</td>
+    </tr>
+    <tr>
+        <td>Accept Option</td>
+        <td>Enter</td>
+    </tr>
+    <tr>
+        <td>Turn Left</td>
+        <td>ArrowLeft</td>
+    </tr>
+    <tr>
+        <td>Turn Right</td>
+        <td>ArrowRight</td>
+    </tr>
+    </tbody>
+</table>

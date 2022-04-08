@@ -1,11 +1,18 @@
-console.log("Hello World!")
+console.log('Hello World!')
+
+var gl = null
+var canvas = document.createElement('canvas')
+canvas.id = 'gl'
+canvas.width = 640
+canvas.height = 360
 
 function init() {
-    gl = document.getElementsByTagName("canvas")[0].getContext("webgl2")
+    document.getElementById('canvas').appendChild(canvas)
+    gl = document.getElementById('gl').getContext('webgl2')
 }
 
-var scene = () =>
-    Scene.create(800,600,1)
+var scene = (width, height, scale) =>
+    new Scene(width, height, scale)
 
 function loop() {
     let last = 0
@@ -18,14 +25,6 @@ function loop() {
     insideLoop(0)
 }
 
-window.canvasFocus = () => {
-    document.getElementsByTagName("canvas")[0].focus();
-};
-
-function toggleFullScreen() {
-    if (!document.fullscreenElement)
-        document.documentElement.requestFullscreen()
-    else if (document.exitFullscreen)
-        document.exitFullscreen()
-    screen.orientation.lock('portrait')
+function canvasFocus() {
+    document.getElementById('canvas').focus()
 }
