@@ -2,13 +2,12 @@ console.log('Hello World!')
 
 var gl = null
 var canvas = document.createElement('canvas')
-canvas.id = 'gl'
 canvas.width = 640
 canvas.height = 360
 
 function init() {
     document.getElementById('canvas').appendChild(canvas)
-    gl = document.getElementById('gl').getContext('webgl2')
+    gl = canvas.getContext('webgl2')
 }
 
 var scene = (width, height, scale) =>
