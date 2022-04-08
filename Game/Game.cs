@@ -143,15 +143,11 @@ public class Game
   public void ToggleMenu()
   {
     if (_start)
-    {
       _menu.Visible = !_menu.Visible;
-      _menu.Option = MenuSelect.Continue;
-    }
-    else
-    {
-      _menu.Visible = true;
-    }
   }
+
+  public void Pause()
+    => _menu.Visible = true;
 
   public void SelectNextOption()
     => _menu.SelectOption(-1);
