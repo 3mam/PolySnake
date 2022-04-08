@@ -22,7 +22,7 @@ public class Scene : IScene
 
   public async Task Init()
   {
-    _handle = await _js.InvokeAsync<IJSObjectReference>("scene");
+    _handle = await _js.InvokeAsync<IJSObjectReference>("scene", _width, _height, _scale);
     await _handle.InvokeVoidAsync("clear");
     await _handle.InvokeVoidAsync("dimensions", _width, _height, _scale);
   }

@@ -1,12 +1,10 @@
 console.log("Hello World!")
 
-const width = 640
-const height = 360
 var gl = null
 var canvas = document.createElement('canvas')
 canvas.id = "gl"
-canvas.width = width
-canvas.height = height
+canvas.width = 640
+canvas.height = 360
 canvas.style.position = "absolute"
 
 function init() {
@@ -14,8 +12,8 @@ function init() {
     gl = document.getElementById("gl").getContext("webgl2")
 }
 
-var scene = () =>
-    new Scene(width, height, 1)
+var scene = (width, height, scale) =>
+    new Scene(width, height, scale)
 
 function loop() {
     let last = 0
