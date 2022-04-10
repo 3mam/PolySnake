@@ -33,14 +33,14 @@ investigate problem farther, I start feel more confused.
 
 ## Keyboard control
 
-|            | Keys   |        |
+| Function      | Keys   |        |
 |---------------|--------|------------|
 | Menu          | Escape |      |
 | Option Up     | W      | ArrowUp    |
 | Option Down   | S      | ArrowDown  |
 | Accept Option | Space  | Enter      |
 | Turn Left     | A      | ArrowLeft  |
-|  Turn Right   | D      | ArrowRight |
+| Turn Right    | D      | ArrowRight |
 
 ## Install and run
 
