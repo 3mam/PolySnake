@@ -13,7 +13,6 @@ works 100% same way like desktop version.
 Weird problem is with floating-point numbers. Is behave differently
 between Desktop and Blazor.
 And this create some problems with proper calculation.
-But when I try investigate problem farther, I start feel more confused.
 
 ## Used for this project
 
