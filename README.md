@@ -5,6 +5,7 @@
 ![Snake Screenshot](Assets/output.gif)
 
 ## [live demo](https://elaborate-lily-2c0859.netlify.app)
+
 Project goal is write from scratch 2D Snake in **.net 6**.<br><br>
 This project contains port for Blazor Server and Webassembly.
 I adding Blazor for proof of concept. Game on Blazor don't
@@ -14,7 +15,6 @@ between Desktop and Blazor.
 And this create some problems with proper calculation.
 For reduce problem I don't use **double**. But when I try
 investigate problem farther, I start feel more confused.
-
 
 ## Used for this project
 
@@ -33,26 +33,29 @@ investigate problem farther, I start feel more confused.
 
 ## Keyboard control
 
-| Key           | Desktop      |Browser|
-|---------------|--------------|---|
-| Menu          | Escape       | Escape|
-| Option Up     | W, ArrowUp   | ArrowUp|
-| Option Down   | S, ArrowDown | ArrowDown|
-| Accept Option | Space, Enter | Enter|
-| Turn Left     | A, ArrowLeft| ArrowLeft|
-|  Turn Right   | D, ArrowRight| ArrowRight|
+|            | Keys   |        |
+|---------------|--------|------------|
+| Menu          | Escape |      |
+| Option Up     | W      | ArrowUp    |
+| Option Down   | S      | ArrowDown  |
+| Accept Option | Space  | Enter      |
+| Turn Left     | A      | ArrowLeft  |
+|  Turn Right   | D      | ArrowRight |
 
 ## Install and run
 
 ### Download code.
+
 > git clone https://github.com/3mam/PolySnake.git
 
 > cd PolySnake
 
 ### Run desktop version.
+
 > dotnet run --project Poly
 
 ### Run browser version.
+
 Blazor server.
 > dotnet run --project BlazorServer
 
@@ -66,8 +69,9 @@ In browser go to this url.
 > https://localhost:5249
 
 ## Build
+
 > cd Poly
- 
+
 For Windows.
 > dotnet publish -c Release --runtime win-x64
 

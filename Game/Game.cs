@@ -70,7 +70,11 @@ public class Game
     _power.speed.SpawnPoints(_spawnPoints);
     _power.speed.Trigger(SnakeSpeed);
     Reset();
+#if RELEASE
     Begin();
+#else
+    _start = true;
+#endif
   }
 
   private void Begin()
@@ -95,7 +99,6 @@ public class Game
 
     if (_menu.Visible)
       return;
-
     if (Life == 0)
       Begin();
 
@@ -103,7 +106,9 @@ public class Game
     if (_snake.MoveWhenSmashWithWall(_walls.Current))
     {
       _shakeCameraDuration.Reset();
+#if RELEASE
       Life--;
+#endif
     }
 
     _hudDisplay.Update(Life, _score);

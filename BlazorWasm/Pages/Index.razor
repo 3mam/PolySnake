@@ -45,19 +45,19 @@
     {
         switch (e.Key)
         {
-            case "Enter":
+            case "Enter" or " ":
                 _game.Enter();
                 break;
-            case "ArrowRight":
+            case "ArrowRight" or "d":
                 _game.SnakeMoveRight();
                 break;
-            case "ArrowLeft":
+            case "ArrowLeft" or "a":
                 _game.SnakeMoveLeft();
                 break;
-            case "ArrowUp":
+            case "ArrowUp" or "w":
                 _game.SelectNextOption();
                 break;
-            case "ArrowDown":
+            case "ArrowDown" or "s":
                 _game.SelectPreviousOption();
                 break;
             case "Escape":
@@ -70,10 +70,10 @@
     {
         switch (e.Key)
         {
-            case "ArrowRight":
+            case "ArrowRight" or "d":
                 _game.SnakeMoveStraight();
                 break;
-            case "ArrowLeft":
+            case "ArrowLeft" or "a":
                 _game.SnakeMoveStraight();
                 break;
         }
@@ -91,36 +91,43 @@
 <h1>Hello, world!</h1>
 <div id="canvas" @onkeydown="@KeyDown" @onkeyup="@KeyUp" @onfocusout="@Focusout" tabindex="0"></div>
 <table>
-    <thead>
-    <tr>
-        <th>Key</th>
-        <th>Browser</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>Menu</td>
-        <td>Escape</td>
-    </tr>
-    <tr>
-        <td>Option Up</td>
-        <td>ArrowUp</td>
-    </tr>
-    <tr>
-        <td>Option Down</td>
-        <td>ArrowDown</td>
-    </tr>
-    <tr>
-        <td>Accept Option</td>
-        <td>Enter</td>
-    </tr>
-    <tr>
-        <td>Turn Left</td>
-        <td>ArrowLeft</td>
-    </tr>
-    <tr>
-        <td>Turn Right</td>
-        <td>ArrowRight</td>
-    </tr>
-    </tbody>
+<thead>
+<tr>
+<th></th>
+<th>Keys</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Menu</td>
+<td>Escape</td>
+<td></td>
+</tr>
+<tr>
+<td>Option Up</td>
+<td>W</td>
+<td>ArrowUp</td>
+</tr>
+<tr>
+<td>Option Down</td>
+<td>S</td>
+<td>ArrowDown</td>
+</tr>
+<tr>
+<td>Accept Option</td>
+<td>Space</td>
+<td>Enter</td>
+</tr>
+<tr>
+<td>Turn Left</td>
+<td>A</td>
+<td>ArrowLeft</td>
+</tr>
+<tr>
+<td>Turn Right</td>
+<td>D</td>
+<td>ArrowRight</td>
+</tr>
+</tbody>
 </table>
