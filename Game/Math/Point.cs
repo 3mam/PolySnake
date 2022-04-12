@@ -8,7 +8,7 @@ public class Point
   private Vector2 _pivot;
   private Vector2 _position;
   private float _angle;
-  private int _scale = 1;
+  private float _scale = 1f;
 
   public Vector2 Value
   {
@@ -42,7 +42,7 @@ public class Point
     return this;
   }
 
-  public Point Scale(int size)
+  public Point Scale(float size)
   {
     _scale = size;
     return this;
