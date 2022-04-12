@@ -7,7 +7,7 @@ namespace Game;
 
 public class Snake
 {
-  private event Action<ICollide> Collide = default!;
+  private event Action<Func<ICollide, bool>> Collide = default!;
   private readonly IActor _head;
   private readonly IActor _body;
   private readonly IActor _tail;
@@ -63,9 +63,10 @@ public class Snake
       _bodyPositions[i].Motion(_bodyPositions[i - 1].Position);
 
     _tailPosition.Motion(_bodyPositions[Lenght - 1].Position);
-    CheckCollide();
-  }
 
+    Collide(CheckCollide);
+  }
+  
   public void Draw()
   {
     _head.Rotation(_headPosition.Direction - 90f);
@@ -124,9 +125,10 @@ public class Snake
   public void CollideWith(ICollideEvent item)
     => Collide += item.Collide;
 
-  private void CheckCollide()
+  private bool CheckCollide(ICollide item)
   {
     var snake = new CollideCircle(_headPosition.Position, CollideRadius);
-    Collide(snake);
+    return item.Collide(snake);
   }
+  
 }

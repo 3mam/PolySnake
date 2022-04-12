@@ -1,3 +1,4 @@
+using System;
 using Game.Collision;
 using Game.Interface;
 using Game.Math;
@@ -20,16 +21,15 @@ public sealed class Walls : ICollideEvent
 
   public WallsList Current { get; private set; } = WallsList.None;
 
- public void Collide(ICollide item)
+ public void Collide(Func<ICollide, bool> snake)
   {
-    var head = (CollideCircle) item;
-    if (_wallLeft == head)
+    if (snake(_wallLeft))
       Current = WallsList.Left;
-    else if (_wallRight == head)
+    else if (snake(_wallRight))
       Current = WallsList.Right;
-    else if (_wallTop == head)
+    else if (snake(_wallTop))
       Current = WallsList.Top;
-    else if (_wallBottom == head)
+    else if (snake(_wallBottom))
       Current = WallsList.Bottom;
     else 
       Current = WallsList.None;

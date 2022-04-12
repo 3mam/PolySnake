@@ -33,8 +33,8 @@ public class Speed : IPowerUp
     _spawnPoint = p.point;
   }
 
-  public void Collide(ICollide snake) =>
-    _collide = new CollideCircle(_spawnPoint, 15f) == (CollideCircle) snake;
+  public void Collide(Func<ICollide, bool> snake) =>
+    _collide = snake(new CollideCircle(_spawnPoint, 15f));
 
   public void Trigger(Action<bool> fn)
     => _trigger += fn;
