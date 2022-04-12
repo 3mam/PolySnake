@@ -67,6 +67,11 @@ public class Window : GameWindow
     if (KeyboardState.IsKeyDown(Keys.D) ||
         KeyboardState.IsKeyDown(Keys.Right))
           _game.SnakeMoveRight();
+
+#if DEBUG
+    if (KeyboardState.IsKeyDown(Keys.Q))
+      Close();
+#endif
     
     if (_game.Exit)
       Close();
