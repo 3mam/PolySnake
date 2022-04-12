@@ -27,8 +27,8 @@ public class Point
     }
   }
 
-  public Point(Vector2 point)
-    => _point = point;
+  public Point(float x, float y)
+    => _point = new Vector2(x, y);
 
   public Point Pivot(Vector2 point)
   {
