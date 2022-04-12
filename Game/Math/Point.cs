@@ -21,8 +21,8 @@ public class Point
       var xNew = x * c - y * s;
       var yNew = x * s + y * c;
       return new Vector2(
-        (xNew + _pivot.X) * _scale + _position.X,
-        (yNew + _pivot.Y) * _scale + _position.Y
+        (xNew + _pivot.X) * (Settings.CenterWidth * _scale) + _position.X,
+        (yNew + _pivot.Y) * (Settings.CenterHeight * _scale) + _position.Y
       );
     }
   }
