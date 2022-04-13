@@ -11,7 +11,6 @@ public class Speed : IPowerUp
   private readonly Timer _speedVisibilityDuration = new(Settings.SpeedVisibilityTime);
   private readonly Timer _speedShowUp = new(Settings.ShowSpeedItemAtTime);
   private readonly Timer _speedDuration = new(Settings.SpeedUpDuration);
-  private Action<bool> _trigger = default!;
 
   private bool _visible;
   private bool _collide;
@@ -36,9 +35,6 @@ public class Speed : IPowerUp
   public void Collide(Func<ICollide, bool> snake) =>
     _collide = snake(new CollideCircle(_spawnPoint, 15f));
 
-  public void Trigger(Action<bool> fn)
-    => _trigger += fn;
-
   public void Draw()
   {
     if (_visible)
@@ -51,13 +47,13 @@ public class Speed : IPowerUp
   public void Update()
   {
     if (!_speedDuration.Duration())
-      _trigger(false);
+      Trigger(false);
 
     if (_speedVisibilityDuration.Duration())
     {
       if (_collide)
       {
-        _trigger(true);
+        Trigger(true);
         _speedDuration.Reset();
         _speedVisibilityDuration.Stop();
       }
@@ -86,4 +82,6 @@ public class Speed : IPowerUp
 
   public void SpawnPoints(SpawnPoints spawnPoints)
     => _spawnPoints = spawnPoints;
+
+  public Action<bool> Trigger { get; set; }
 }

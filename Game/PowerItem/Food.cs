@@ -9,7 +9,6 @@ public class Food : IPowerUp
 {
   private readonly IActor _apple;
   private readonly Timer _foodReposition = new(Settings.FoodReplaceTime);
-  private Action<bool> _trigger = default!;
 
   private bool _collide;
   private SpawnPoints _spawnPoints = default!;
@@ -33,9 +32,6 @@ public class Food : IPowerUp
   public void Collide(Func<ICollide, bool> snake)
     => _collide = snake(new CollideCircle(_spawnPoint, 15f));
 
-  public void Trigger(Action<bool> fn)
-    => _trigger += fn;
-
   public void Draw()
   {
     _apple.Position(_spawnPoint);
@@ -46,9 +42,9 @@ public class Food : IPowerUp
   {
     if (_collide)
     {
-      _trigger(true);
+      Trigger(true);
         Reset();
-      _trigger(false);
+      Trigger(false);
     }
 
     if (!_foodReposition.Duration(true))
@@ -67,4 +63,6 @@ public class Food : IPowerUp
 
   public void SpawnPoints(SpawnPoints spawnPoints)
     => _spawnPoints = spawnPoints;
+
+  public Action<bool> Trigger { get; set; }
 }
