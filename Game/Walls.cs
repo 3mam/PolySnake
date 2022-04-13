@@ -5,7 +5,7 @@ using Game.Math;
 
 namespace Game;
 
-public sealed class Walls : ICollideEvent
+public sealed class Walls : ICollideEvent , ITrigger
 {
   private readonly CollideLine _wallLeft =
     new(new Vector2(100f, 1000f), new Vector2(100f, 0f));
@@ -19,19 +19,16 @@ public sealed class Walls : ICollideEvent
   private readonly CollideLine _wallBottom =
     new(new Vector2(0f, 50f), new Vector2(2000f, 50f));
 
+  public Action<bool> Trigger { get; set; }
   public WallsList Current { get; private set; } = WallsList.None;
 
- public void Collide(Func<ICollide, bool> snake)
+  public void Collide(Func<ICollide, bool> snake)
   {
-    if (snake(_wallLeft))
-      Current = WallsList.Left;
-    else if (snake(_wallRight))
-      Current = WallsList.Right;
-    else if (snake(_wallTop))
-      Current = WallsList.Top;
-    else if (snake(_wallBottom))
-      Current = WallsList.Bottom;
-    else 
-      Current = WallsList.None;
+    if (snake(_wallLeft)) Current = WallsList.Left;
+    else if (snake(_wallRight)) Current = WallsList.Right;
+    else if (snake(_wallTop)) Current = WallsList.Top;
+    else if (snake(_wallBottom)) Current = WallsList.Bottom;
+    else Current = WallsList.None;
+    Trigger(Current != WallsList.None);
   }
 }

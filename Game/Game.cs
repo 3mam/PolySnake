@@ -36,27 +36,6 @@ public class Game
 
   public bool Exit { get; private set; }
 
-  private void SnakeSize(bool trigger)
-  {
-    if (!trigger) return;
-    _snake.Lenght += 1;
-    _score += Settings.PointForFood * _pointMultiplier;
-  }
-
-  private void SnakeSpeed(bool boost)
-  {
-    if (boost)
-    {
-      _snake.Speed = Settings.SpeedUp;
-      _pointMultiplier = Settings.PointMultiplier;
-    }
-    else
-    {
-      _snake.Speed = Settings.Speed;
-      _pointMultiplier = 1;
-    }
-  }
-
   public Game(IScene scene)
   {
     _scene = scene;
@@ -64,11 +43,40 @@ public class Game
     _power.food = new Food();
     _snake.CollideWith(_power.food);
     _power.food.SpawnPoints(_spawnPoints);
-    _power.food.Trigger(SnakeSize);
+    _power.food.Trigger = trigger =>
+    {
+      if (!trigger) return;
+      _snake.Lenght += 1;
+      _score += Settings.PointForFood * _pointMultiplier;
+    };
+
     _power.speed = new Speed();
     _snake.CollideWith(_power.speed);
     _power.speed.SpawnPoints(_spawnPoints);
-    _power.speed.Trigger(SnakeSpeed);
+    _power.speed.Trigger = boost =>
+    {
+      if (boost)
+      {
+        _snake.Speed = Settings.SpeedUp;
+        _pointMultiplier = Settings.PointMultiplier;
+      }
+      else
+      {
+        _snake.Speed = Settings.Speed;
+        _pointMultiplier = 1;
+      }
+    };
+    
+    _walls.Trigger = trigger =>
+    {
+      if (!trigger) return;
+      _snake.MoveWhenCollide(_walls.Current);
+      _shakeCameraDuration.Reset();
+#if RELEASE
+      Life--;
+#endif
+    };
+
     Reset();
 #if RELEASE
     Begin();
@@ -103,13 +111,6 @@ public class Game
       Begin();
 
     _snake.Move(delta, _direction);
-    if (_snake.MoveWhenSmashWithWall(_walls.Current))
-    {
-      _shakeCameraDuration.Reset();
-#if RELEASE
-      Life--;
-#endif
-    }
 
     _hudDisplay.Update(Life, _score);
     _power.food.Update();

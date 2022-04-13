@@ -66,7 +66,7 @@ public class Snake
 
     Collide(CheckCollide);
   }
-  
+
   public void Draw()
   {
     _head.Rotation(_headPosition.Direction - 90f);
@@ -84,33 +84,6 @@ public class Snake
     _tail.Position(_tailPosition.Position);
     _tail.Draw();
   }
-
-  public bool MoveWhenSmashWithWall(WallsList wallsList)
-  {
-    switch (wallsList)
-    {
-      case WallsList.Left:
-        _headPosition.Direction = 180f - _headPosition.Direction;
-        _headPosition.Position += new Vector2(Settings.Recoil, 0);
-        return true;
-      case WallsList.Right:
-        _headPosition.Direction = 180f - _headPosition.Direction;
-        _headPosition.Position -= new Vector2(Settings.Recoil, 0);
-        return true;
-      case WallsList.Top:
-        _headPosition.Direction = -_headPosition.Direction;
-        _headPosition.Position -= new Vector2(0, Settings.Recoil);
-        return true;
-      case WallsList.Bottom:
-        _headPosition.Direction = MathF.Abs(_headPosition.Direction);
-        _headPosition.Position += new Vector2(0, Settings.Recoil);
-        return true;
-      case WallsList.None:
-      default:
-        return false;
-    }
-  }
-
   public void Reset()
   {
     Speed = Settings.Speed;
@@ -127,8 +100,30 @@ public class Snake
 
   private bool CheckCollide(ICollide item)
   {
-    var snake = new CollideCircle(_headPosition.Position, CollideRadius);
-    return item.Collide(snake);
+    var head = new CollideCircle(_headPosition.Position, CollideRadius);
+    return item.Collide(head);
   }
-  
+
+  public void MoveWhenCollide(WallsList wallsList)
+  {
+    switch (wallsList)
+    {
+      case WallsList.Left:
+        _headPosition.Direction = 180f - _headPosition.Direction;
+        _headPosition.Position += new Vector2(Settings.Recoil, 0);
+        break;
+      case WallsList.Right:
+        _headPosition.Direction = 180f - _headPosition.Direction;
+        _headPosition.Position -= new Vector2(Settings.Recoil, 0);
+        break;
+      case WallsList.Top:
+        _headPosition.Direction = -_headPosition.Direction;
+        _headPosition.Position -= new Vector2(0, Settings.Recoil);
+        break;
+      case WallsList.Bottom:
+        _headPosition.Direction = MathF.Abs(_headPosition.Direction);
+        _headPosition.Position += new Vector2(0, Settings.Recoil);
+        break;
+    }
+  }
 }
