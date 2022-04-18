@@ -45,19 +45,19 @@
     {
         switch (e.Key)
         {
-            case "Enter":
+            case "Enter" or " ":
                 _game.Enter();
                 break;
-            case "ArrowRight":
+            case "ArrowRight" or "d":
                 _game.SnakeMoveRight();
                 break;
-            case "ArrowLeft":
+            case "ArrowLeft" or "a":
                 _game.SnakeMoveLeft();
                 break;
-            case "ArrowUp":
+            case "ArrowUp" or "w":
                 _game.SelectNextOption();
                 break;
-            case "ArrowDown":
+            case "ArrowDown" or "s":
                 _game.SelectPreviousOption();
                 break;
             case "Escape":
@@ -70,10 +70,10 @@
     {
         switch (e.Key)
         {
-            case "ArrowRight":
+            case "ArrowRight" or "d":
                 _game.SnakeMoveStraight();
                 break;
-            case "ArrowLeft":
+            case "ArrowLeft" or "a":
                 _game.SnakeMoveStraight();
                 break;
         }
