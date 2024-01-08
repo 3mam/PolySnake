@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flow
+  namespace: namespace-workflow-1704708220380
+spec:
+  type: LoadBalancer
+  selector:
+    app: flow
+  ports:
+    - protocol: TCP
+      port: 5000
+      targetPort: 5000
