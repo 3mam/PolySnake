@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flow
+  labels:
+    app: flow
+  namespace: namespace-workflow-1704708220380
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flow
+  template:
+    metadata:
+      labels:
+        app: flow
+    spec:
+      containers:
+        - name: flow
+          image: k8stestfoo.azurecr.io/image-workflow-1704708220380:latest
+          ports:
+            - containerPort: 5000
